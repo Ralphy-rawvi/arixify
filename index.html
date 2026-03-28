@@ -1512,6 +1512,152 @@
         width: 100% !important;
       }
     }
+
+    /* ─── Touch-hover: replicate :hover effects for touch devices ─── */
+    @media (hover: none) and (pointer: coarse) {
+      /* Nav logo */
+      .nav-logo.touch-hover svg {
+        filter: drop-shadow(0 0 16px rgba(124, 110, 250, 0.7)) drop-shadow(0 0 24px rgba(0, 217, 255, 0.3));
+      }
+
+      /* Nav CTA */
+      .nav-cta.touch-hover {
+        background: var(--accent-hover);
+        color: white;
+        transform: translateY(-1px);
+      }
+
+      /* Primary button */
+      .btn-primary.touch-hover {
+        background: var(--accent-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 24px rgba(124, 110, 250, 0.4);
+      }
+
+      /* Secondary button */
+      .btn-secondary.touch-hover {
+        border-color: var(--accent);
+        background: rgba(124, 110, 250, 0.06);
+      }
+
+      /* Platform cards */
+      .platform-card.touch-hover {
+        border-color: var(--accent);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba(124, 110, 250, 0.15);
+      }
+
+      .platform-card.touch-hover::before {
+        opacity: 1;
+      }
+
+      /* Feature blocks */
+      .feature-block.touch-hover {
+        border-color: transparent;
+      }
+
+      .feature-block.touch-hover::before {
+        opacity: 0.3;
+      }
+
+      /* Mock Arixify button */
+      .mock-arixify-btn.touch-hover {
+        background: var(--accent-hover);
+        transform: scale(1.05);
+        box-shadow: 0 0 28px rgba(124, 110, 250, 0.4);
+        animation: none;
+      }
+
+      /* Mock picker search */
+      .mock-picker-search.touch-hover {
+        border-color: var(--accent);
+      }
+
+      /* Mock picker items */
+      .mock-picker-item.touch-hover {
+        background: rgba(124, 110, 250, 0.06);
+      }
+
+      /* Mock platform tags */
+      .mock-platform-tag.touch-hover {
+        border-color: var(--accent);
+        color: var(--text-primary);
+        transform: translateY(-2px);
+      }
+
+      .mock-platform-tag.muted.touch-hover {
+        opacity: 1;
+      }
+
+      /* Mock shield */
+      .mock-shield.touch-hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 36px rgba(52, 211, 153, 0.25);
+      }
+
+      /* Mock local lines */
+      .mock-local-line.touch-hover {
+        background: rgba(52, 211, 153, 0.06);
+        transform: translateX(4px);
+      }
+
+      /* Mock tracking rows */
+      .mock-track-row.touch-hover {
+        border-color: var(--accent);
+        transform: translateX(4px);
+      }
+
+      /* Steps */
+      .step.touch-hover {
+        transform: translateY(-4px);
+        border-color: transparent;
+        box-shadow: 0 8px 32px rgba(124, 110, 250, 0.2);
+      }
+
+      .step.touch-hover::before {
+        opacity: 0.15;
+      }
+
+      .step.touch-hover .step-number {
+        opacity: 1;
+      }
+
+      /* Pricing cards */
+      .pricing-card.touch-hover {
+        transform: translateY(-4px);
+      }
+
+      .pricing-card:not(.pro).touch-hover {
+        border-color: var(--accent);
+        box-shadow: 0 4px 16px rgba(124, 110, 250, 0.15);
+      }
+
+      .pricing-card.pro.touch-hover {
+        box-shadow: 0 12px 40px rgba(124, 110, 250, 0.25);
+        border-color: transparent;
+      }
+
+      .pricing-card.pro.touch-hover::before {
+        opacity: 0.3;
+      }
+
+      /* Pricing buttons */
+      .pricing-btn.free.touch-hover {
+        background: var(--bg-primary);
+        border-color: var(--accent);
+      }
+
+      .pricing-btn.pro.touch-hover {
+        background: var(--accent-hover);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 16px rgba(124, 110, 250, 0.3);
+      }
+
+      /* Footer links */
+      .footer-links a.touch-hover {
+        color: var(--accent-soft);
+      }
+    }
   </style>
 </head>
 <canvas id="lightning-canvas" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;"></canvas>
@@ -2064,4 +2210,79 @@
         <a href="/privacy.html">Privacy</a>
         <a href="/terms.html">Terms</a>
         <a href="/billing.html">Billing</a>
-        <a href="/cdn-cgi/l/email-protection#681b1d1818071a1c28091a0
+        <a href="mailto:support@arixify.com">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ─── Touch-hover Script ─── -->
+  <script>
+  (function() {
+    // Only activate on touch devices
+    if (!('ontouchstart' in window) && !navigator.maxTouchPoints) return;
+
+    // Selectors that should receive touch-hover effect
+    const TOUCH_HOVER_SELECTORS = [
+      '.nav-logo',
+      '.nav-cta',
+      '.btn-primary',
+      '.btn-secondary',
+      '.platform-card',
+      '.feature-block',
+      '.mock-arixify-btn',
+      '.mock-picker-search',
+      '.mock-picker-item',
+      '.mock-platform-tag',
+      '.mock-shield',
+      '.mock-local-line',
+      '.mock-track-row',
+      '.step',
+      '.pricing-card',
+      '.pricing-btn',
+      '.footer-links a'
+    ];
+
+    const allSelector = TOUCH_HOVER_SELECTORS.join(', ');
+
+    // Track currently hovered element
+    let currentHovered = null;
+
+    function clearHover() {
+      if (currentHovered) {
+        currentHovered.classList.remove('touch-hover');
+        currentHovered = null;
+      }
+    }
+
+    document.addEventListener('touchstart', function(e) {
+      const target = e.target.closest(allSelector);
+      clearHover();
+      if (target) {
+        target.classList.add('touch-hover');
+        currentHovered = target;
+      }
+    }, { passive: true });
+
+    document.addEventListener('touchend', function() {
+      // Small delay so the user sees the effect before it disappears
+      setTimeout(clearHover, 300);
+    }, { passive: true });
+
+    document.addEventListener('touchcancel', function() {
+      clearHover();
+    }, { passive: true });
+
+    // Also clear when scrolling (prevents sticky hover on scroll)
+    let scrolling = false;
+    document.addEventListener('scroll', function() {
+      if (!scrolling) {
+        scrolling = true;
+        clearHover();
+        setTimeout(function() { scrolling = false; }, 100);
+      }
+    }, { passive: true });
+  })();
+  </script>
+
+</body>
+</html>
