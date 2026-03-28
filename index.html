@@ -54,17 +54,7 @@
       position: relative;
     }
 
-    /* ─── Brand Signature Line ─── */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent 0%, var(--accent) 30%, var(--electric-blue) 70%, transparent 100%);
-      z-index: 200;
-    }
+    /* ─── Brand Signature Line (as nav border, avoids mobile dynamic island gap) ─── */
 
     a { color: var(--accent-soft); text-decoration: none; transition: color 0.2s; }
     a:hover { color: var(--accent); }
@@ -151,7 +141,7 @@
     /* ─── Navigation ─── */
     .nav {
       position: fixed;
-      top: 2px;
+      top: 0;
       left: 0;
       right: 0;
       z-index: 100;
@@ -163,7 +153,9 @@
       background: rgba(10, 5, 20, 0.85);
       backdrop-filter: blur(20px) saturate(1.4);
       -webkit-backdrop-filter: blur(20px) saturate(1.4);
-      border-bottom: 1px solid var(--border-subtle);
+      border-bottom: 1.1px solid var(--border-subtle);
+      border-top: 2px solid;
+      border-image: linear-gradient(90deg, transparent 0%, var(--accent) 30%, var(--electric-blue) 70%, transparent 100%) 1;
     }
 
     .nav-logo {
@@ -892,9 +884,9 @@
     }
 
     .step:hover {
-      transform: translateY(-4px);
+      transform: translateY(-8px);
       border-color: transparent;
-      box-shadow: 0 8px 32px rgba(124, 110, 250, 0.2);
+      box-shadow: 0 12px 36px rgba(124, 110, 250, 0.2);
     }
 
     .step:hover::before {
@@ -1002,7 +994,24 @@
     }
 
     .pricing-card.pro:hover::before {
-      opacity: 0.3;
+      opacity: 0.45;
+    }
+
+    /* Pro card gradient sweep on hover */
+    .pricing-card.pro::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(124, 110, 250, 0.12) 0%, rgba(0, 217, 255, 0.08) 50%, rgba(124, 110, 250, 0.12) 100%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .pricing-card.pro:hover::after {
+      opacity: 1;
     }
 
     .pricing-badge {
@@ -1017,6 +1026,7 @@
       border-radius: 999px;
       letter-spacing: 0.06em;
       text-transform: uppercase;
+      z-index: 1;
     }
 
     .pricing-plan {
@@ -1025,6 +1035,8 @@
       color: var(--text-tertiary);
       margin-bottom: 12px;
       letter-spacing: 0.02em;
+      position: relative;
+      z-index: 1;
     }
 
     .pricing-price {
@@ -1034,6 +1046,8 @@
       color: var(--text-primary);
       margin-bottom: 4px;
       letter-spacing: -0.03em;
+      position: relative;
+      z-index: 1;
     }
 
     .pricing-price span {
@@ -1046,6 +1060,8 @@
       font-size: 13px;
       color: var(--text-tertiary);
       margin-bottom: 8px;
+      position: relative;
+      z-index: 1;
     }
 
     .pricing-annual-note {
@@ -1053,18 +1069,24 @@
       color: var(--green);
       font-weight: 600;
       margin-bottom: 8px;
+      position: relative;
+      z-index: 1;
     }
 
     .pricing-divider {
       height: 1px;
       background: var(--border-default);
       margin: 28px 0;
+      position: relative;
+      z-index: 1;
     }
 
     .pricing-features {
       list-style: none;
       margin-bottom: 32px;
       flex-grow: 1;
+      position: relative;
+      z-index: 1;
     }
 
     .pricing-features li {
@@ -1102,6 +1124,8 @@
       font-family: inherit;
       border: none;
       cursor: pointer;
+      position: relative;
+      z-index: 1;
     }
 
     .pricing-btn.free {
@@ -1161,6 +1185,10 @@
       font-weight: 700;
       margin-bottom: 16px;
       letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #FFFFFF 0%, var(--accent-soft) 50%, var(--electric-blue) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .cta-sub {
@@ -1462,6 +1490,19 @@
       flex-shrink: 0;
       box-shadow: 0 0 12px var(--accent-glow);
       animation: hero-btn-pulse 3s ease-in-out infinite;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
+    }
+
+    .hero-demo-arixify-btn:hover {
+      background: var(--accent-hover);
+      transform: scale(1.05);
+      box-shadow: 0 0 28px rgba(124, 110, 250, 0.4);
+      animation: none;
+    }
+
+    .hero-demo-arixify-btn:active {
+      transform: scale(0.97);
     }
 
     .hero-demo-arixify-label {
@@ -1617,10 +1658,7 @@
     .scroll-reveal.is-revealed.from-left   { transform: translateX(0); }
     .scroll-reveal.is-revealed.from-right  { transform: translateX(0); }
 
-    /* After transition completes, remove transform so hover works */
-    .scroll-reveal.is-revealed.reveal-done {
-      transform: none !important;
-    }
+    /* After scroll-reveal completes, JS strips scroll-reveal classes so hover transforms work */
 
     /* Stagger delays for grid items */
     .scroll-reveal-delay-1 { transition-delay: 0.1s; }
@@ -2113,9 +2151,9 @@
 
       /* Steps */
       .step.touch-hover {
-        transform: translateY(-4px);
+        transform: translateY(-8px);
         border-color: transparent;
-        box-shadow: 0 8px 32px rgba(124, 110, 250, 0.2);
+        box-shadow: 0 12px 36px rgba(124, 110, 250, 0.2);
       }
 
       .step.touch-hover::before {
@@ -2142,7 +2180,11 @@
       }
 
       .pricing-card.pro.touch-hover::before {
-        opacity: 0.3;
+        opacity: 0.45;
+      }
+
+      .pricing-card.pro.touch-hover::after {
+        opacity: 1;
       }
 
       /* Pricing buttons */
@@ -2793,7 +2835,7 @@
   </footer>
 
   <!-- ─── Hero Emblem Typing Animation ─── -->
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
   (function() {
     var wrap = document.getElementById('hero-emblem');
     var textEl = document.getElementById('hero-emblem-text');
@@ -2894,10 +2936,15 @@
       entries.forEach(function(entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add('is-revealed');
-          // After transition, remove transform lock so hover works
-          entry.target.addEventListener('transitionend', function handler() {
-            entry.target.classList.add('reveal-done');
-            entry.target.removeEventListener('transitionend', handler);
+          // After transition completes, strip all scroll-reveal classes
+          // so their transform rules no longer block :hover transforms
+          entry.target.addEventListener('transitionend', function handler(e) {
+            if (e.propertyName !== 'transform' && e.propertyName !== 'opacity') return;
+            var el = entry.target;
+            el.classList.remove('scroll-reveal', 'from-left', 'from-right', 'from-bottom', 'is-revealed',
+              'scroll-reveal-delay-1', 'scroll-reveal-delay-2', 'scroll-reveal-delay-3',
+              'scroll-reveal-delay-4', 'scroll-reveal-delay-5');
+            el.removeEventListener('transitionend', handler);
           });
           revealObs.unobserve(entry.target);
         }
