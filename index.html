@@ -1,0 +1,2064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arixify — Your prompts. One click away.</title>
+  <meta name="description" content="Save, manage, and instantly insert your prompts into ChatGPT, Claude, Gemini, Perplexity, and 20+ AI platforms. Free Browser Extension." />
+  <meta property="og:title" content="Arixify — Your prompts. One click away." />
+  <meta property="og:description" content="Save, manage, and instantly insert your prompts into 20+ AI platforms." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://arixify.com" />
+  <link rel="canonical" href="https://arixify.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-primary: #0A0514;
+      --bg-secondary: #111118;
+      --bg-card: #16151F;
+      --bg-elevated: #1C1B28;
+      --border-subtle: #1F1E2E;
+      --border-default: #2A293D;
+      --border-accent: #7C6EFA;
+      --text-primary: #EEEDF5;
+      --text-secondary: #A09CB5;
+      --text-tertiary: #6B6880;
+      --accent: #7C6EFA;
+      --accent-hover: #6B5EE8;
+      --accent-glow: rgba(124, 110, 250, 0.15);
+      --accent-soft: #9D8DFF;
+      --electric-blue: #00D9FF;
+      --electric-glow: rgba(0, 217, 255, 0.3);
+      --green: #34D399;
+      --green-soft: rgba(52, 211, 153, 0.12);
+      --amber: #FBBF24;
+      --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      background: linear-gradient(135deg, #0A0514 0%, #0F0A1A 100%);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    a { color: var(--accent-soft); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--accent); }
+
+
+    /* ─── Animated Light Particles ─── */
+    .light-particle {
+      position: fixed;
+      width: 4px;
+      height: 4px;
+      background: var(--electric-blue);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 2;
+      box-shadow: 0 0 12px var(--electric-glow), 0 0 24px var(--electric-glow);
+      opacity: 0;
+    }
+
+    .light-particle.p1 {
+      top: 15%;
+      left: 10%;
+      animation: particle-flow-1 12s ease-in-out infinite;
+    }
+
+    .light-particle.p2 {
+      top: 40%;
+      right: 15%;
+      animation: particle-flow-2 10s ease-in-out infinite 2s;
+    }
+
+    .light-particle.p3 {
+      top: 65%;
+      left: 20%;
+      animation: particle-flow-3 14s ease-in-out infinite 4s;
+    }
+
+    .light-particle.p4 {
+      top: 30%;
+      left: 50%;
+      animation: particle-flow-4 11s ease-in-out infinite 1s;
+    }
+
+    .light-particle.p5 {
+      top: 80%;
+      right: 30%;
+      animation: particle-flow-5 13s ease-in-out infinite 3s;
+    }
+
+    @keyframes particle-flow-1 {
+      0%, 100% { opacity: 0; transform: translate(0, 0); }
+      10% { opacity: 0.7; }
+      50% { opacity: 0.9; transform: translate(200px, 100px); }
+      90% { opacity: 0.7; }
+    }
+
+    @keyframes particle-flow-2 {
+      0%, 100% { opacity: 0; transform: translate(0, 0); }
+      10% { opacity: 0.7; }
+      50% { opacity: 0.9; transform: translate(-180px, 120px); }
+      90% { opacity: 0.7; }
+    }
+
+    @keyframes particle-flow-3 {
+      0%, 100% { opacity: 0; transform: translate(0, 0); }
+      10% { opacity: 0.7; }
+      50% { opacity: 0.9; transform: translate(220px, -80px); }
+      90% { opacity: 0.7; }
+    }
+
+    @keyframes particle-flow-4 {
+      0%, 100% { opacity: 0; transform: translate(0, 0); }
+      10% { opacity: 0.7; }
+      50% { opacity: 0.9; transform: translate(-150px, 90px); }
+      90% { opacity: 0.7; }
+    }
+
+    @keyframes particle-flow-5 {
+      0%, 100% { opacity: 0; transform: translate(0, 0); }
+      10% { opacity: 0.7; }
+      50% { opacity: 0.9; transform: translate(160px, -110px); }
+      90% { opacity: 0.7; }
+    }
+
+    /* ─── Navigation ─── */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 64px;
+      background: rgba(10, 5, 20, 0.85);
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-decoration: none;
+      letter-spacing: -0.3px;
+      position: relative;
+    }
+
+    /* Logo Lightning Glow */
+    .nav-logo svg {
+      filter: drop-shadow(0 0 8px rgba(124, 110, 250, 0.4));
+      transition: filter 0.3s;
+    }
+
+    .nav-logo:hover svg {
+      filter: drop-shadow(0 0 16px rgba(124, 110, 250, 0.7)) drop-shadow(0 0 24px rgba(0, 217, 255, 0.3));
+    }
+
+    .nav-logo-dot { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-link {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+    }
+
+    .nav-link:hover { color: var(--text-primary); }
+
+    .nav-cta {
+      font-size: 13px;
+      font-weight: 600;
+      color: white;
+      background: var(--accent);
+      padding: 8px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .nav-cta:hover {
+      background: var(--accent-hover);
+      color: white;
+      transform: translateY(-1px);
+    }
+
+    /* ─── Hero ─── */
+    .hero {
+      position: relative;
+      padding: 160px 40px 100px;
+      text-align: center;
+      overflow: hidden;
+      z-index: 3;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 900px;
+      background: radial-gradient(ellipse, rgba(124, 110, 250, 0.12) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px 6px 8px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-default);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      letter-spacing: 0.02em;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .hero h1 {
+      font-size: clamp(52px, 9vw, 96px);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-soft) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-sub {
+      font-size: clamp(18px, 2.2vw, 22px);
+      color: var(--text-secondary);
+      margin: 0 auto 48px;
+      max-width: 640px;
+      line-height: 1.65;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 32px;
+      font-size: 16px;
+      font-weight: 700;
+      color: white;
+      background: var(--accent);
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      font-family: inherit;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(124, 110, 250, 0.4);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+      background: transparent;
+      border: 1px solid var(--border-default);
+      border-radius: 12px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      font-family: inherit;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      background: rgba(124, 110, 250, 0.06);
+    }
+
+    .hero-buttons {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ─── Supported Platforms ─── */
+    .platforms {
+      padding: 60px 40px;
+      text-align: center;
+      position: relative;
+      z-index: 3;
+    }
+
+    .platforms-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 32px;
+    }
+
+    .platforms-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .platform-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-default);
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .platform-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(124, 110, 250, 0.05) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .platform-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(124, 110, 250, 0.15);
+    }
+
+    .platform-card:hover::before {
+      opacity: 1;
+    }
+
+    /* ─── Features Section ─── */
+    .features {
+      padding: 120px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 3;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .section-title {
+      font-size: clamp(36px, 5vw, 52px);
+      font-weight: 700;
+      text-align: center;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .section-sub {
+      font-size: 17px;
+      color: var(--text-secondary);
+      text-align: center;
+      max-width: 600px;
+      line-height: 1.7;
+      margin: 0 auto 80px;
+    }
+
+    .feature-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      margin-bottom: 100px;
+      padding: 60px;
+      background: rgba(22, 21, 31, 0.5);
+      border: 1px solid var(--border-default);
+      border-radius: 20px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+
+    .feature-block::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--electric-blue) 100%);
+      border-radius: 20px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: -1;
+    }
+
+    .feature-block:hover {
+      border-color: transparent;
+    }
+
+    .feature-block:hover::before {
+      opacity: 0.3;
+    }
+
+    .feature-block:nth-child(even) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .feature-block:nth-child(even) .feature-content {
+      order: 2;
+    }
+
+    .feature-number {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent);
+      margin-bottom: 12px;
+      letter-spacing: 0.05em;
+    }
+
+    .feature-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+    }
+
+    .feature-desc {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+
+    .feature-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: var(--green-soft);
+      border: 1px solid rgba(52, 211, 153, 0.25);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--green);
+      letter-spacing: 0.01em;
+    }
+
+    .feature-visual {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--border-default);
+      border-radius: 16px;
+      overflow: visible;
+      aspect-ratio: 4 / 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+    }
+
+    .feature-visual::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(124, 110, 250, 0.06), transparent 50%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ── Feature visual: inline inject mock (ORIGINAL) ── */
+    .mock-inject {
+      width: 85%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .mock-chatbar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 16px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-default);
+      border-radius: 12px;
+    }
+
+    .mock-chatbar-text {
+      flex: 1;
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+
+    .mock-arixify-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent);
+      border-radius: 8px;
+      padding: 6px 12px;
+      flex-shrink: 0;
+      box-shadow: 0 0 12px var(--accent-glow);
+      animation: btn-glow 3s ease-in-out infinite;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
+    }
+
+    .mock-arixify-btn:hover {
+      background: var(--accent-hover);
+      transform: scale(1.05);
+      box-shadow: 0 0 28px rgba(124, 110, 250, 0.4);
+      animation: none;
+    }
+
+    .mock-arixify-btn:active {
+      transform: scale(0.97);
+    }
+
+    .mock-arixify-btn-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: white;
+      letter-spacing: 0.01em;
+    }
+
+    @keyframes btn-glow {
+      0%, 100% { box-shadow: 0 0 12px var(--accent-glow); }
+      50% { box-shadow: 0 0 24px rgba(124, 110, 250, 0.35); }
+    }
+
+    .mock-picker {
+      background: #1A1825;
+      border: 1px solid var(--border-default);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+
+    .mock-picker-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px 8px;
+    }
+
+    .mock-picker-brand {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent-soft);
+    }
+
+    .mock-picker-hint {
+      font-size: 10px;
+      color: var(--text-tertiary);
+    }
+
+    .mock-picker-search {
+      margin: 0 10px 8px;
+      padding: 7px 10px;
+      background: #0E0E11;
+      border: 1px solid var(--border-default);
+      border-radius: 6px;
+      font-size: 11px;
+      color: var(--text-tertiary);
+      cursor: text;
+      transition: border-color 0.15s;
+    }
+
+    .mock-picker-search:hover {
+      border-color: var(--accent);
+    }
+
+    .mock-picker-item {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 10px 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      transition: background 0.15s;
+      cursor: pointer;
+    }
+
+    .mock-picker-item:last-child { border-bottom: none; }
+
+    .mock-picker-item:hover {
+      background: rgba(124, 110, 250, 0.06);
+    }
+
+    .mock-picker-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .mock-picker-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .mock-picker-preview {
+      font-size: 10px;
+      color: var(--text-tertiary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .mock-picker-count {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-tertiary);
+      flex-shrink: 0;
+      margin-left: 12px;
+      margin-top: 2px;
+    }
+
+    /* ── Feature visual: platform tags (ORIGINAL) ── */
+    .mock-platform-tag {
+      padding: 5px 10px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-default);
+      border-radius: 6px;
+      font-size: 11px;
+      color: var(--text-secondary);
+      transition: border-color 0.15s, color 0.15s, transform 0.1s;
+      cursor: default;
+    }
+
+    .mock-platform-tag:hover {
+      border-color: var(--accent);
+      color: var(--text-primary);
+      transform: translateY(-2px);
+    }
+
+    .mock-platform-tag.muted {
+      color: var(--text-tertiary);
+      opacity: 0.7;
+    }
+
+    .mock-platform-tag.muted:hover {
+      opacity: 1;
+    }
+
+    /* ── Feature visual: local storage (ORIGINAL) ── */
+    .mock-local {
+      width: 75%;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .mock-shield {
+      width: 56px;
+      height: 56px;
+      background: var(--bg-elevated);
+      border: 2px solid var(--green);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      box-shadow: 0 0 24px var(--green-soft);
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: default;
+    }
+
+    .mock-shield:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 36px rgba(52, 211, 153, 0.25);
+    }
+
+    .mock-local-lines {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .mock-local-line {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      background: var(--bg-elevated);
+      border-radius: 8px;
+      font-size: 11px;
+      color: var(--text-secondary);
+      transition: background 0.15s, transform 0.15s;
+    }
+
+    .mock-local-line:hover {
+      background: rgba(52, 211, 153, 0.06);
+      transform: translateX(4px);
+    }
+
+    .mock-local-line .check {
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    /* ── Feature visual: tracking rows (ORIGINAL) ── */
+    .mock-track-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-default);
+      border-radius: 10px;
+      transition: border-color 0.15s, transform 0.15s;
+      cursor: default;
+    }
+
+    .mock-track-row:hover {
+      border-color: var(--accent);
+      transform: translateX(4px);
+    }
+
+    /* ─── How it works ─── */
+    .how-it-works {
+      padding: 100px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 3;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 40px;
+      margin-top: 60px;
+    }
+
+    .step {
+      padding: 40px 32px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-default);
+      border-radius: 16px;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .step::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      background: linear-gradient(135deg, var(--accent) 0%, transparent 100%);
+      border-radius: 16px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: -1;
+    }
+
+    .step:hover {
+      transform: translateY(-4px);
+      border-color: transparent;
+      box-shadow: 0 8px 32px rgba(124, 110, 250, 0.2);
+    }
+
+    .step:hover::before {
+      opacity: 0.15;
+    }
+
+    .step:hover .step-number {
+      opacity: 1;
+    }
+
+    .step-number {
+      font-family: var(--font-mono);
+      font-size: 40px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 20px;
+      opacity: 0.4;
+      transition: opacity 0.3s;
+    }
+
+    .step-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+
+    .step-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* ─── Pricing ─── */
+    .pricing {
+      padding: 100px 40px;
+      background: var(--bg-secondary);
+      position: relative;
+      z-index: 3;
+    }
+
+    .pricing-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .pricing-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 32px;
+      margin: 60px auto 40px;
+      max-width: 860px;
+    }
+
+    .pricing-card {
+      padding: 48px 40px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-default);
+      border-radius: 20px;
+      text-align: left;
+      position: relative;
+      transition: all 0.3s;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pricing-card::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--electric-blue) 100%);
+      border-radius: 20px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: -1;
+    }
+
+    .pricing-card.pro {
+      border-color: var(--accent);
+    }
+
+    .pricing-card.pro::before {
+      opacity: 0.2;
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-4px);
+    }
+
+    /* Free card: 只變邊框，不變背景 */
+    .pricing-card:not(.pro):hover {
+      border-color: var(--accent);
+      box-shadow: 0 4px 16px rgba(124, 110, 250, 0.15);
+    }
+
+    /* Pro card: 保留完整背景效果 */
+    .pricing-card.pro:hover {
+      box-shadow: 0 12px 40px rgba(124, 110, 250, 0.25);
+      border-color: transparent;
+    }
+
+    .pricing-card.pro:hover::before {
+      opacity: 0.3;
+    }
+
+    .pricing-badge {
+      position: absolute;
+      top: 20px;
+      right: 32px;
+      padding: 6px 16px;
+      background: var(--accent);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 999px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .pricing-plan {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-tertiary);
+      margin-bottom: 12px;
+      letter-spacing: 0.02em;
+    }
+
+    .pricing-price {
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+      letter-spacing: -0.03em;
+    }
+
+    .pricing-price span {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--text-tertiary);
+    }
+
+    .pricing-period {
+      font-size: 13px;
+      color: var(--text-tertiary);
+      margin-bottom: 8px;
+    }
+
+    .pricing-annual-note {
+      font-size: 12px;
+      color: var(--green);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .pricing-divider {
+      height: 1px;
+      background: var(--border-default);
+      margin: 28px 0;
+    }
+
+    .pricing-features {
+      list-style: none;
+      margin-bottom: 32px;
+      flex-grow: 1;
+    }
+
+    .pricing-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 12px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .check {
+      color: var(--text-tertiary);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .check-green {
+      color: var(--green);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .pricing-btn {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      text-align: center;
+      font-size: 15px;
+      font-weight: 700;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: all 0.2s;
+      font-family: inherit;
+      border: none;
+      cursor: pointer;
+    }
+
+    .pricing-btn.free {
+      background: var(--bg-elevated);
+      color: var(--text-primary);
+      border: 1px solid var(--border-default);
+    }
+
+    .pricing-btn.free:hover {
+      background: var(--bg-primary);
+      border-color: var(--accent);
+    }
+
+    .pricing-btn.pro {
+      background: var(--accent);
+      color: white;
+    }
+
+    .pricing-btn.pro:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(124, 110, 250, 0.3);
+    }
+
+    .pricing-note {
+      font-size: 13px;
+      color: var(--text-tertiary);
+      line-height: 1.7;
+    }
+
+    /* ─── CTA ─── */
+    .cta {
+      padding: 120px 40px;
+      text-align: center;
+      position: relative;
+      z-index: 3;
+    }
+
+    .cta-title {
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 700;
+      margin-bottom: 16px;
+      letter-spacing: -0.03em;
+    }
+
+    .cta-sub {
+      font-size: 17px;
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+      line-height: 1.7;
+    }
+
+    /* ─── Footer ─── */
+    .footer {
+      padding: 60px 40px 40px;
+      border-top: 1px solid var(--border-subtle);
+      position: relative;
+      z-index: 3;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 32px;
+    }
+
+    .footer-left {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: var(--text-tertiary);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 28px;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--text-tertiary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-soft);
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 1024px) {
+      .feature-block {
+        grid-template-columns: 1fr !important;
+        gap: 40px;
+      }
+
+      .feature-block:nth-child(even) .feature-content {
+        order: 0;
+      }
+
+      .feature-visual {
+        aspect-ratio: auto;
+        min-height: 280px;
+        height: auto;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav {
+        padding: 0 16px;
+        height: 56px;
+      }
+
+      .nav-links {
+        gap: 12px;
+      }
+
+      .nav-link {
+        font-size: 11px;
+      }
+
+      .nav-cta {
+        font-size: 11px;
+        padding: 6px 14px;
+      }
+
+      .nav-logo {
+        font-size: 15px;
+        gap: 8px;
+      }
+
+      .nav-logo svg {
+        width: 18px;
+        height: 18px;
+      }
+
+      .hero {
+        padding: 120px 24px 80px;
+      }
+
+      .hero-title {
+        font-size: 42px;
+      }
+
+      .hero-sub {
+        font-size: 16px;
+      }
+
+      .platforms {
+        padding: 40px 24px;
+      }
+
+      .platforms-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 12px;
+      }
+
+      .features {
+        padding: 80px 24px;
+      }
+
+      .section-sub {
+        margin-bottom: 60px;
+      }
+
+      .feature-block {
+        padding: 40px 28px;
+        margin-bottom: 60px;
+      }
+
+      .feature-visual {
+        aspect-ratio: auto;
+        min-height: 240px;
+        height: auto;
+        padding: 20px 14px;
+      }
+
+      /* Feature 02 platform tags responsive */
+      .feature-visual .mock-platform-tag {
+        font-size: 10px;
+        padding: 4px 8px;
+      }
+
+      /* Feature 03 privacy lines responsive */
+      .mock-local {
+        width: 90%;
+      }
+
+      .mock-local-line {
+        font-size: 10px;
+        padding: 6px 10px;
+      }
+
+      /* Feature 04 tracking rows responsive */
+      .mock-track-row {
+        padding: 10px 12px;
+      }
+
+      .mock-track-row span[style*="font-size:12px"] {
+        font-size: 11px !important;
+      }
+
+      /* Feature 06 dashboard responsive */
+      .mock-manage-dashboard {
+        width: 100% !important;
+        flex-direction: column !important;
+        height: auto !important;
+        gap: 8px !important;
+      }
+
+      .mock-manage-dashboard > div {
+        width: 100% !important;
+        min-height: 100px;
+      }
+
+      /* Feature 01 mockup 響應式 */
+      .mock-inject {
+        width: 100%;
+      }
+
+      .mock-chatbar {
+        padding: 12px 14px;
+      }
+
+      .mock-chatbar-text {
+        font-size: 12px;
+      }
+
+      .mock-arixify-btn {
+        padding: 5px 10px;
+      }
+
+      .mock-arixify-btn-label {
+        font-size: 10px;
+      }
+
+      .mock-picker-item {
+        padding: 8px 12px;
+      }
+
+      .mock-picker-title {
+        font-size: 11px;
+      }
+
+      .mock-picker-preview {
+        font-size: 9px;
+      }
+
+      .how-it-works {
+        padding: 80px 24px;
+      }
+
+      .steps {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .pricing {
+        padding: 80px 24px;
+      }
+
+      .pricing-cards {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .pricing-card {
+        padding: 40px 28px;
+      }
+
+      .pricing-price {
+        font-size: 40px;
+      }
+
+      .cta {
+        padding: 80px 24px;
+      }
+
+      .footer {
+        padding: 40px 24px 32px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 24px;
+      }
+
+      .footer-links {
+        flex-direction: column;
+        gap: 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .nav {
+        padding: 0 14px;
+        height: 50px;
+      }
+
+      .nav-link {
+        font-size: 11px;
+      }
+
+      .nav-link[href="#how"] {
+        display: none;
+      }
+
+      
+
+      .nav-logo {
+        font-size: 14px;
+      }
+
+      .hero-title {
+        font-size: 36px;
+      }
+
+      .hero-sub {
+        font-size: 15px;
+      }
+
+      .pricing-card {
+        padding: 32px 24px;
+      }
+
+      .pricing-badge {
+        top: 16px;
+        right: 20px;
+        font-size: 10px;
+        padding: 5px 12px;
+      }
+
+      .feature-block {
+        padding: 32px 20px;
+      }
+
+      .section-title {
+        font-size: 32px;
+      }
+
+      .feature-visual {
+        aspect-ratio: auto;
+        min-height: 200px;
+        height: auto;
+        padding: 16px 12px;
+      }
+
+      /* Feature 01 更小螢幕調整 */
+      .mock-inject {
+        width: 100%;
+      }
+
+      .mock-chatbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      .mock-arixify-btn {
+        align-self: flex-end;
+      }
+
+      .mock-picker-item {
+        padding: 6px 10px;
+      }
+
+      .mock-picker-title {
+        font-size: 10px;
+      }
+
+      .mock-picker-preview {
+        font-size: 8px;
+      }
+
+      .mock-picker-count {
+        font-size: 9px;
+      }
+
+      .mock-picker-search {
+        font-size: 10px;
+        padding: 5px 8px;
+      }
+
+      /* Feature 02 platform tags 更小螢幕 */
+      .feature-visual .mock-platform-tag {
+        font-size: 9px;
+        padding: 3px 6px;
+      }
+
+      /* Feature 03 privacy */
+      .mock-local {
+        width: 100%;
+      }
+
+      .mock-shield {
+        width: 44px;
+        height: 44px;
+        font-size: 20px;
+        border-radius: 12px;
+      }
+
+      .mock-local-line {
+        font-size: 9px;
+        padding: 5px 8px;
+        gap: 6px;
+      }
+
+      /* Feature 04 tracking rows */
+      .mock-track-row {
+        padding: 8px 10px;
+      }
+
+      /* Feature 05 right-click mock */
+      .mock-inject[style*="width:80%"] {
+        width: 100% !important;
+      }
+
+      /* Feature 06 更小螢幕調整 */
+      .mock-manage-dashboard {
+        width: 100% !important;
+        flex-direction: column !important;
+        height: auto !important;
+        gap: 8px !important;
+      }
+
+      .mock-manage-dashboard > div {
+        width: 100% !important;
+        min-height: 100px;
+      }
+
+      .mock-manage-dashboard > div[style*="width:22%"],
+      .mock-manage-dashboard > div[style*="width:30%"],
+      .mock-manage-dashboard > div[style*="flex:1"] {
+        width: 100% !important;
+      }
+    }
+  </style>
+</head>
+<canvas id="lightning-canvas" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;"></canvas>
+<script>
+(function(){
+  const canvas = document.getElementById('lightning-canvas');
+  const ctx = canvas.getContext('2d');
+  function resize(){ canvas.width = innerWidth; canvas.height = innerHeight; }
+  resize(); window.addEventListener('resize', resize);
+  function rand(a,b){ return a + Math.random()*(b-a); }
+
+  function buildTrunk(x,y,angle,length){
+    const pts=[{x,y}]; let cx=x,cy=y,a=angle;
+    const steps=Math.floor(rand(10,18)), sl=length/steps;
+    for(let i=0;i<steps;i++){ a+=rand(-0.25,0.25); cx+=Math.cos(a)*sl; cy+=Math.sin(a)*sl; pts.push({x:cx,y:cy}); }
+    return pts;
+  }
+
+  function buildBranches(tp){
+    const branches=[];
+    for(let i=3;i<tp.length-1;i++){
+      if(Math.random()>0.45) continue;
+      const o=tp[i], dx=tp[i+1].x-o.x, dy=tp[i+1].y-o.y;
+      const ba=Math.atan2(dy,dx)+(Math.random()<0.5?1:-1)*rand(0.3,0.7);
+      const bl=rand(60,150), bs=Math.floor(rand(5,11)), bPts=[{x:o.x,y:o.y}];
+      let cx=o.x,cy=o.y,a=ba;
+      for(let j=0;j<bs;j++){ a+=rand(-0.2,0.2); cx+=Math.cos(a)*(bl/bs); cy+=Math.sin(a)*(bl/bs); bPts.push({x:cx,y:cy}); }
+      const sub=[];
+      if(Math.random()<0.5 && bPts.length>3){
+        const si=Math.floor(rand(2,bPts.length-1)), sp=bPts[si];
+        const sa=a+(Math.random()<0.5?1:-1)*rand(0.3,0.6), sLen=rand(20,55), sPts=[{x:sp.x,y:sp.y}];
+        let sx=sp.x,sy=sp.y,sA=sa;
+        for(let j=0;j<4;j++){ sA+=rand(-0.2,0.2); sx+=Math.cos(sA)*(sLen/4); sy+=Math.sin(sA)*(sLen/4); sPts.push({x:sx,y:sy}); }
+        sub.push(sPts);
+      }
+      branches.push({pts:bPts,sub});
+    }
+    return branches;
+  }
+
+  function spawnEvent(){
+    const W=canvas.width, H=canvas.height;
+    const ox=W*rand(0.15,0.85), oy=H*rand(0.0,0.15);
+    const n=Math.random()<0.4?2:1, trunks=[];
+    for(let t=0;t<n;t++){
+      const pts=buildTrunk(ox,oy,rand(Math.PI*0.1,Math.PI*0.9),rand(H*0.5,H*0.95));
+      trunks.push({pts,branches:buildBranches(pts)});
+    }
+    return {ox,oy,trunks};
+  }
+
+  function strokePts(pts,lw,alpha,color){
+    if(pts.length<2) return;
+    ctx.beginPath(); ctx.moveTo(pts[0].x,pts[0].y);
+    for(let i=1;i<pts.length;i++) ctx.lineTo(pts[i].x,pts[i].y);
+    ctx.strokeStyle=color; ctx.lineWidth=lw; ctx.globalAlpha=alpha;
+    ctx.shadowBlur=lw*6; ctx.shadowColor=color; ctx.stroke(); ctx.shadowBlur=0;
+  }
+
+  function getAlphas(ph){
+    const t = ph<0.08?ph/0.08:ph<0.55?1:1-(ph-0.55)/0.45;
+    const b = ph<0.25?0:ph<0.35?(ph-0.25)/0.1:ph<0.55?1:1-(ph-0.55)/0.45;
+    return {trunk:Math.max(0,t), branch:Math.max(0,b)};
+  }
+
+  function drawEvent(ev,ph){
+    const {trunk,branch}=getAlphas(ph); if(trunk<=0) return;
+    ctx.save(); ctx.lineCap='round'; ctx.lineJoin='round';
+    ev.trunks.forEach(t=>{
+      strokePts(t.pts,2.2,trunk*0.9,'rgba(140,120,240,0.95)');
+      if(branch>0) t.branches.forEach(b=>{
+        strokePts(b.pts,1.3,branch*0.75,'rgba(120,100,200,0.7)');
+        b.sub.forEach(s=>strokePts(s,0.8,branch*0.55,'rgba(100,85,170,0.5)'));
+      });
+    });
+    if(trunk>0.5){ ctx.globalAlpha=(trunk-0.5)*0.08; ctx.fillStyle='#7C6EFA'; ctx.fillRect(0,0,canvas.width,canvas.height); }
+    ctx.restore();
+  }
+
+  let state='idle', idleTimer=rand(1,3), event=null, phase=0, doubleFlash=false, pauseTimer=0, last=performance.now();
+
+  function tick(ts){
+    requestAnimationFrame(tick);
+    const dt=Math.min((ts-last)/1000,0.08); last=ts;
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    if(state==='idle'){
+      if((idleTimer-=dt)<=0){ event=spawnEvent(); doubleFlash=Math.random()<0.4; phase=0; state='flash1'; }
+      return;
+    }
+    if(state==='pause'){
+      if((pauseTimer-=dt)<=0){
+        const prev=event; event=spawnEvent();
+        event.ox=Math.min(canvas.width*0.82,Math.max(canvas.width*0.18,prev.ox+rand(-canvas.width*0.12,canvas.width*0.12)));
+        phase=0; state='flash2';
+      }
+      return;
+    }
+    phase+=dt*(state==='flash2'?2.6:2.0);
+    drawEvent(event,phase);
+    if(phase>=1){
+      if(state==='flash1'&&doubleFlash){ state='pause'; pauseTimer=rand(0.04,0.12); }
+      else{ state='idle'; idleTimer=rand(4,7); }
+    }
+  }
+  requestAnimationFrame(tick);
+})();
+</script>
+<body>
+
+  <!-- Animated Light Particles -->
+  <div class="light-particle p1"></div>
+  <div class="light-particle p2"></div>
+  <div class="light-particle p3"></div>
+  <div class="light-particle p4"></div>
+  <div class="light-particle p5"></div>
+
+  <!-- ─── Navigation ─── -->
+  <nav class="nav">
+    <a class="nav-logo" href="/">
+      <svg width="22" height="22" viewBox="0 0 32 32" fill="none">
+        <rect width="32" height="32" rx="7" fill="#7C6EFA"/>
+        <path d="M11 8L7 16H14L10 24" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M19 8L15 16H22L18 24" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+      </svg>
+      Arixify<span class="nav-logo-dot"></span>
+    </a>
+    <div class="nav-links">
+      <a class="nav-link" href="#features">Features</a>
+      <a class="nav-link" href="#how">How it works</a>
+      <a class="nav-link" href="#pricing">Pricing</a>
+      <a class="nav-cta" href="https://chromewebstore.google.com" target="_blank">Add to Browser</a>
+    </div>
+  </nav>
+
+  <!-- ─── Hero ─── -->
+  <section class="hero">
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      Now supporting 20+ AI platforms
+    </div>
+    <h1>Your prompts.<br/>One click away.</h1>
+    <p class="hero-sub">
+      Build your library. Access it everywhere. Stay in flow.
+    </p>
+    <div class="hero-buttons">
+      <a class="btn-primary" href="https://chromewebstore.google.com" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        Add to Browser — Free
+      </a>
+      <a class="btn-secondary" href="#features">
+        See features
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ─── Supported Platforms ─── -->
+  <section class="platforms">
+    <div class="platforms-label">Works with your favorite AI platforms</div>
+    <div class="platforms-grid">
+      <div class="platform-card">ChatGPT</div>
+      <div class="platform-card">Claude</div>
+      <div class="platform-card">Gemini</div>
+      <div class="platform-card">Perplexity</div>
+      <div class="platform-card">Grok</div>
+      <div class="platform-card">Copilot</div>
+      <div class="platform-card">DeepSeek</div>
+      <div class="platform-card">Poe</div>
+      <div class="platform-card">Le Chat</div>
+      <div class="platform-card">Luma</div>
+      <div class="platform-card">Runway</div>
+      <div class="platform-card">+ 10 more</div>
+    </div>
+  </section>
+
+  <!-- ─── Features ─── -->
+  <section class="features" id="features">
+    <div class="section-label">Features</div>
+    <div class="section-title">Everything you need to work faster</div>
+    <p class="section-sub">
+      Designed for AI power users who want their prompts organized, accessible, and ready to use — anywhere.
+    </p>
+
+    <!-- Feature 1: Inline injection (ORIGINAL MOCKUP) -->
+    <div class="feature-block">
+      <div class="feature-content">
+        <div class="feature-number">01</div>
+        <div class="feature-title">Insert prompts right where you type</div>
+        <div class="feature-desc">
+          A small button appears next to the AI input box. Click it, pick your prompt,
+          and it's injected instantly. No tab-switching, no clipboard juggling.
+          It works exactly where your cursor is.
+        </div>
+        <span class="feature-tag">⚡ Under 0.5 seconds</span>
+      </div>
+      <div class="feature-visual">
+        <div class="mock-inject">
+          <div class="mock-chatbar">
+            <span class="mock-chatbar-text">How can I help you today?</span>
+            <div class="mock-arixify-btn">
+              <svg width="12" height="12" viewBox="0 0 32 32" fill="none"><path d="M11 6L7 14H14L10 22" stroke="white" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 6L17 14H24L20 22" stroke="white" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/></svg>
+              <span class="mock-arixify-btn-label">Arixify</span>
+            </div>
+          </div>
+          <div class="mock-picker">
+            <div class="mock-picker-header">
+              <div class="mock-picker-brand">
+                <svg width="12" height="12" viewBox="0 0 32 32" fill="none"><path d="M11 6L7 14H14L10 22" stroke="#9D8DFF" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 6L17 14H24L20 22" stroke="#9D8DFF" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/></svg>
+                Arixify
+              </div>
+              <span class="mock-picker-hint">Click to insert</span>
+            </div>
+            <div class="mock-picker-search">Search…</div>
+            <div class="mock-picker-item">
+              <div class="mock-picker-text">
+                <span class="mock-picker-title">Write unit tests</span>
+                <span class="mock-picker-preview">Write comprehensive unit tests for the following f…</span>
+              </div>
+              <span class="mock-picker-count">43x</span>
+            </div>
+            <div class="mock-picker-item">
+              <div class="mock-picker-text">
+                <span class="mock-picker-title">Explain like I'm 5</span>
+                <span class="mock-picker-preview">Explain the following concept as if you're talking…</span>
+              </div>
+              <span class="mock-picker-count">67x</span>
+            </div>
+            <div class="mock-picker-item">
+              <div class="mock-picker-text">
+                <span class="mock-picker-title">Code review checklist</span>
+                <span class="mock-picker-preview">Review the following code for bugs, security issu…</span>
+              </div>
+              <span class="mock-picker-count">31x</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature 2: 20+ platforms (ORIGINAL MOCKUP) -->
+    <div class="feature-block">
+      <div class="feature-content">
+        <div class="feature-number">02</div>
+        <div class="feature-title">20+ platforms. One extension.</div>
+        <div class="feature-desc">
+          ChatGPT, Claude, Gemini, Perplexity, Grok, DeepSeek, Copilot — plus
+          AI image and video generators like Runway, Kling AI, and Luma.
+          Wherever you prompt, Arixify is already there.
+        </div>
+        <span class="feature-tag">🌐 AI Chat + Image + Video</span>
+      </div>
+      <div class="feature-visual">
+        <div style="width:80%; max-width:100%; display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <div style="font-size:9px; font-weight:600; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-tertiary); margin-bottom:8px;">AI Chat</div>
+            <div style="display:flex; flex-wrap:wrap; gap:6px;">
+              <span class="mock-platform-tag">ChatGPT</span>
+              <span class="mock-platform-tag">Claude</span>
+              <span class="mock-platform-tag">Gemini</span>
+              <span class="mock-platform-tag">Perplexity</span>
+              <span class="mock-platform-tag">Grok</span>
+              <span class="mock-platform-tag">DeepSeek</span>
+              <span class="mock-platform-tag">Copilot</span>
+              <span class="mock-platform-tag">Le Chat</span>
+              <span class="mock-platform-tag">Poe</span>
+              <span class="mock-platform-tag muted">+3 more</span>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:9px; font-weight:600; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-tertiary); margin-bottom:8px;">AI Image & Video</div>
+            <div style="display:flex; flex-wrap:wrap; gap:6px;">
+              <span class="mock-platform-tag">Runway</span>
+              <span class="mock-platform-tag">Kling AI</span>
+              <span class="mock-platform-tag">Luma</span>
+              <span class="mock-platform-tag">Dreamina</span>
+              <span class="mock-platform-tag">Hailuo</span>
+              <span class="mock-platform-tag muted">+3 more</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature 3: Privacy (ORIGINAL MOCKUP) -->
+    <div class="feature-block">
+      <div class="feature-content">
+        <div class="feature-number">03</div>
+        <div class="feature-title">Your prompts are yours. Period.</div>
+        <div class="feature-desc">
+          Arixify doesn't read your AI conversations, doesn't track your browsing,
+          and doesn't collect analytics. Your data is stored locally in your browser
+          by default — nothing leaves your device unless you choose to enable cloud sync.
+        </div>
+        <span class="feature-tag">🔒 No tracking · No analytics · No data collection</span>
+      </div>
+      <div class="feature-visual">
+        <div class="mock-local">
+          <div class="mock-shield">🛡️</div>
+          <div class="mock-local-lines">
+            <div class="mock-local-line"><span class="check">✓</span> Doesn't read your AI conversations</div>
+            <div class="mock-local-line"><span class="check">✓</span> No analytics, trackers, or ads</div>
+            <div class="mock-local-line"><span class="check">✓</span> Local storage by default (Free plan)</div>
+            <div class="mock-local-line"><span class="check">✓</span> Opt-in cloud sync (Pro plan)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature 4: Track usage (ORIGINAL MOCKUP) -->
+    <div class="feature-block">
+      <div class="feature-content">
+        <div class="feature-number">04</div>
+        <div class="feature-title">See which prompts you use most</div>
+        <div class="feature-desc">
+          Every time you insert a prompt, Arixify increments its use count and updates its last-used timestamp.
+          Sort by usage, recency, or rating to find the prompts you rely on.
+        </div>
+        <span class="feature-tag">📊 Usage tracking + Top Used tab</span>
+      </div>
+      <div class="feature-visual">
+        <div style="width:80%; max-width:100%; display:flex; flex-direction:column; gap:8px;">
+          <div class="mock-track-row">
+            <div style="display:flex; flex-direction:column; gap:2px;">
+              <span style="font-size:12px; font-weight:600; color:var(--text-primary);">Code review checklist</span>
+              <span style="font-size:10px; color:var(--amber);">★★★★★</span>
+            </div>
+            <span style="font-family:var(--font-mono); font-size:12px; color:var(--accent-soft);">47x</span>
+          </div>
+          <div class="mock-track-row">
+            <div style="display:flex; flex-direction:column; gap:2px;">
+              <span style="font-size:12px; font-weight:600; color:var(--text-primary);">Translate to formal English</span>
+              <span style="font-size:10px; color:var(--amber);">★★★★☆</span>
+            </div>
+            <span style="font-family:var(--font-mono); font-size:12px; color:var(--accent-soft);">31x</span>
+          </div>
+          <div class="mock-track-row">
+            <div style="display:flex; flex-direction:column; gap:2px;">
+              <span style="font-size:12px; font-weight:600; color:var(--text-primary);">Summarize this article</span>
+              <span style="font-size:10px; color:var(--amber);">★★★★☆</span>
+            </div>
+            <span style="font-family:var(--font-mono); font-size:12px; color:var(--accent-soft);">28x</span>
+          </div>
+          <div class="mock-track-row">
+            <div style="display:flex; flex-direction:column; gap:2px;">
+              <span style="font-size:12px; font-weight:600; color:var(--text-secondary);">Debug this error</span>
+              <span style="font-size:10px; color:var(--amber);">★★★☆☆</span>
+            </div>
+            <span style="font-family:var(--font-mono); font-size:12px; color:var(--text-tertiary);">15x</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature 5: Right-click save (ORIGINAL MOCKUP) -->
+    <div class="feature-block">
+      <div class="feature-content">
+        <div class="feature-number">05</div>
+        <div class="feature-title">See a great prompt? Right-click. Saved.</div>
+        <div class="feature-desc">
+          Highlight any text on any webpage, right-click, and choose "Add to Arixify."
+          The text is saved as a prompt instantly. No copy-paste, no switching tabs.
+        </div>
+        <span class="feature-tag">🖱️ Works on any webpage</span>
+      </div>
+      <div class="feature-visual">
+        <div class="mock-inject" style="width:80%; max-width:100%">
+          <div style="padding:14px 18px; background:var(--bg-elevated); border:1px solid var(--border-default); border-radius:10px;">
+            <div style="font-size:12px; color:var(--text-secondary); line-height:1.7; margin-bottom:10px;">
+              <span style="background:rgba(124,110,250,0.2); padding:2px 0; border-radius:2px;">You are an expert code reviewer. Review the following code for bugs, security issues, and performance…</span>
+            </div>
+            <div style="background:var(--bg-card); border:1px solid var(--border-default); border-radius:8px; overflow:hidden; box-shadow:0 4px 16px rgba(0,0,0,0.3);">
+              <div style="display:flex; align-items:center; justify-content:space-between; padding:8px 12px; font-size:11px; color:var(--text-tertiary); border-bottom:1px solid var(--border-subtle);">
+                <span style="display:flex; align-items:center; gap:6px;">Copy</span>
+                <span style="font-size:10px; color:var(--text-tertiary); opacity:0.5;">Ctrl+C</span>
+              </div>
+              <div style="display:flex; align-items:center; padding:8px 12px; font-size:11px; color:var(--text-tertiary); border-bottom:1px solid var(--border-subtle);">Print…</div>
+              <div style="display:flex; align-items:center; gap:7px; padding:8px 12px; font-size:11px; color:var(--text-primary); background:rgba(124,110,250,0.06); cursor:pointer;">
+                <svg width="14" height="14" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="5" fill="#7C6EFA"/><path d="M11 8L7 16H14L10 24" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 8L15 16H22L18 24" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/></svg>
+                Add to Arixify
+              </div>
+              <div style="display:flex; align-items:center; padding:8px 12px; font-size:11px; color:var(--text-tertiary);">Inspect</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature 6: Manage + Markdown (ALL USERS) -->
+    <div class="feature-block">
+      <div class="feature-content">
+        <div class="feature-number">06</div>
+        <div class="feature-title">Full management dashboard with Markdown editor</div>
+        <div class="feature-desc">
+          A three-column management page for power users.
+          Folders, drag-and-drop organization, resizable panels, and a split-view
+          Markdown editor with live preview, keyboard shortcuts, and rich text paste support.
+        </div>
+        <span class="feature-tag">🗂️ Organize · Edit · Sync</span>
+      </div>
+      <div class="feature-visual">
+        <div class="mock-manage-dashboard" style="width:90%; max-width:100%; display:flex; gap:6px; min-height:180px;">
+          <div style="width:22%; background:var(--bg-elevated); border:1px solid var(--border-default); border-radius:8px; padding:10px;">
+            <div style="font-size:9px; color:var(--text-tertiary); margin-bottom:8px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em;">Folders</div>
+            <div style="font-size:10px; color:var(--accent-soft); padding:4px 6px; background:rgba(124,110,250,0.08); border-radius:4px; margin-bottom:4px;">All Prompts</div>
+            <div style="font-size:10px; color:var(--text-secondary); padding:4px 6px; margin-bottom:4px;">Marketing</div>
+            <div style="font-size:10px; color:var(--text-secondary); padding:4px 6px; margin-bottom:4px;">Dev</div>
+            <div style="font-size:10px; color:var(--text-secondary); padding:4px 6px;">Writing</div>
+          </div>
+          <div style="width:30%; background:var(--bg-elevated); border:1px solid var(--border-default); border-radius:8px; padding:10px; display:flex; flex-direction:column; gap:5px;">
+            <div style="padding:6px 8px; background:rgba(124,110,250,0.06); border:1px solid var(--accent); border-radius:5px;">
+              <div style="font-size:10px; color:var(--text-primary); font-weight:600;">Code review</div>
+              <div style="font-size:8px; color:var(--text-tertiary); margin-top:2px;">×47 · ★★★★★</div>
+            </div>
+            <div style="padding:6px 8px; border:1px solid var(--border-default); border-radius:5px;">
+              <div style="font-size:10px; color:var(--text-secondary);">Translate formal</div>
+              <div style="font-size:8px; color:var(--text-tertiary); margin-top:2px;">×31 · ★★★★</div>
+            </div>
+            <div style="padding:6px 8px; border:1px solid var(--border-default); border-radius:5px;">
+              <div style="font-size:10px; color:var(--text-secondary);">Summarize</div>
+              <div style="font-size:8px; color:var(--text-tertiary); margin-top:2px;">×28 · ★★★★</div>
+            </div>
+          </div>
+          <div style="flex:1; background:var(--bg-elevated); border:1px solid var(--border-default); border-radius:8px; padding:10px; display:flex; flex-direction:column;">
+            <div style="display:flex; gap:4px; margin-bottom:6px;">
+              <span style="font-size:9px; padding:2px 6px; background:var(--bg-card); border:1px solid var(--border-default); border-radius:3px; color:var(--text-tertiary); font-weight:600;">B</span>
+              <span style="font-size:9px; padding:2px 6px; background:var(--bg-card); border:1px solid var(--border-default); border-radius:3px; color:var(--text-tertiary); font-style:italic;">I</span>
+              <span style="font-size:9px; padding:2px 6px; background:var(--bg-card); border:1px solid var(--border-default); border-radius:3px; color:var(--text-tertiary);">H1</span>
+            </div>
+            <div style="flex:1; display:flex; gap:4px;">
+              <div style="flex:1; background:var(--bg-card); border-radius:4px; padding:6px; font-size:8px; color:var(--text-tertiary); font-family:var(--font-mono); line-height:1.6;">
+                # Code Review<br>
+                **Check for:**<br>
+                - Security issues<br>
+                - Performance…
+              </div>
+              <div style="flex:1; background:var(--bg-card); border-radius:4px; padding:6px; font-size:8px; color:var(--text-secondary); line-height:1.6;">
+                <span style="font-size:12px; font-weight:700;">Code Review</span><br>
+                <strong>Check for:</strong><br>
+                • Security issues<br>
+                • Performance…
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── How it works ─── -->
+  <section class="how-it-works" id="how">
+    <div class="section-label">How it works</div>
+    <div class="section-title">Three steps. Zero friction.</div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">01</div>
+        <div class="step-title">Save your prompt</div>
+        <div class="step-desc">Type it in the popup, or highlight text on any page and right-click → Add to Arixify.</div>
+      </div>
+      <div class="step">
+        <div class="step-number">02</div>
+        <div class="step-title">Open any AI</div>
+        <div class="step-desc">Go to ChatGPT, Claude, Gemini, or any of the 20+ supported platforms.</div>
+      </div>
+      <div class="step">
+        <div class="step-number">03</div>
+        <div class="step-title">Click and insert</div>
+        <div class="step-desc">Tap the Arixify button next to the input box. Pick a prompt. Done.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Pricing ─── -->
+  <section class="pricing" id="pricing">
+    <div class="pricing-inner">
+      <div class="section-label">Pricing</div>
+      <div class="section-title">Start free. Upgrade when you're ready.</div>
+      <p class="section-sub" style="margin: 0 auto;">No trial limits. No credit card required. Free plan is genuinely free, forever.</p>
+
+      <div class="pricing-cards">
+        <!-- Free -->
+        <div class="pricing-card">
+          <div class="pricing-plan">Free</div>
+          <div class="pricing-price">$0 <span>/ forever</span></div>
+          <div class="pricing-period">No account needed</div>
+          <div class="pricing-divider"></div>
+          <ul class="pricing-features">
+            <li><span class="check">✓</span> 12 prompts (including trash)</li>
+            <li><span class="check">✓</span> One-click insert on 20+ platforms</li>
+            <li><span class="check">✓</span> Instant search (title + content)</li>
+            <li><span class="check">✓</span> Usage count tracking</li>
+            <li><span class="check">✓</span> Right-click save from any page</li>
+            <li><span class="check">✓</span> Soft delete with trash (5-day auto-purge)</li>
+            <li><span class="check">✓</span> 100% local storage — zero data sent</li>
+          </ul>
+          <a class="pricing-btn free" href="https://chromewebstore.google.com" target="_blank">Install Free</a>
+        </div>
+
+        <!-- Pro -->
+        <div class="pricing-card pro">
+          <div class="pricing-badge">Most popular</div>
+          <div class="pricing-plan">Pro</div>
+          <div class="pricing-price">$9 <span>/ month</span></div>
+          <div class="pricing-annual-note">or $79/year — save 27%</div>
+          <div class="pricing-divider"></div>
+          <ul class="pricing-features">
+            <li><span class="check-green">✓</span> Everything in Free</li>
+            <li><span class="check-green">✓</span> Unlimited prompts</li>
+            <li><span class="check-green">✓</span> Cloud sync across devices</li>
+            <li><span class="check-green">✓</span> Folders for organization</li>
+            <li><span class="check-green">✓</span> Star ratings (1–5)</li>
+            <li><span class="check-green">✓</span> Full Manage dashboard</li>
+            <li><span class="check-green">✓</span> Markdown editor with live preview</li>
+            <li><span class="check-green">✓</span> Drag-and-drop organization</li>
+          </ul>
+          <a class="pricing-btn pro" href="/checkout.html">Upgrade to Pro</a>
+        </div>
+      </div>
+
+      <p class="pricing-note">7-day money-back guarantee · Cancel anytime · Payments secured by Paddle</p>
+    </div>
+  </section>
+
+  <!-- ─── CTA ─── -->
+  <section class="cta">
+    <div class="cta-title">Stop losing your best prompts.</div>
+    <p class="cta-sub">Join thousands of AI users who work faster with Arixify.</p>
+    <a class="btn-primary" href="https://chromewebstore.google.com" target="_blank">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+      Add to Browser — Free
+    </a>
+  </section>
+
+  <!-- ─── Footer ─── -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <a class="footer-logo" href="/">
+          <svg width="18" height="18" viewBox="0 0 32 32" fill="none">
+            <rect width="32" height="32" rx="7" fill="#7C6EFA"/>
+            <path d="M11 8L7 16H14L10 24" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M19 8L15 16H22L18 24" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+          </svg>
+          Arixify<span class="nav-logo-dot"></span>
+        </a>
+        <span class="footer-copy">© 2026 Arixify. All rights reserved.</span>
+      </div>
+      <div class="footer-links">
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/billing.html">Billing</a>
+        <a href="/cdn-cgi/l/email-protection#681b1d1818071a1c28091a0
