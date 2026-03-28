@@ -67,6 +67,17 @@
       z-index: 0;
     }
 
+    /* Brand signature line */
+    .brand-line {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent 0%, var(--accent) 30%, #00D9FF 70%, transparent 100%);
+      z-index: 100;
+    }
+
     a { color: var(--accent-soft); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
@@ -281,6 +292,8 @@
   </style>
 </head>
 <body>
+
+  <div class="brand-line"></div>
 
   <a class="logo" href="https://arixify.com">
     <svg width="24" height="24" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="7" fill="#7C6EFA"/><path d="M11 8L7 16H14L10 24" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 8L15 16H22L18 24" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/></svg>

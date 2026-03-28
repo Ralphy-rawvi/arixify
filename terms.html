@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+ 
     :root {
       --bg-primary: #0A0A0F;
       --bg-secondary: #111118;
@@ -28,9 +28,9 @@
       --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
     }
-
+ 
     html { scroll-behavior: smooth; }
-
+ 
     body {
       font-family: var(--font-sans);
       background: var(--bg-primary);
@@ -38,10 +38,10 @@
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
     }
-
+ 
     a { color: var(--accent-soft); text-decoration: none; transition: color 0.2s; }
     a:hover { color: var(--accent); text-decoration: underline; }
-
+ 
     body::before {
       content: '';
       position: fixed;
@@ -50,19 +50,21 @@
       pointer-events: none;
       z-index: 9999;
     }
-
+ 
     .nav {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 40px;
       height: 64px;
-      border-bottom: 1px solid var(--border-subtle);
+      border-bottom: 1.1px solid var(--border-subtle);
+      border-top: 2px solid;
+      border-image: linear-gradient(90deg, transparent 0%, var(--accent) 30%, #00D9FF 70%, transparent 100%) 1;
       background: rgba(10, 10, 15, 0.8);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
     }
-
+ 
     .nav-logo {
       display: flex;
       align-items: center;
@@ -72,30 +74,30 @@
       color: var(--text-primary);
       text-decoration: none;
     }
-
+ 
     .nav-logo-dot { color: var(--accent); }
-
+ 
     .nav-back {
       font-size: 13px;
       font-weight: 500;
       color: var(--text-tertiary);
       text-decoration: none;
     }
-
+ 
     .nav-back:hover { color: var(--accent-soft); text-decoration: none; }
-
+ 
     .container {
       max-width: 720px;
       margin: 0 auto;
       padding: 72px 24px 120px;
     }
-
+ 
     .page-header {
       margin-bottom: 48px;
       padding-bottom: 36px;
       border-bottom: 1px solid var(--border-subtle);
     }
-
+ 
     .page-label {
       font-size: 11px;
       font-weight: 700;
@@ -104,7 +106,7 @@
       color: var(--accent);
       margin-bottom: 14px;
     }
-
+ 
     .page-title {
       font-size: 36px;
       font-weight: 700;
@@ -112,12 +114,12 @@
       letter-spacing: -0.025em;
       margin-bottom: 12px;
     }
-
+ 
     .page-meta {
       font-size: 13px;
       color: var(--text-tertiary);
     }
-
+ 
     .highlight-box {
       background: linear-gradient(135deg, rgba(124,110,250,0.06), rgba(124,110,250,0.02));
       border: 1px solid rgba(124,110,250,0.2);
@@ -125,16 +127,16 @@
       padding: 24px 28px;
       margin-bottom: 48px;
     }
-
+ 
     .highlight-box p {
       margin: 0;
       font-size: 14px;
       color: var(--accent-soft);
       line-height: 1.75;
     }
-
+ 
     .section { margin-bottom: 44px; }
-
+ 
     h2 {
       font-size: 18px;
       font-weight: 700;
@@ -144,19 +146,19 @@
       border-left: 3px solid var(--accent);
       letter-spacing: -0.01em;
     }
-
+ 
     p {
       font-size: 15px;
       color: var(--text-secondary);
       margin-bottom: 12px;
       line-height: 1.75;
     }
-
+ 
     ul {
       list-style: none;
       margin-bottom: 14px;
     }
-
+ 
     ul li {
       font-size: 15px;
       color: var(--text-secondary);
@@ -164,7 +166,7 @@
       position: relative;
       line-height: 1.6;
     }
-
+ 
     ul li::before {
       content: '';
       position: absolute;
@@ -176,9 +178,9 @@
       border-radius: 50%;
       opacity: 0.6;
     }
-
+ 
     ul li strong { color: var(--text-primary); }
-
+ 
     /* Warning box */
     .warning-box {
       background: rgba(251, 191, 36, 0.04);
@@ -187,14 +189,14 @@
       padding: 20px 24px;
       margin: 16px 0 24px;
     }
-
+ 
     .warning-box p {
       margin: 0;
       font-size: 14px;
       color: var(--amber);
       line-height: 1.7;
     }
-
+ 
     /* Pricing table */
     .pricing-table {
       width: 100%;
@@ -205,7 +207,7 @@
       border-radius: 12px;
       overflow: hidden;
     }
-
+ 
     .pricing-table th {
       text-align: left;
       padding: 12px 16px;
@@ -217,7 +219,7 @@
       letter-spacing: 0.06em;
       border-bottom: 1px solid var(--border-default);
     }
-
+ 
     .pricing-table td {
       padding: 12px 16px;
       color: var(--text-secondary);
@@ -225,16 +227,16 @@
       vertical-align: top;
       line-height: 1.6;
     }
-
+ 
     .pricing-table tr:last-child td { border-bottom: none; }
-
+ 
     .pricing-table td:first-child {
       font-weight: 600;
       color: var(--text-primary);
       white-space: nowrap;
       width: 140px;
     }
-
+ 
     /* Contact box */
     .contact-box {
       background: var(--bg-card);
@@ -243,10 +245,10 @@
       padding: 28px;
       margin-top: 56px;
     }
-
+ 
     .contact-box h2 { border-left-color: var(--accent-soft); margin-bottom: 10px; }
     .contact-box p { margin-bottom: 10px; }
-
+ 
     .contact-email {
       display: inline-flex;
       align-items: center;
@@ -260,38 +262,38 @@
       color: var(--accent-soft);
       font-family: var(--font-mono);
     }
-
+ 
     .contact-email a { text-decoration: none; }
     .contact-email a:hover { text-decoration: underline; }
-
+ 
     .footer {
       margin-top: 80px;
       padding-top: 28px;
       border-top: 1px solid var(--border-subtle);
       text-align: center;
     }
-
+ 
     .footer-links {
       display: flex;
       justify-content: center;
       gap: 28px;
       margin-bottom: 14px;
     }
-
+ 
     .footer-links a {
       font-size: 12px;
       color: var(--text-tertiary);
       text-decoration: none;
     }
-
+ 
     .footer-links a:hover { color: var(--accent-soft); }
-
+ 
     .footer-copy {
       font-size: 12px;
       color: var(--text-tertiary);
       opacity: 0.6;
     }
-
+ 
     @media (max-width: 768px) {
       .nav { padding: 0 20px; }
       .container { padding: 48px 20px 80px; }
@@ -301,7 +303,7 @@
   </style>
 </head>
 <body>
-
+ 
   <nav class="nav">
     <a class="nav-logo" href="https://arixify.com">
       <svg width="22" height="22" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="7" fill="#7C6EFA"/><path d="M11 8L7 16H14L10 24" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 8L15 16H22L18 24" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/></svg>
@@ -309,15 +311,15 @@
     </a>
     <a class="nav-back" href="https://arixify.com">← Back to home</a>
   </nav>
-
+ 
   <div class="container">
-
+ 
     <div class="page-header">
       <div class="page-label">Legal</div>
       <h1 class="page-title">Terms of Service</h1>
       <p class="page-meta">Last updated: March 2026</p>
     </div>
-
+ 
     <div class="highlight-box">
       <p>
         <strong>Short version:</strong> Use Arixify responsibly. You own your prompts.
@@ -325,7 +327,7 @@
         can be cancelled at any time.
       </p>
     </div>
-
+ 
     <div class="section">
       <h2>Acceptance of terms</h2>
       <p>
@@ -336,7 +338,7 @@
         These terms apply to all users of Arixify, including free and paid (Pro) users.
       </p>
     </div>
-
+ 
     <div class="section">
       <h2>Description of service</h2>
       <p>
@@ -345,7 +347,7 @@
         The Service includes a free tier and a paid Pro tier with additional features.
       </p>
     </div>
-
+ 
     <div class="section">
       <h2>User content and responsibility</h2>
       <p>
@@ -372,7 +374,7 @@
         </p>
       </div>
     </div>
-
+ 
     <div class="section">
       <h2>Pro subscription and billing</h2>
       <p>Arixify offers a Pro plan with the following terms:</p>
@@ -411,7 +413,7 @@
         </tbody>
       </table>
     </div>
-
+ 
     <div class="section">
       <h2>Acceptable use</h2>
       <p>You agree not to:</p>
@@ -423,7 +425,7 @@
         <li>Share your account credentials with others</li>
       </ul>
     </div>
-
+ 
     <div class="section">
       <h2>Disclaimer of warranties</h2>
       <p>
@@ -440,7 +442,7 @@
         that the prompt insertion feature will work indefinitely on all supported platforms.
       </p>
     </div>
-
+ 
     <div class="section">
       <h2>Limitation of liability</h2>
       <p>
@@ -454,7 +456,7 @@
         Service shall not exceed the amount you paid us in the 12 months preceding the claim.
       </p>
     </div>
-
+ 
     <div class="section">
       <h2>Account termination</h2>
       <p>
@@ -467,7 +469,7 @@
         data will be permanently removed within 30 days.
       </p>
     </div>
-
+ 
     <div class="section">
       <h2>Changes to these terms</h2>
       <p>
@@ -477,7 +479,7 @@
         efforts to notify users.
       </p>
     </div>
-
+ 
     <div class="section">
       <h2>Governing law and disputes</h2>
       <p>
@@ -491,13 +493,13 @@
         to the non-exclusive jurisdiction of courts with competent authority over the matter.
       </p>
     </div>
-
+ 
     <div class="contact-box">
       <h2>Contact</h2>
       <p>Questions about these Terms? Reach out and we'll respond within a few business days.</p>
       <div class="contact-email">✉ <a href="mailto:support@arixify.com">support@arixify.com</a></div>
     </div>
-
+ 
     <div class="footer">
       <div class="footer-links">
         <a href="/privacy.html">Privacy Policy</a>
