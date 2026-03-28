@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
- 
+
     :root {
       --bg-primary: #0A0A0F;
       --bg-secondary: #111118;
@@ -28,9 +28,9 @@
       --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
     }
- 
+
     html { scroll-behavior: smooth; }
- 
+
     body {
       font-family: var(--font-sans);
       background: var(--bg-primary);
@@ -38,10 +38,10 @@
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
     }
- 
+
     a { color: var(--accent-soft); text-decoration: none; transition: color 0.2s; }
     a:hover { color: var(--accent); text-decoration: underline; }
- 
+
     body::before {
       content: '';
       position: fixed;
@@ -50,8 +50,13 @@
       pointer-events: none;
       z-index: 9999;
     }
- 
+
     .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -60,11 +65,11 @@
       border-bottom: 1.1px solid var(--border-subtle);
       border-top: 2px solid;
       border-image: linear-gradient(90deg, transparent 0%, var(--accent) 30%, #00D9FF 70%, transparent 100%) 1;
-      background: rgba(10, 10, 15, 0.8);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      background: rgba(10, 10, 15, 0.85);
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
     }
- 
+
     .nav-logo {
       display: flex;
       align-items: center;
@@ -74,30 +79,30 @@
       color: var(--text-primary);
       text-decoration: none;
     }
- 
+
     .nav-logo-dot { color: var(--accent); }
- 
+
     .nav-back {
       font-size: 13px;
       font-weight: 500;
       color: var(--text-tertiary);
       text-decoration: none;
     }
- 
+
     .nav-back:hover { color: var(--accent-soft); text-decoration: none; }
- 
+
     .container {
       max-width: 720px;
       margin: 0 auto;
-      padding: 72px 24px 120px;
+      padding: 136px 24px 120px;
     }
- 
+
     .page-header {
       margin-bottom: 48px;
       padding-bottom: 36px;
       border-bottom: 1px solid var(--border-subtle);
     }
- 
+
     .page-label {
       font-size: 11px;
       font-weight: 700;
@@ -106,7 +111,7 @@
       color: var(--accent);
       margin-bottom: 14px;
     }
- 
+
     .page-title {
       font-size: 36px;
       font-weight: 700;
@@ -114,12 +119,12 @@
       letter-spacing: -0.025em;
       margin-bottom: 12px;
     }
- 
+
     .page-meta {
       font-size: 13px;
       color: var(--text-tertiary);
     }
- 
+
     .highlight-box {
       background: linear-gradient(135deg, rgba(124,110,250,0.06), rgba(124,110,250,0.02));
       border: 1px solid rgba(124,110,250,0.2);
@@ -127,16 +132,16 @@
       padding: 24px 28px;
       margin-bottom: 48px;
     }
- 
+
     .highlight-box p {
       margin: 0;
       font-size: 14px;
       color: var(--accent-soft);
       line-height: 1.75;
     }
- 
+
     .section { margin-bottom: 44px; }
- 
+
     h2 {
       font-size: 18px;
       font-weight: 700;
@@ -146,19 +151,19 @@
       border-left: 3px solid var(--accent);
       letter-spacing: -0.01em;
     }
- 
+
     p {
       font-size: 15px;
       color: var(--text-secondary);
       margin-bottom: 12px;
       line-height: 1.75;
     }
- 
+
     ul {
       list-style: none;
       margin-bottom: 14px;
     }
- 
+
     ul li {
       font-size: 15px;
       color: var(--text-secondary);
@@ -166,7 +171,7 @@
       position: relative;
       line-height: 1.6;
     }
- 
+
     ul li::before {
       content: '';
       position: absolute;
@@ -178,10 +183,9 @@
       border-radius: 50%;
       opacity: 0.6;
     }
- 
+
     ul li strong { color: var(--text-primary); }
- 
-    /* Warning box */
+
     .warning-box {
       background: rgba(251, 191, 36, 0.04);
       border: 1px solid rgba(251, 191, 36, 0.2);
@@ -189,15 +193,14 @@
       padding: 20px 24px;
       margin: 16px 0 24px;
     }
- 
+
     .warning-box p {
       margin: 0;
       font-size: 14px;
       color: var(--amber);
       line-height: 1.7;
     }
- 
-    /* Pricing table */
+
     .pricing-table {
       width: 100%;
       border-collapse: collapse;
@@ -207,7 +210,7 @@
       border-radius: 12px;
       overflow: hidden;
     }
- 
+
     .pricing-table th {
       text-align: left;
       padding: 12px 16px;
@@ -219,7 +222,7 @@
       letter-spacing: 0.06em;
       border-bottom: 1px solid var(--border-default);
     }
- 
+
     .pricing-table td {
       padding: 12px 16px;
       color: var(--text-secondary);
@@ -227,17 +230,16 @@
       vertical-align: top;
       line-height: 1.6;
     }
- 
+
     .pricing-table tr:last-child td { border-bottom: none; }
- 
+
     .pricing-table td:first-child {
       font-weight: 600;
       color: var(--text-primary);
       white-space: nowrap;
       width: 140px;
     }
- 
-    /* Contact box */
+
     .contact-box {
       background: var(--bg-card);
       border: 1px solid var(--border-default);
@@ -245,10 +247,10 @@
       padding: 28px;
       margin-top: 56px;
     }
- 
+
     .contact-box h2 { border-left-color: var(--accent-soft); margin-bottom: 10px; }
     .contact-box p { margin-bottom: 10px; }
- 
+
     .contact-email {
       display: inline-flex;
       align-items: center;
@@ -262,48 +264,52 @@
       color: var(--accent-soft);
       font-family: var(--font-mono);
     }
- 
+
     .contact-email a { text-decoration: none; }
     .contact-email a:hover { text-decoration: underline; }
- 
+
     .footer {
       margin-top: 80px;
       padding-top: 28px;
       border-top: 1px solid var(--border-subtle);
       text-align: center;
     }
- 
+
     .footer-links {
       display: flex;
       justify-content: center;
       gap: 28px;
       margin-bottom: 14px;
     }
- 
+
     .footer-links a {
       font-size: 12px;
       color: var(--text-tertiary);
       text-decoration: none;
     }
- 
+
     .footer-links a:hover { color: var(--accent-soft); }
- 
+
     .footer-copy {
       font-size: 12px;
       color: var(--text-tertiary);
       opacity: 0.6;
     }
- 
+
     @media (max-width: 768px) {
-      .nav { padding: 0 20px; }
+      .nav { padding: 0 16px; }
       .container { padding: 48px 20px 80px; }
       .page-title { font-size: 28px; }
       .pricing-table td:first-child { white-space: normal; }
     }
+
+    @media (max-width: 480px) {
+      .nav { padding: 0 14px; }
+    }
   </style>
 </head>
 <body>
- 
+
   <nav class="nav">
     <a class="nav-logo" href="https://arixify.com">
       <svg width="22" height="22" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="7" fill="#7C6EFA"/><path d="M11 8L7 16H14L10 24" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 8L15 16H22L18 24" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/></svg>
@@ -311,23 +317,24 @@
     </a>
     <a class="nav-back" href="https://arixify.com">← Back to home</a>
   </nav>
- 
+
   <div class="container">
- 
+
     <div class="page-header">
       <div class="page-label">Legal</div>
       <h1 class="page-title">Terms of Service</h1>
       <p class="page-meta">Last updated: March 2026</p>
     </div>
- 
+
     <div class="highlight-box">
       <p>
         <strong>Short version:</strong> Use Arixify responsibly. You own your prompts.
         Don't store illegal content. Pro subscriptions are billed monthly or annually and
-        can be cancelled at any time.
+        can be cancelled at any time. We are not responsible for data loss — always keep
+        your own backups.
       </p>
     </div>
- 
+
     <div class="section">
       <h2>Acceptance of terms</h2>
       <p>
@@ -338,7 +345,7 @@
         These terms apply to all users of Arixify, including free and paid (Pro) users.
       </p>
     </div>
- 
+
     <div class="section">
       <h2>Description of service</h2>
       <p>
@@ -347,7 +354,7 @@
         The Service includes a free tier and a paid Pro tier with additional features.
       </p>
     </div>
- 
+
     <div class="section">
       <h2>User content and responsibility</h2>
       <p>
@@ -374,7 +381,58 @@
         </p>
       </div>
     </div>
- 
+
+    <div class="section">
+      <h2>Data storage and backups</h2>
+      <p>
+        Arixify stores data using different methods depending on your plan:
+      </p>
+      <ul>
+        <li><strong>Free users:</strong> Data is stored locally on your device using Chrome's built-in storage (chrome.storage.local). This data exists only on your device and is not backed up to any server.</li>
+        <li><strong>Pro users:</strong> Data is synced to cloud storage powered by Google Firebase Firestore. While we take reasonable measures to ensure data integrity, cloud storage is provided on a best-effort basis.</li>
+      </ul>
+      <p>
+        <strong>You are solely responsible for maintaining backups of your content.</strong>
+        We strongly recommend exporting or copying any prompts that are important to you.
+        Arixify is not a backup service, and we do not guarantee the permanent availability
+        or integrity of stored data.
+      </p>
+      <div class="warning-box">
+        <p>
+          <strong>Important:</strong> Data loss can occur due to browser resets, device
+          changes, extension reinstallation, third-party service outages, or other
+          circumstances beyond our control. Arixify and its developer shall not be held
+          liable for any data loss, regardless of the cause.
+        </p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Third-party services</h2>
+      <p>
+        The Service relies on third-party platforms and infrastructure to function, including
+        but not limited to:
+      </p>
+      <ul>
+        <li><strong>Google Firebase:</strong> Cloud data storage and user authentication for Pro users</li>
+        <li><strong>Google Chrome APIs:</strong> Local storage, extension runtime, and identity services</li>
+        <li><strong>Paddle:</strong> Payment processing, subscription management, and billing</li>
+        <li><strong>AI platforms (ChatGPT, Claude, Gemini, Perplexity, etc.):</strong> Target platforms where prompts are inserted</li>
+      </ul>
+      <p>
+        These third-party services are operated independently and are subject to their own
+        terms of service, privacy policies, and availability. We do not control, and are not
+        responsible for, any outages, data loss, API changes, policy changes, or service
+        disruptions caused by these providers.
+      </p>
+      <p>
+        In particular, AI platforms may change their website structure (DOM) at any time
+        without notice, which may temporarily or permanently affect Arixify's prompt
+        insertion functionality on those platforms. Such changes are outside our control
+        and do not constitute a breach of these Terms.
+      </p>
+    </div>
+
     <div class="section">
       <h2>Pro subscription and billing</h2>
       <p>Arixify offers a Pro plan with the following terms:</p>
@@ -396,11 +454,11 @@
           </tr>
           <tr>
             <td>Payment processor</td>
-            <td>Payments are handled by Paddle, who acts as the merchant of record.</td>
+            <td>Payments are handled by Paddle, who acts as the merchant of record. All billing inquiries, payment disputes, and transaction-related questions are subject to <a href="https://www.paddle.com/legal/checkout-buyer-terms" target="_blank" rel="noopener">Paddle's Checkout Buyer Terms</a>.</td>
           </tr>
           <tr>
             <td>Refunds</td>
-            <td>Refund requests within 7 days of purchase will be honoured. Contact us at <a href="mailto:support@arixify.com">support@arixify.com</a>.</td>
+            <td>Refund requests within 7 days of purchase will be honoured. Contact us at <a href="mailto:support@arixify.com">support@arixify.com</a>. All refunds are processed through Paddle and are subject to Paddle's refund policies.</td>
           </tr>
           <tr>
             <td>Cancellation</td>
@@ -413,7 +471,7 @@
         </tbody>
       </table>
     </div>
- 
+
     <div class="section">
       <h2>Acceptable use</h2>
       <p>You agree not to:</p>
@@ -425,38 +483,58 @@
         <li>Share your account credentials with others</li>
       </ul>
     </div>
- 
+
     <div class="section">
       <h2>Disclaimer of warranties</h2>
       <p>
         The Service is provided <strong>"as is"</strong> and <strong>"as available"</strong>
-        without warranties of any kind, either express or implied. We do not warrant that:
+        without warranties of any kind, either express or implied, including but not limited
+        to implied warranties of merchantability, fitness for a particular purpose, and
+        non-infringement. We do not warrant that:
       </p>
       <ul>
         <li>The Service will be uninterrupted, error-free, or available at all times</li>
-        <li>Data stored in the Service will never be lost (maintain your own backups for critical content)</li>
-        <li>The Service will be compatible with all future versions of supported AI platforms</li>
+        <li>Data stored in the Service will be preserved, accurate, or recoverable — whether stored locally or in the cloud</li>
+        <li>The Service will be compatible with all future versions of supported AI platforms or browsers</li>
+        <li>Third-party services (including Firebase, Chrome APIs, and Paddle) will remain available, unchanged, or free from errors</li>
       </ul>
       <p>
         AI platform DOM structures change frequently and without notice. We cannot guarantee
         that the prompt insertion feature will work indefinitely on all supported platforms.
       </p>
+      <p>
+        You acknowledge that you use the Service at your own risk and that you are solely
+        responsible for any consequences arising from your reliance on the Service or its
+        data storage capabilities.
+      </p>
     </div>
- 
+
     <div class="section">
       <h2>Limitation of liability</h2>
       <p>
         To the maximum extent permitted by applicable law, Arixify and its developer shall
         not be liable for any indirect, incidental, special, consequential, or punitive
-        damages, including but not limited to loss of data, loss of profits, or business
-        interruption, arising from your use of or inability to use the Service.
+        damages, including but not limited to:
+      </p>
+      <ul>
+        <li>Loss of data, prompts, or user content — whether stored locally or in the cloud</li>
+        <li>Loss of profits, revenue, or business opportunities</li>
+        <li>Business interruption or inability to use the Service</li>
+        <li>Damages arising from third-party service outages, data breaches, API changes, or discontinuation</li>
+        <li>Damages arising from unauthorized access to your account or data</li>
+        <li>Damages caused by browser updates, extension conflicts, or device failures</li>
+      </ul>
+      <p>
+        This limitation applies regardless of the legal theory (contract, tort, negligence,
+        strict liability, or otherwise), even if we have been advised of the possibility of
+        such damages.
       </p>
       <p>
         Our total liability to you for any claim arising from these Terms or your use of the
         Service shall not exceed the amount you paid us in the 12 months preceding the claim.
       </p>
     </div>
- 
+
     <div class="section">
       <h2>Account termination</h2>
       <p>
@@ -469,7 +547,7 @@
         data will be permanently removed within 30 days.
       </p>
     </div>
- 
+
     <div class="section">
       <h2>Changes to these terms</h2>
       <p>
@@ -479,7 +557,7 @@
         efforts to notify users.
       </p>
     </div>
- 
+
     <div class="section">
       <h2>Governing law and disputes</h2>
       <p>
@@ -493,13 +571,13 @@
         to the non-exclusive jurisdiction of courts with competent authority over the matter.
       </p>
     </div>
- 
+
     <div class="contact-box">
       <h2>Contact</h2>
       <p>Questions about these Terms? Reach out and we'll respond within a few business days.</p>
       <div class="contact-email">✉ <a href="mailto:support@arixify.com">support@arixify.com</a></div>
     </div>
- 
+
     <div class="footer">
       <div class="footer-links">
         <a href="/privacy.html">Privacy Policy</a>
