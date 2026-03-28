@@ -1050,6 +1050,13 @@
       z-index: 1;
     }
 
+    .pricing-price .currency {
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-right: 2px;
+    }
+
     .pricing-price span {
       font-size: 16px;
       font-weight: 400;
@@ -2755,7 +2762,7 @@
         <!-- Free -->
         <div class="pricing-card">
           <div class="pricing-plan">Free</div>
-          <div class="pricing-price">$0 <span>/ forever</span></div>
+          <div class="pricing-price"><span class="currency">$</span>0 <span>/ forever</span></div>
           <div class="pricing-period">No account needed</div>
           <div class="pricing-divider"></div>
           <ul class="pricing-features">
@@ -2774,8 +2781,8 @@
         <div class="pricing-card pro">
           <div class="pricing-badge">Most popular</div>
           <div class="pricing-plan">Pro</div>
-          <div class="pricing-price">$9 <span>/ month</span></div>
-          <div class="pricing-annual-note">or $79/year — save 27%</div>
+          <div class="pricing-price"><span class="currency">$</span>9 <span>/ month</span></div>
+          <div class="pricing-annual-note">or <span class="currency" style="font-size: 11px; vertical-align: baseline;">$</span>79/year — save 27%</div>
           <div class="pricing-divider"></div>
           <ul class="pricing-features">
             <li><span class="check-green">✓</span> Everything in Free</li>
@@ -2833,7 +2840,7 @@
   </footer>
 
   <!-- ─── Hero Emblem Typing Animation ─── -->
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   (function() {
     var wrap = document.getElementById('hero-emblem');
     var textEl = document.getElementById('hero-emblem-text');

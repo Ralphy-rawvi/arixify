@@ -285,6 +285,41 @@
       display: none;
     }
 
+    .signin-notice {
+      padding: 16px 20px;
+      background: linear-gradient(135deg, rgba(124,110,250,0.08), rgba(124,110,250,0.03));
+      border: 1px solid rgba(124,110,250,0.25);
+      border-radius: 12px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .signin-notice p {
+      font-size: 13px;
+      color: var(--accent-soft);
+      line-height: 1.7;
+      margin: 0 0 12px;
+    }
+
+    .signin-notice a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      background: var(--accent);
+      color: white;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .signin-notice a:hover {
+      background: var(--accent-hover);
+      text-decoration: none;
+    }
+
     @media (max-width: 480px) {
       .card { padding: 32px 24px; }
       .features-mini-list { grid-template-columns: 1fr; }
@@ -303,6 +338,14 @@
   <div class="card" id="main-card">
     <div class="card-title">Upgrade to Pro</div>
     <div class="card-sub">Unlimited prompts, cloud sync, folders, ratings, and more.</div>
+
+    <div class="signin-notice" id="signin-notice" style="display:none">
+      <p>To upgrade, install Arixify and sign in first.<br/>You can upgrade directly from inside the extension.</p>
+      <a href="https://chromewebstore.google.com" target="_blank">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 3L4 13H12L8 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 3L11 13H19L15 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/></svg>
+        Install Arixify — Free
+      </a>
+    </div>
 
     <div class="plans">
       <button class="plan-btn" id="plan-annual" onclick="selectPlan('annual')">
@@ -356,6 +399,13 @@
     var uid = params.get('uid') || '';
     var selectedPlan = 'monthly';
     var paddleReady = false;
+
+    // If no uid, show install notice and disable checkout
+    if (!uid) {
+      document.getElementById('signin-notice').style.display = '';
+      document.getElementById('checkout-btn').disabled = true;
+      document.getElementById('checkout-btn').textContent = 'Sign in from Arixify to continue';
+    }
 
     try {
       Paddle.Initialize({
