@@ -1,0 +1,3394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="./icon.svg">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+  <link rel="icon" type="image/png" sizes="144x144" href="./favicon-144x144.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="./favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="./favicon-48x48.png">
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arixify — Your Prompt Manager for AI.</title>
+  <meta name="description" content="Save, manage, and instantly insert your prompts. Works on ChatGPT, Claude, Gemini, Perplexity, and 20+ AI platforms. Free Browser Extension." />
+  <meta property="og:title" content="Arixify — Your Prompts. One Click Away." />
+  <meta property="og:description" content="Save, Manage, and instantly Insert your Prompts into 20+ AI platforms." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://arixify.com" />
+  <link rel="canonical" href="https://arixify.com/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-primary: #0A0514;
+      --bg-secondary: #111118;
+      --bg-card: #16151F;
+      --bg-elevated: #1C1B28;
+      --border-subtle: #1F1E2E;
+      --border-default: #2A293D;
+      --border-accent: #7C6EFA;
+      --text-primary: #EEEDF5;
+      --text-secondary: #A09CB5;
+      --text-tertiary: #6B6880;
+      --accent: #7C6EFA;
+      --accent-hover: #6B5EE8;
+      --accent-glow: rgba(124, 110, 250, 0.15);
+      --accent-soft: #9D8DFF;
+      --electric-blue: #00D9FF;
+      --electric-glow: rgba(0, 217, 255, 0.3);
+      --green: #34D399;
+      --green-soft: rgba(52, 211, 153, 0.12);
+      --amber: #FBBF24;
+      --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-display: 'Sora', 'DM Sans', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      background: linear-gradient(135deg, #0A0514 0%, #0F0A1A 100%);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    a { color: var(--accent-soft); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--accent); }
+
+
+    /* ─── Animated Light Particles ─── */
+    .light-particle {
+      position: fixed;
+      width: 4px;
+      height: 4px;
+      background: var(--electric-blue);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 2;
+      box-shadow: 0 0 12px var(--electric-glow), 0 0 24px var(--electric-glow);
+      opacity: 0;
+    }
+
+    .light-particle.p1 {
+      top: 15%;
+      left: 10%;
+      animation: particle-flow-1 12s ease-in-out infinite;
+    }
+
+    .light-particle.p2 {
+      top: 40%;
+      right: 15%;
+      animation: particle-flow-2 10s ease-in-out infinite 2s;
+    }
+
+    .light-particle.p3 {
+      top: 65%;
+      left: 20%;
+      animation: particle-flow-3 14s ease-in-out infinite 4s;
+    }
+
+    .light-particle.p4 {
+      top: 30%;
+      left: 50%;
+      animation: particle-flow-4 11s ease-in-out infinite 1s;
+    }
+
+    .light-particle.p5 {
+      top: 80%;
+      right: 30%;
+      animation: particle-flow-5 13s ease-in-out infinite 3s;
+    }
+
+    @keyframes particle-flow-1 {
+      0%, 100% { opacity: 0; transform: translate(0, 0); }
+      10% { opacity: 0.7; }
+      50% { opacity: 0.9; transform: translate(200px, 100px); }
+      90% { opacity: 0.7; }
+    }
+
+    @keyframes particle-flow-2 {
+      0%, 100% { opacity: 0; transform: translate(0, 0); }
+      10% { opacity: 0.7; }
+      50% { opacity: 0.9; transform: translate(-180px, 120px); }
+      90% { opacity: 0.7; }
+    }
+
+    @keyframes particle-flow-3 {
+      0%, 100% { opacity: 0; transform: translate(0, 0); }
+      10% { opacity: 0.7; }
+      50% { opacity: 0.9; transform: translate(220px, -80px); }
+      90% { opacity: 0.7; }
+    }
+
+    @keyframes particle-flow-4 {
+      0%, 100% { opacity: 0; transform: translate(0, 0); }
+      10% { opacity: 0.7; }
+      50% { opacity: 0.9; transform: translate(-150px, 90px); }
+      90% { opacity: 0.7; }
+    }
+
+    @keyframes particle-flow-5 {
+      0%, 100% { opacity: 0; transform: translate(0, 0); }
+      10% { opacity: 0.7; }
+      50% { opacity: 0.9; transform: translate(160px, -110px); }
+      90% { opacity: 0.7; }
+    }
+
+    /* ─── Navigation ─── */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 64px;
+      background: rgba(10, 5, 20, 0.85);
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      border-bottom: 1.1px solid var(--border-subtle);
+      border-top: 2px solid;
+      border-image: linear-gradient(90deg, transparent 0%, var(--accent) 30%, var(--electric-blue) 70%, transparent 100%) 1;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-decoration: none;
+      letter-spacing: -0.3px;
+      position: relative;
+    }
+
+    .nav-logo svg {
+      filter: drop-shadow(0 0 8px rgba(124, 110, 250, 0.4));
+      transition: filter 0.3s;
+    }
+
+    .nav-logo:hover svg {
+      filter: drop-shadow(0 0 16px rgba(124, 110, 250, 0.7)) drop-shadow(0 0 24px rgba(0, 217, 255, 0.3));
+    }
+
+    .nav-logo-dot { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-link {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+    }
+
+    .nav-link:hover { color: var(--text-primary); }
+
+    .nav-cta {
+      font-size: 13px;
+      font-weight: 600;
+      color: white;
+      background: var(--accent);
+      padding: 8px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .nav-cta:hover {
+      background: var(--accent-hover);
+      color: white;
+      transform: translateY(-1px);
+    }
+
+    .nav-cta:active {
+      transform: translateY(-1px) scale(0.93);
+      transition: transform 0.08s ease-out;
+    }
+
+    /* ─── Hero ─── */
+    .hero {
+      position: relative;
+      padding: 160px 40px 48px;
+      text-align: center;
+      overflow: hidden;
+      z-index: 3;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -400px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1400px;
+      height: 1400px;
+      background:
+        radial-gradient(ellipse 60% 45% at 50% 35%, rgba(124, 110, 250, 0.45) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 40% at 65% 45%, rgba(0, 217, 255, 0.2) 0%, transparent 50%),
+        radial-gradient(ellipse 40% 35% at 35% 55%, rgba(157, 141, 255, 0.15) 0%, transparent 55%);
+      pointer-events: none;
+      animation: hero-glow-breathe 6s ease-in-out infinite;
+    }
+
+    @keyframes hero-glow-breathe {
+      0%, 100% { opacity: 1; transform: translateX(-50%) scale(1); }
+      50% { opacity: 0.85; transform: translateX(-50%) scale(1.04); }
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1400px;
+      height: 100%;
+      background-image:
+        linear-gradient(rgba(124, 110, 250, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124, 110, 250, 0.06) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse at 50% 30%, black 0%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse at 50% 30%, black 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px 6px 8px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-default);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      letter-spacing: 0.02em;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(52px, 9vw, 96px);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.05em;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, #FFFFFF 0%, var(--accent-soft) 50%, var(--electric-blue) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-sub {
+      font-size: clamp(18px, 2.2vw, 22px);
+      color: var(--text-secondary);
+      margin: 0 auto 48px;
+      max-width: 640px;
+      line-height: 1.65;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 32px;
+      font-size: 16px;
+      font-weight: 700;
+      color: white;
+      background: var(--accent);
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s;
+      font-family: inherit;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(124, 110, 250, 0.35);
+      color: white;
+    }
+
+    .btn-primary:active {
+      transform: translateY(-2px) scale(0.93);
+      transition: transform 0.08s ease-out;
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+      background: transparent;
+      border: 1px solid var(--border-default);
+      border-radius: 12px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      font-family: inherit;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      background: rgba(124, 110, 250, 0.06);
+    }
+
+    .hero-buttons {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ─── Supported Platforms ─── */
+    .platforms {
+      padding: 60px 40px;
+      text-align: center;
+      position: relative;
+      z-index: 3;
+    }
+
+    .platforms-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 32px;
+    }
+
+    .platforms-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .platform-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-default);
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .platform-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(124, 110, 250, 0.05) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .platform-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(124, 110, 250, 0.15);
+    }
+
+    .platform-card:hover::before {
+      opacity: 1;
+    }
+
+    .platform-card.muted {
+      color: var(--text-tertiary);
+      opacity: 0.7;
+    }
+
+    .platform-card.muted:hover {
+      opacity: 1;
+    }
+
+    /* ─── Features Section ─── */
+    .features {
+      padding: 120px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 3;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 5vw, 52px);
+      font-weight: 700;
+      text-align: center;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .section-sub {
+      font-size: 17px;
+      color: var(--text-secondary);
+      text-align: center;
+      max-width: 600px;
+      line-height: 1.7;
+      margin: 0 auto 80px;
+    }
+
+    .feature-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      margin-bottom: 100px;
+      padding: 60px;
+      background: rgba(22, 21, 31, 0.5);
+      border: 1px solid var(--border-default);
+      border-radius: 20px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+
+    .feature-block::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--electric-blue) 100%);
+      border-radius: 20px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: -1;
+    }
+
+    .feature-block:hover {
+      border-color: transparent;
+    }
+
+    .feature-block:hover::before {
+      opacity: 0.3;
+    }
+
+    .feature-block:nth-child(even) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .feature-block:nth-child(even) .feature-content {
+      order: 2;
+    }
+
+    .feature-number {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent);
+      margin-bottom: 12px;
+      letter-spacing: 0.05em;
+    }
+
+    .feature-title {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+    }
+
+    .feature-desc {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+
+    .feature-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: var(--green-soft);
+      border: 1px solid rgba(52, 211, 153, 0.25);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--green);
+      letter-spacing: 0.01em;
+    }
+
+    .feature-visual {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--border-default);
+      border-radius: 16px;
+      overflow: visible;
+      aspect-ratio: 4 / 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+    }
+
+    .feature-visual::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(124, 110, 250, 0.06), transparent 50%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .mock-inject {
+      width: 85%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .mock-chatbar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 16px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-default);
+      border-radius: 12px;
+    }
+
+    .mock-chatbar-text {
+      flex: 1;
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+
+    .mock-arixify-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent);
+      border-radius: 8px;
+      padding: 6px 12px;
+      flex-shrink: 0;
+      box-shadow: 0 0 12px var(--accent-glow);
+      animation: btn-glow 3s ease-in-out infinite;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
+    }
+
+    .mock-arixify-btn:hover {
+      background: var(--accent-hover);
+      transform: scale(1.05);
+      box-shadow: 0 0 28px rgba(124, 110, 250, 0.4);
+      animation: none;
+    }
+
+    .mock-arixify-btn:active {
+      transform: scale(0.93) !important;
+      animation: none !important;
+      transition: transform 0.08s ease-out;
+    }
+
+    .mock-arixify-btn-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: white;
+      letter-spacing: 0.01em;
+    }
+
+    @keyframes btn-glow {
+      0%, 100% { box-shadow: 0 0 12px var(--accent-glow); }
+      50% { box-shadow: 0 0 24px rgba(124, 110, 250, 0.35); }
+    }
+
+    .mock-picker {
+      background: #1A1825;
+      border: 1px solid var(--border-default);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+
+    .mock-picker-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px 8px;
+    }
+
+    .mock-picker-brand {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent-soft);
+    }
+
+    .mock-picker-hint {
+      font-size: 10px;
+      color: var(--text-tertiary);
+    }
+
+    .mock-picker-search {
+      margin: 0 10px 8px;
+      padding: 7px 10px;
+      background: #0E0E11;
+      border: 1px solid var(--border-default);
+      border-radius: 6px;
+      font-size: 11px;
+      color: var(--text-tertiary);
+      cursor: text;
+      transition: border-color 0.15s;
+    }
+
+    .mock-picker-search:hover {
+      border-color: var(--accent);
+    }
+
+    .mock-picker-item {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 10px 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      transition: background 0.15s;
+      cursor: pointer;
+    }
+
+    .mock-picker-item:last-child { border-bottom: none; }
+
+    .mock-picker-item:hover {
+      background: rgba(124, 110, 250, 0.06);
+    }
+
+    .mock-picker-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .mock-picker-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .mock-picker-preview {
+      font-size: 10px;
+      color: var(--text-tertiary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .mock-picker-count {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-tertiary);
+      flex-shrink: 0;
+      margin-left: 12px;
+      margin-top: 2px;
+    }
+
+    .mock-platform-tag {
+      padding: 5px 10px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-default);
+      border-radius: 6px;
+      font-size: 11px;
+      color: var(--text-secondary);
+      transition: border-color 0.15s, color 0.15s, transform 0.1s;
+      cursor: default;
+    }
+
+    .mock-platform-tag:hover {
+      border-color: var(--accent);
+      color: var(--text-primary);
+      transform: translateY(-2px);
+    }
+
+    .mock-platform-tag.muted {
+      color: var(--text-tertiary);
+      opacity: 0.7;
+    }
+
+    .mock-platform-tag.muted:hover {
+      opacity: 1;
+    }
+
+    .mock-local {
+      width: 75%;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .mock-shield {
+      width: 56px;
+      height: 56px;
+      background: var(--bg-elevated);
+      border: 2px solid var(--green);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      box-shadow: 0 0 24px var(--green-soft);
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: default;
+    }
+
+    .mock-shield:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 36px rgba(52, 211, 153, 0.25);
+    }
+
+    .mock-local-lines {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .mock-local-line {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      background: var(--bg-elevated);
+      border-radius: 8px;
+      font-size: 11px;
+      color: var(--text-secondary);
+      transition: background 0.15s, transform 0.15s;
+    }
+
+    .mock-local-line:hover {
+      background: rgba(52, 211, 153, 0.06);
+      transform: translateX(4px);
+    }
+
+    .mock-local-line .check {
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .mock-track-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-default);
+      border-radius: 10px;
+      transition: border-color 0.15s, transform 0.15s;
+      cursor: default;
+    }
+
+    .mock-track-row:hover {
+      border-color: var(--accent);
+      transform: translateX(4px);
+    }
+
+    /* ─── How it works ─── */
+    .how-it-works {
+      padding: 100px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 3;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 40px;
+      margin-top: 60px;
+    }
+
+    .step {
+      padding: 40px 32px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-default);
+      border-radius: 16px;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .step::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      background: linear-gradient(135deg, var(--accent) 0%, transparent 100%);
+      border-radius: 16px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: -1;
+    }
+
+    .step:hover {
+      transform: translateY(-8px);
+      border-color: transparent;
+      box-shadow: 0 12px 36px rgba(124, 110, 250, 0.2);
+    }
+
+    .step:hover::before {
+      opacity: 0.15;
+    }
+
+    .step:hover .step-number {
+      opacity: 1;
+    }
+
+    .step-number {
+      font-family: var(--font-mono);
+      font-size: 40px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 20px;
+      opacity: 0.4;
+      transition: opacity 0.3s;
+    }
+
+    .step-title {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+
+    .step-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* ─── Pricing ─── */
+    .pricing {
+      padding: 100px 40px;
+      background: var(--bg-secondary);
+      position: relative;
+      z-index: 3;
+    }
+
+    .pricing-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .pricing-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 32px;
+      margin: 60px auto 40px;
+      max-width: 860px;
+    }
+
+    .pricing-card {
+      padding: 48px 40px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-default);
+      border-radius: 20px;
+      text-align: left;
+      position: relative;
+      transition: all 0.3s;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pricing-card::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--electric-blue) 100%);
+      border-radius: 20px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: -1;
+    }
+
+    .pricing-card.pro {
+      border-color: var(--accent);
+      box-shadow: 0 0 40px rgba(124, 110, 250, 0.1);
+    }
+
+    .pricing-card.pro::before {
+      opacity: 0.2;
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .pricing-card:not(.pro):hover {
+      border-color: var(--accent);
+      box-shadow: 0 4px 16px rgba(124, 110, 250, 0.15);
+    }
+
+    .pricing-card.pro:hover {
+      box-shadow: 0 12px 40px rgba(124, 110, 250, 0.25);
+      border-color: transparent;
+    }
+
+    .pricing-card.pro:hover::before {
+      opacity: 0.45;
+    }
+
+    .pricing-card.pro::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(124, 110, 250, 0.12) 0%, rgba(0, 217, 255, 0.08) 50%, rgba(124, 110, 250, 0.12) 100%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .pricing-card.pro:hover::after {
+      opacity: 1;
+    }
+
+    .pricing-badge {
+      position: absolute;
+      top: 20px;
+      right: 32px;
+      padding: 6px 16px;
+      background: var(--accent);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 999px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      z-index: 1;
+    }
+
+    .pricing-plan {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-tertiary);
+      margin-bottom: 12px;
+      letter-spacing: 0.02em;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pricing-price {
+      font-family: var(--font-display);
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+      letter-spacing: -0.03em;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pricing-price .currency {
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-right: 2px;
+    }
+
+    .pricing-price span {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--text-tertiary);
+    }
+
+    .pricing-period {
+      font-size: 13px;
+      color: var(--text-tertiary);
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pricing-annual-note {
+      font-size: 12px;
+      color: var(--green);
+      font-weight: 600;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pricing-divider {
+      height: 1px;
+      background: var(--border-default);
+      margin: 28px 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pricing-features {
+      list-style: none;
+      margin-bottom: 32px;
+      flex-grow: 1;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pricing-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 12px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .check {
+      color: var(--text-tertiary);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .check-green {
+      color: var(--green);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .pricing-btn {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      text-align: center;
+      font-size: 15px;
+      font-weight: 700;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: background 0.2s, border-color 0.2s, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s;
+      font-family: inherit;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pricing-btn:active {
+      transform: scale(0.95) !important;
+      transition: transform 0.08s ease-out !important;
+    }
+
+    .pricing-btn.free {
+      background: var(--bg-elevated);
+      color: var(--text-primary);
+      border: 1px solid var(--border-default);
+    }
+
+    .pricing-btn.free:hover {
+      background: var(--bg-primary);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .pricing-btn.pro {
+      background: var(--accent);
+      color: white;
+    }
+
+    .pricing-btn.pro:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(124, 110, 250, 0.25);
+    }
+
+    .pricing-note {
+      font-size: 13px;
+      color: var(--text-tertiary);
+      line-height: 1.7;
+    }
+
+    /* ─── CTA ─── */
+    .cta {
+      padding: 120px 40px;
+      text-align: center;
+      position: relative;
+      z-index: 3;
+    }
+
+    .cta .btn-primary {
+      box-shadow: 0 6px 20px rgba(124, 110, 250, 0.25);
+      animation: cta-glow 3s ease-in-out infinite;
+    }
+
+    .cta .btn-primary:hover {
+      box-shadow: 0 10px 28px rgba(124, 110, 250, 0.35);
+      animation: none;
+    }
+
+    .cta .btn-primary:active {
+      animation: none;
+    }
+
+    @keyframes cta-glow {
+      0%, 100% { box-shadow: 0 6px 20px rgba(124, 110, 250, 0.25); }
+      50% { box-shadow: 0 8px 28px rgba(124, 110, 250, 0.35); }
+    }
+
+    .cta-title {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 700;
+      margin-bottom: 16px;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #FFFFFF 0%, var(--accent-soft) 50%, var(--electric-blue) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .cta-sub {
+      font-size: 17px;
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+      line-height: 1.7;
+    }
+
+    /* ─── Footer ─── */
+    .footer {
+      padding: 60px 40px 40px;
+      border-top: 1px solid var(--border-subtle);
+      position: relative;
+      z-index: 3;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 32px;
+    }
+
+    .footer-left {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: var(--text-tertiary);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 28px;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--text-tertiary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-soft);
+    }
+
+    /* ─── Hero Emblem → Arixify Button ─── */
+    .hero-emblem-wrap {
+      position: relative;
+      z-index: 1;
+      margin-top: 120px;
+      margin-bottom: 80px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .hero-emblem-btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      background: none;
+      padding: 0;
+      animation: emblem-float 4s ease-in-out infinite;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .hero-emblem-btn:hover {
+      transform: scale(1.05);
+      animation-play-state: paused;
+    }
+
+    .hero-emblem-btn:active {
+      transform: scale(0.95) !important;
+      animation: none !important;
+      transition: transform 0.08s ease-out;
+    }
+
+    .hero-emblem-inner {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+
+    .hero-emblem-svg {
+      filter: drop-shadow(0 0 60px rgba(124, 110, 250, 0.5)) drop-shadow(0 0 120px rgba(124, 110, 250, 0.25));
+      border-radius: 30px;
+      flex-shrink: 0;
+      transition: width 0.6s ease, height 0.6s ease, border-radius 0.6s ease, filter 0.3s;
+    }
+
+    .hero-emblem-btn:hover .hero-emblem-svg {
+      filter: drop-shadow(0 0 80px rgba(124, 110, 250, 0.7)) drop-shadow(0 0 140px rgba(0, 217, 255, 0.3));
+    }
+
+    .hero-emblem-text {
+      font-family: var(--font-display);
+      font-size: 0;
+      font-weight: 700;
+      color: white;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+      overflow: hidden;
+      opacity: 0;
+      transition: font-size 0.4s ease, opacity 0.3s ease, margin 0.4s ease;
+    }
+
+    .hero-emblem-wrap.is-typing .hero-emblem-svg {
+      width: 96px;
+      height: 96px;
+      border-radius: 18px;
+    }
+
+    .hero-emblem-wrap.is-typing .hero-emblem-inner {
+      gap: 24px;
+    }
+
+    .hero-emblem-wrap.is-typing .hero-emblem-text {
+      font-size: 67px;
+      opacity: 1;
+    }
+
+    .hero-emblem-bg {
+      position: absolute;
+      inset: 0;
+      background: var(--accent);
+      border-radius: 24px;
+      z-index: 1;
+      opacity: 0;
+      transform: scaleX(0.3) scaleY(0.5);
+      transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+    }
+
+    .hero-emblem-wrap.is-button .hero-emblem-bg {
+      opacity: 1;
+      transform: scale(1);
+      box-shadow: 0 0 30px rgba(124, 110, 250, 0.5), 0 0 80px rgba(124, 110, 250, 0.2);
+    }
+
+    .hero-emblem-wrap.is-button .hero-emblem-btn {
+      padding: 29px 62px;
+      animation: none;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .hero-emblem-wrap.is-button .hero-emblem-inner {
+      gap: 24px;
+    }
+
+    .hero-emblem-wrap.is-button .hero-emblem-svg {
+      width: 86px;
+      height: 86px;
+      border-radius: 16px;
+      filter: drop-shadow(0 0 12px rgba(255,255,255,0.2));
+    }
+
+    .hero-emblem-wrap.is-button .hero-emblem-text {
+      font-size: 62px;
+      opacity: 1;
+    }
+
+    .hero-emblem-btn:hover .hero-emblem-bg {
+      box-shadow: 0 0 40px rgba(124, 110, 250, 0.7), 0 0 100px rgba(0, 217, 255, 0.25);
+    }
+
+    .hero-emblem-btn:active .hero-emblem-bg {
+      box-shadow: 0 0 20px rgba(124, 110, 250, 0.4), 0 0 50px rgba(124, 110, 250, 0.15);
+    }
+
+    .hero-emblem-wrap::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 480px;
+      height: 480px;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(124, 110, 250, 0.25) 0%, rgba(0, 217, 255, 0.08) 40%, transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
+      animation: glow-ring-pulse 4s ease-in-out infinite;
+      transition: opacity 0.6s;
+    }
+
+    .hero-emblem-wrap.is-typing::before,
+    .hero-emblem-wrap.is-button::before {
+      opacity: 0;
+    }
+
+    @keyframes glow-ring-pulse {
+      0%, 100% { opacity: 0.7; transform: translate(-50%, -50%) scale(1); }
+      50% { opacity: 1; transform: translate(-50%, -50%) scale(1.06); }
+    }
+
+    @keyframes emblem-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* ─── Hero Product Demo ─── */
+    .hero-demo {
+      position: relative;
+      z-index: 1;
+      margin-top: 64px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-demo-window {
+      background: var(--bg-card);
+      border: 1px solid rgba(124, 110, 250, 0.3);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.5), 0 0 40px rgba(124, 110, 250, 0.12);
+      position: relative;
+      -webkit-mask-image: -webkit-radial-gradient(white, black);
+    }
+
+    .hero-demo-topbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: var(--bg-elevated);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .hero-demo-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .hero-demo-dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--border-default);
+    }
+
+    .hero-demo-dots span:first-child { background: #FF5F57; }
+    .hero-demo-dots span:nth-child(2) { background: #FFBD2E; }
+    .hero-demo-dots span:last-child { background: #28CA41; }
+
+    .hero-demo-url {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      font-family: var(--font-mono);
+      flex: 1;
+      text-align: center;
+    }
+
+    .hero-demo-content {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: relative;
+    }
+
+    .hero-demo-chatbar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 16px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-default);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .hero-demo-chatbar.is-expanded {
+      align-items: flex-start;
+    }
+
+    .hero-demo-placeholder {
+      flex: 1;
+      font-size: 13px;
+      color: var(--text-tertiary);
+      text-align: left;
+      line-height: 1.55;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    /* Inserted text style */
+    .hero-demo-placeholder.has-text {
+      color: var(--text-primary);
+    }
+
+    .hero-demo-arixify-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent);
+      border-radius: 8px;
+      padding: 6px 12px;
+      flex-shrink: 0;
+      box-shadow: 0 0 12px var(--accent-glow);
+      cursor: pointer;
+      /* margin-top animates smoothly unlike align-self */
+      margin-top: 0;
+      transition: background 0.15s, transform 0.15s, box-shadow 0.15s, margin-top 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Button pressed state */
+    .hero-demo-arixify-btn.is-pressed {
+      background: var(--accent-hover);
+      transform: scale(0.92);
+      box-shadow: 0 0 8px rgba(124, 110, 250, 0.2);
+    }
+
+    .hero-demo-arixify-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: white;
+      letter-spacing: 0.01em;
+    }
+
+    .hero-demo-picker {
+      background: #1A1825;
+      border: 1px solid var(--border-default);
+      border-radius: 10px;
+      overflow: visible;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      opacity: 0;
+      transform: translateY(-8px) scale(0.98);
+      transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+      pointer-events: none;
+    }
+
+    .hero-demo-picker.shown {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+      overflow: hidden;
+    }
+
+    .hero-demo-picker-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px 8px;
+    }
+
+    .hero-demo-picker-brand {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent-soft);
+    }
+
+    .hero-demo-picker-hint {
+      font-size: 10px;
+      color: var(--text-tertiary);
+    }
+
+    .hero-demo-picker-search {
+      margin: 0 10px 8px;
+      padding: 7px 10px;
+      background: #0E0E11;
+      border: 1px solid var(--border-default);
+      border-radius: 6px;
+      font-size: 11px;
+      color: var(--text-tertiary);
+      text-align: left;
+    }
+
+    .hero-demo-picker-item {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 10px 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.25s ease-out, transform 0.25s ease-out, background 0.15s ease-out;
+    }
+
+    .hero-demo-picker-item:last-child { border-bottom: none; }
+
+    .hero-demo-picker-item.shown {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Hover highlight for animated cursor */
+    .hero-demo-picker-item.is-hovered {
+      background: rgba(124, 110, 250, 0.08);
+    }
+
+    /* Click flash */
+    .hero-demo-picker-item.is-clicked {
+      background: rgba(124, 110, 250, 0.18);
+    }
+
+    .hero-demo-picker-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .hero-demo-picker-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: left;
+    }
+
+    .hero-demo-picker-preview {
+      font-size: 10px;
+      color: var(--text-tertiary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: left;
+    }
+
+    .hero-demo-picker-uses {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-tertiary);
+      flex-shrink: 0;
+      margin-left: 12px;
+      margin-top: 2px;
+    }
+
+    /* ─── Animated Hand Cursor ─── */
+    .hero-demo-cursor {
+      position: absolute;
+      width: 28px;
+      height: 34px;
+      z-index: 10;
+      pointer-events: none;
+      opacity: 0;
+      transition: none;
+    }
+
+    .hero-demo-cursor.is-visible {
+      opacity: 1;
+    }
+
+    .hero-demo-cursor.is-clicking {
+      transform: scale(0.82);
+    }
+
+    /* I-beam cursor variant — hidden by default, shown when over text area */
+    .hero-demo-cursor-ibeam {
+      width: 24px;
+      height: 32px;
+    }
+
+    /* ─── Fake blinking text caret ─── */
+    /* NEW */
+    .hero-demo-caret {
+      position: absolute;
+      width: 2px;
+      height: 18px;
+      background: var(--text-primary);
+      border-radius: 1px;
+      z-index: 8;
+      pointer-events: none;
+      opacity: 0;
+    }
+    
+    .hero-demo-caret.is-visible {
+      opacity: 1;
+      animation: blink-caret 1s step-end infinite;
+    }
+
+    @keyframes blink-caret {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* ─── Scroll Reveal Animations ─── */
+    .scroll-reveal {
+      opacity: 0;
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+
+    .scroll-reveal.from-bottom { transform: translateY(50px); }
+    .scroll-reveal.from-left   { transform: translateX(-60px); }
+    .scroll-reveal.from-right  { transform: translateX(60px); }
+
+    .scroll-reveal.is-revealed {
+      opacity: 1;
+    }
+
+    .scroll-reveal.is-revealed.from-bottom { transform: translateY(0); }
+    .scroll-reveal.is-revealed.from-left   { transform: translateX(0); }
+    .scroll-reveal.is-revealed.from-right  { transform: translateX(0); }
+
+    .scroll-reveal-delay-1 { transition-delay: 0.1s; }
+    .scroll-reveal-delay-2 { transition-delay: 0.2s; }
+    .scroll-reveal-delay-3 { transition-delay: 0.3s; }
+    .scroll-reveal-delay-4 { transition-delay: 0.15s; }
+    .scroll-reveal-delay-5 { transition-delay: 0.25s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .scroll-reveal {
+        opacity: 1;
+        transform: none !important;
+        transition: none;
+      }
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 1024px) {
+      .feature-block {
+        grid-template-columns: 1fr !important;
+        gap: 40px;
+      }
+
+      .feature-block:nth-child(even) .feature-content {
+        order: 0;
+      }
+
+      .feature-visual {
+        aspect-ratio: auto;
+        min-height: 280px;
+        height: auto;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav {
+        -webkit-backdrop-filter: blur(10px) saturate(1.2);
+        backdrop-filter: blur(10px) saturate(1.2);
+      }
+
+      .light-particle {
+        display: none !important;
+      }
+
+      .hero::before {
+        animation: none;
+      }
+
+      .hero-emblem-svg {
+        filter: drop-shadow(0 0 30px rgba(124, 110, 250, 0.4)) !important;
+      }
+
+      .nav {
+        padding: 0 16px;
+        height: 72px;
+      }
+
+      .nav-links {
+        gap: 14px;
+      }
+
+      .nav-link {
+        font-size: 13px;
+      }
+
+      .nav-cta {
+        font-size: 13px;
+        padding: 8px 18px;
+      }
+
+      .nav-logo {
+        font-size: 17px;
+        gap: 8px;
+      }
+
+      .nav-logo svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      .hero {
+        padding: 120px 24px 80px;
+      }
+
+      .hero-emblem-svg {
+        width: 120px !important;
+        height: 120px !important;
+      }
+
+      .hero-emblem-wrap.is-typing .hero-emblem-svg {
+        width: 56px !important;
+        height: 56px !important;
+      }
+
+      .hero-emblem-wrap.is-typing .hero-emblem-text,
+      .hero-emblem-wrap.is-button .hero-emblem-text {
+        font-size: 36px !important;
+      }
+
+      .hero-emblem-wrap.is-button .hero-emblem-svg {
+        width: 52px !important;
+        height: 52px !important;
+      }
+
+      .hero-emblem-wrap.is-button .hero-emblem-btn {
+        padding: 16px 32px;
+      }
+
+      .hero-demo {
+        margin-top: 48px;
+      }
+
+      .hero-title {
+        font-size: 42px;
+      }
+
+      .hero-sub {
+        font-size: 16px;
+      }
+
+      .platforms {
+        padding: 40px 24px;
+      }
+
+      .platforms-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 12px;
+      }
+
+      .features {
+        padding: 80px 24px;
+      }
+
+      .section-sub {
+        margin-bottom: 60px;
+      }
+
+      .feature-block {
+        padding: 40px 28px;
+        margin-bottom: 60px;
+      }
+
+      .feature-visual {
+        aspect-ratio: auto;
+        min-height: 240px;
+        height: auto;
+        padding: 20px 14px;
+      }
+
+      .feature-visual .mock-platform-tag {
+        font-size: 10px;
+        padding: 4px 8px;
+      }
+
+      .mock-local {
+        width: 90%;
+      }
+
+      .mock-local-line {
+        font-size: 10px;
+        padding: 6px 10px;
+      }
+
+      .mock-track-row {
+        padding: 10px 12px;
+      }
+
+      .mock-track-row span[style*="font-size:12px"] {
+        font-size: 11px !important;
+      }
+
+      .mock-manage-dashboard {
+        width: 100% !important;
+        flex-direction: column !important;
+        height: auto !important;
+        gap: 8px !important;
+      }
+
+      .mock-manage-dashboard > div {
+        width: 100% !important;
+        min-height: 100px;
+      }
+
+      .mock-inject {
+        width: 100%;
+      }
+
+      .mock-chatbar {
+        padding: 12px 14px;
+      }
+
+      .mock-chatbar-text {
+        font-size: 12px;
+      }
+
+      .mock-arixify-btn {
+        padding: 5px 10px;
+      }
+
+      .mock-arixify-btn-label {
+        font-size: 10px;
+      }
+
+      .mock-picker-item {
+        padding: 8px 12px;
+      }
+
+      .mock-picker-title {
+        font-size: 11px;
+      }
+
+      .mock-picker-preview {
+        font-size: 9px;
+      }
+
+      .how-it-works {
+        padding: 80px 24px;
+      }
+
+      .steps {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .pricing {
+        padding: 80px 24px;
+      }
+
+      .pricing-cards {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .pricing-card {
+        padding: 40px 28px;
+      }
+
+      .pricing-price {
+        font-size: 40px;
+      }
+
+      .cta {
+        padding: 80px 24px;
+      }
+
+      .footer {
+        padding: 40px 24px 32px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 24px;
+      }
+
+      .footer-links {
+        flex-direction: column;
+        gap: 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .nav {
+        padding: 0 14px;
+        height: 72px;
+      }
+
+      .nav-link {
+        font-size: 12px;
+      }
+
+      .nav-link[href="#how"] {
+        display: none;
+      }
+
+      .nav-cta {
+        display: flex;
+        font-size: 12px;
+      }
+
+      .nav-logo {
+        font-size: 16px;
+      }
+
+      .hero-title {
+        font-size: 36px;
+      }
+
+      .hero-sub {
+        font-size: 15px;
+      }
+
+      .pricing-card {
+        padding: 32px 24px;
+      }
+
+      .pricing-badge {
+        top: 16px;
+        right: 20px;
+        font-size: 10px;
+        padding: 5px 12px;
+      }
+
+      .feature-block {
+        padding: 32px 20px;
+      }
+
+      .section-title {
+        font-size: 32px;
+      }
+
+      .feature-visual {
+        aspect-ratio: auto;
+        min-height: 200px;
+        height: auto;
+        padding: 16px 12px;
+      }
+
+      .mock-inject {
+        width: 100%;
+      }
+
+      .mock-chatbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      .mock-arixify-btn {
+        align-self: flex-end;
+      }
+
+      .mock-picker-item {
+        padding: 6px 10px;
+      }
+
+      .mock-picker-title {
+        font-size: 10px;
+      }
+
+      .mock-picker-preview {
+        font-size: 8px;
+      }
+
+      .mock-picker-count {
+        font-size: 9px;
+      }
+
+      .mock-picker-search {
+        font-size: 10px;
+        padding: 5px 8px;
+      }
+
+      .feature-visual .mock-platform-tag {
+        font-size: 9px;
+        padding: 3px 6px;
+      }
+
+      .mock-local {
+        width: 100%;
+      }
+
+      .mock-shield {
+        width: 44px;
+        height: 44px;
+        font-size: 20px;
+        border-radius: 12px;
+      }
+
+      .mock-local-line {
+        font-size: 9px;
+        padding: 5px 8px;
+        gap: 6px;
+      }
+
+      .mock-track-row {
+        padding: 8px 10px;
+      }
+
+      .mock-inject[style*="width:80%"] {
+        width: 100% !important;
+      }
+
+      .mock-manage-dashboard {
+        width: 100% !important;
+        flex-direction: column !important;
+        height: auto !important;
+        gap: 8px !important;
+      }
+
+      .mock-manage-dashboard > div {
+        width: 100% !important;
+        min-height: 100px;
+      }
+
+      .mock-manage-dashboard > div[style*="width:22%"],
+      .mock-manage-dashboard > div[style*="width:30%"],
+      .mock-manage-dashboard > div[style*="flex:1"] {
+        width: 100% !important;
+      }
+    }
+
+    /* ─── Touch-hover ─── */
+    @media (hover: none) and (pointer: coarse) {
+      .nav-logo.touch-hover svg {
+        filter: drop-shadow(0 0 16px rgba(124, 110, 250, 0.7)) drop-shadow(0 0 24px rgba(0, 217, 255, 0.3));
+      }
+
+      .nav-cta.touch-hover {
+        background: var(--accent-hover);
+        color: white;
+        transform: translateY(-1px);
+      }
+
+      .btn-primary.touch-hover {
+        background: var(--accent-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 24px rgba(124, 110, 250, 0.4);
+      }
+
+      .btn-secondary.touch-hover {
+        border-color: var(--accent);
+        background: rgba(124, 110, 250, 0.06);
+      }
+
+      .platform-card.touch-hover {
+        border-color: var(--accent);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba(124, 110, 250, 0.15);
+      }
+
+      .platform-card.touch-hover::before {
+        opacity: 1;
+      }
+
+      .platform-card.muted.touch-hover {
+        opacity: 1;
+      }
+
+      .feature-block.touch-hover {
+        border-color: transparent;
+      }
+
+      .feature-block.touch-hover::before {
+        opacity: 0.3;
+      }
+
+      .mock-arixify-btn.touch-hover {
+        background: var(--accent-hover);
+        transform: scale(1.05);
+        box-shadow: 0 0 28px rgba(124, 110, 250, 0.4);
+        animation: none;
+      }
+
+      .mock-picker-search.touch-hover {
+        border-color: var(--accent);
+      }
+
+      .mock-picker-item.touch-hover {
+        background: rgba(124, 110, 250, 0.06);
+      }
+
+      .mock-platform-tag.touch-hover {
+        border-color: var(--accent);
+        color: var(--text-primary);
+        transform: translateY(-2px);
+      }
+
+      .mock-platform-tag.muted.touch-hover {
+        opacity: 1;
+      }
+
+      .mock-shield.touch-hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 36px rgba(52, 211, 153, 0.25);
+      }
+
+      .mock-local-line.touch-hover {
+        background: rgba(52, 211, 153, 0.06);
+        transform: translateX(4px);
+      }
+
+      .mock-track-row.touch-hover {
+        border-color: var(--accent);
+        transform: translateX(4px);
+      }
+
+      .step.touch-hover {
+        transform: translateY(-8px);
+        border-color: transparent;
+        box-shadow: 0 12px 36px rgba(124, 110, 250, 0.2);
+      }
+
+      .step.touch-hover::before {
+        opacity: 0.15;
+      }
+
+      .step.touch-hover .step-number {
+        opacity: 1;
+      }
+
+      .pricing-card.touch-hover {
+        transform: translateY(-4px);
+      }
+
+      .pricing-card:not(.pro).touch-hover {
+        border-color: var(--accent);
+        box-shadow: 0 4px 16px rgba(124, 110, 250, 0.15);
+      }
+
+      .pricing-card.pro.touch-hover {
+        box-shadow: 0 12px 40px rgba(124, 110, 250, 0.25);
+        border-color: transparent;
+      }
+
+      .pricing-card.pro.touch-hover::before {
+        opacity: 0.45;
+      }
+
+      .pricing-card.pro.touch-hover::after {
+        opacity: 1;
+      }
+
+      .pricing-btn.free.touch-hover {
+        background: var(--bg-primary);
+        border-color: var(--accent);
+      }
+
+      .pricing-btn.pro.touch-hover {
+        background: var(--accent-hover);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 16px rgba(124, 110, 250, 0.3);
+      }
+
+      .footer-links a.touch-hover {
+        color: var(--accent-soft);
+      }
+    }
+  </style>
+</head>
+<canvas id="lightning-canvas" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;"></canvas>
+<script>
+(function(){
+  const canvas = document.getElementById('lightning-canvas');
+  const ctx = canvas.getContext('2d');
+  function resize(){ canvas.width = innerWidth; canvas.height = innerHeight; }
+  resize(); window.addEventListener('resize', resize);
+  function rand(a,b){ return a + Math.random()*(b-a); }
+
+  function buildTrunk(x,y,angle,length){
+    const pts=[{x,y}]; let cx=x,cy=y,a=angle;
+    const steps=Math.floor(rand(10,18)), sl=length/steps;
+    for(let i=0;i<steps;i++){ a+=rand(-0.25,0.25); cx+=Math.cos(a)*sl; cy+=Math.sin(a)*sl; pts.push({x:cx,y:cy}); }
+    return pts;
+  }
+
+  function buildBranches(tp){
+    const branches=[];
+    for(let i=3;i<tp.length-1;i++){
+      if(Math.random()>0.45) continue;
+      const o=tp[i], dx=tp[i+1].x-o.x, dy=tp[i+1].y-o.y;
+      const ba=Math.atan2(dy,dx)+(Math.random()<0.5?1:-1)*rand(0.3,0.7);
+      const bl=rand(60,150), bs=Math.floor(rand(5,11)), bPts=[{x:o.x,y:o.y}];
+      let cx=o.x,cy=o.y,a=ba;
+      for(let j=0;j<bs;j++){ a+=rand(-0.2,0.2); cx+=Math.cos(a)*(bl/bs); cy+=Math.sin(a)*(bl/bs); bPts.push({x:cx,y:cy}); }
+      const sub=[];
+      if(Math.random()<0.5 && bPts.length>3){
+        const si=Math.floor(rand(2,bPts.length-1)), sp=bPts[si];
+        const sa=a+(Math.random()<0.5?1:-1)*rand(0.3,0.6), sLen=rand(20,55), sPts=[{x:sp.x,y:sp.y}];
+        let sx=sp.x,sy=sp.y,sA=sa;
+        for(let j=0;j<4;j++){ sA+=rand(-0.2,0.2); sx+=Math.cos(sA)*(sLen/4); sy+=Math.sin(sA)*(sLen/4); sPts.push({x:sx,y:sy}); }
+        sub.push(sPts);
+      }
+      branches.push({pts:bPts,sub});
+    }
+    return branches;
+  }
+
+  function spawnEvent(){
+    const W=canvas.width, H=canvas.height;
+    const ox=W*rand(0.15,0.85), oy=H*rand(0.0,0.15);
+    const n=Math.random()<0.4?2:1, trunks=[];
+    for(let t=0;t<n;t++){
+      const pts=buildTrunk(ox,oy,rand(Math.PI*0.1,Math.PI*0.9),rand(H*0.5,H*0.95));
+      trunks.push({pts,branches:buildBranches(pts)});
+    }
+    return {ox,oy,trunks};
+  }
+
+  function strokePts(pts,lw,alpha,color){
+    if(pts.length<2) return;
+    ctx.beginPath(); ctx.moveTo(pts[0].x,pts[0].y);
+    for(let i=1;i<pts.length;i++) ctx.lineTo(pts[i].x,pts[i].y);
+    ctx.strokeStyle=color; ctx.lineWidth=lw; ctx.globalAlpha=alpha;
+    ctx.shadowBlur=lw*6; ctx.shadowColor=color; ctx.stroke(); ctx.shadowBlur=0;
+  }
+
+  function getAlphas(ph){
+    const t = ph<0.08?ph/0.08:ph<0.55?1:1-(ph-0.55)/0.45;
+    const b = ph<0.25?0:ph<0.35?(ph-0.25)/0.1:ph<0.55?1:1-(ph-0.55)/0.45;
+    return {trunk:Math.max(0,t), branch:Math.max(0,b)};
+  }
+
+  function drawEvent(ev,ph){
+    const {trunk,branch}=getAlphas(ph); if(trunk<=0) return;
+    ctx.save(); ctx.lineCap='round'; ctx.lineJoin='round';
+    ev.trunks.forEach(t=>{
+      strokePts(t.pts,2.2,trunk*0.9,'rgba(140,120,240,0.95)');
+      if(branch>0) t.branches.forEach(b=>{
+        strokePts(b.pts,1.3,branch*0.75,'rgba(120,100,200,0.7)');
+        b.sub.forEach(s=>strokePts(s,0.8,branch*0.55,'rgba(100,85,170,0.5)'));
+      });
+    });
+    if(trunk>0.5){ ctx.globalAlpha=(trunk-0.5)*0.08; ctx.fillStyle='#7C6EFA'; ctx.fillRect(0,0,canvas.width,canvas.height); }
+    ctx.restore();
+  }
+
+  let state='idle', idleTimer=rand(1,3), event=null, phase=0, doubleFlash=false, pauseTimer=0, last=performance.now();
+
+  function tick(ts){
+    requestAnimationFrame(tick);
+    const dt=Math.min((ts-last)/1000,0.08); last=ts;
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    if(state==='idle'){
+      if((idleTimer-=dt)<=0){ event=spawnEvent(); doubleFlash=Math.random()<0.4; phase=0; state='flash1'; }
+      return;
+    }
+    if(state==='pause'){
+      if((pauseTimer-=dt)<=0){
+        const prev=event; event=spawnEvent();
+        event.ox=Math.min(canvas.width*0.82,Math.max(canvas.width*0.18,prev.ox+rand(-canvas.width*0.12,canvas.width*0.12)));
+        phase=0; state='flash2';
+      }
+      return;
+    }
+    phase+=dt*(state==='flash2'?2.6:2.0);
+    drawEvent(event,phase);
+    if(phase>=1){
+      if(state==='flash1'&&doubleFlash){ state='pause'; pauseTimer=rand(0.04,0.12); }
+      else{ state='idle'; idleTimer=rand(4,7); }
+    }
+  }
+  requestAnimationFrame(tick);
+})();
+</script>
+
+<body>
+
+  <!-- Animated Light Particles -->
+  <div class="light-particle p1"></div>
+  <div class="light-particle p2"></div>
+  <div class="light-particle p3"></div>
+  <div class="light-particle p4"></div>
+  <div class="light-particle p5"></div>
+
+  <!-- ─── Navigation ─── -->
+  <nav class="nav">
+    <a class="nav-logo" href="/">
+      <svg width="22" height="22" viewBox="0 0 32 32" fill="none">
+        <rect width="32" height="32" rx="7" fill="#7C6EFA"/>
+        <path d="M11 8L7 16H14L10 24" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M19 8L15 16H22L18 24" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+      </svg>
+      Arixify<span class="nav-logo-dot"></span>
+    </a>
+    <div class="nav-links">
+      <a class="nav-link" href="#features">Features</a>
+      <a class="nav-link" href="#how">How it works</a>
+      <a class="nav-link" href="#pricing">Pricing</a>
+      <a class="nav-cta" href="https://chromewebstore.google.com" target="_blank">Add to Browser</a>
+    </div>
+  </nav>
+
+  <!-- ─── Hero ─── -->
+  <section class="hero">
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      Now supporting 20+ AI platforms
+    </div>
+    <h1>Your prompts.<br/>One click away.</h1>
+    <p class="hero-sub">
+      Save your best prompts. Insert them into ChatGPT, Claude, Gemini, Perplexity, and 20+ AI platforms — one click from the input box.
+    </p>
+    <div class="hero-buttons">
+      <a class="btn-primary" href="https://chromewebstore.google.com" target="_blank">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M9 3L4 13H12L8 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M16 3L11 13H19L15 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+        </svg>
+        Add to Browser — Free
+      </a>
+      <a class="btn-secondary" href="#features">
+        See features
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </a>
+    </div>
+
+    <!-- Hero Product Demo (animated cursor interaction) -->
+    <div class="hero-demo" id="hero-demo">
+      <div class="hero-demo-window">
+        <div class="hero-demo-topbar">
+          <div class="hero-demo-dots"><span></span><span></span><span></span></div>
+          <span class="hero-demo-url">claude.ai</span>
+        </div>
+        <div class="hero-demo-content" id="hero-demo-content">
+          <!-- Chatbar -->
+          <div class="hero-demo-chatbar" id="hero-demo-chatbar">
+            <span class="hero-demo-placeholder" id="hero-demo-text">How can I help you today?</span>
+            <div class="hero-demo-arixify-btn" id="hero-demo-btn">
+              <svg width="12" height="12" viewBox="0 0 32 32" fill="none"><path d="M11 6L7 14H14L10 22" stroke="white" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 6L17 14H24L20 22" stroke="white" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/></svg>
+              <span class="hero-demo-arixify-label">Arixify</span>
+            </div>
+          </div>
+          <!-- Picker -->
+          <div class="hero-demo-picker" id="hero-demo-picker">
+            <div class="hero-demo-picker-header">
+              <div class="hero-demo-picker-brand">
+                <svg width="12" height="12" viewBox="0 0 32 32" fill="none"><path d="M11 6L7 14H14L10 22" stroke="#9D8DFF" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 6L17 14H24L20 22" stroke="#9D8DFF" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/></svg>
+                Arixify
+              </div>
+              <span class="hero-demo-picker-hint">Click to insert</span>
+            </div>
+            <div class="hero-demo-picker-search">Search…</div>
+            <div class="hero-demo-picker-item" data-demo-item="0">
+              <div class="hero-demo-picker-text">
+                <span class="hero-demo-picker-title">Code review checklist</span>
+                <span class="hero-demo-picker-preview">Review the following code for bugs, security issu…</span>
+              </div>
+              <span class="hero-demo-picker-uses">31x</span>
+            </div>
+            <div class="hero-demo-picker-item" data-demo-item="1">
+              <div class="hero-demo-picker-text">
+                <span class="hero-demo-picker-title">Explain like I'm 5</span>
+                <span class="hero-demo-picker-preview">Explain the following concept as if you're talking…</span>
+              </div>
+              <span class="hero-demo-picker-uses">67x</span>
+            </div>
+            <div class="hero-demo-picker-item" data-demo-item="2">
+              <div class="hero-demo-picker-text">
+                <span class="hero-demo-picker-title">Write unit tests</span>
+                <span class="hero-demo-picker-preview">Write comprehensive unit tests for the following f…</span>
+              </div>
+              <span class="hero-demo-picker-uses">43x</span>
+            </div>
+          </div>
+
+          <!-- Animated hand cursor (external SVG) -->
+          <img class="hero-demo-cursor" id="hero-demo-cursor" src="./hand_no_bg.svg" alt="" width="28" height="34" />
+
+          <!-- I-beam cursor for text areas (external SVG) -->
+          <img class="hero-demo-cursor hero-demo-cursor-ibeam" id="hero-demo-cursor-ibeam" src="./ibeam_no_bg.svg" alt="" width="24" height="32" />
+
+          <!-- Fake blinking text caret -->
+          <div class="hero-demo-caret" id="hero-demo-caret"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero Logo → Arixify Button -->
+    <div class="hero-emblem-wrap" id="hero-emblem">
+      <a href="#features" class="hero-emblem-btn" id="hero-emblem-btn">
+        <div class="hero-emblem-inner">
+          <svg class="hero-emblem-svg" width="204" height="204" viewBox="0 0 32 32" fill="none">
+            <rect width="32" height="32" rx="7" fill="#7C6EFA"/>
+            <path d="M11 8L7 16H14L10 24" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M19 8L15 16H22L18 24" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+          </svg>
+          <span class="hero-emblem-text" id="hero-emblem-text"></span>
+        </div>
+        <div class="hero-emblem-bg" id="hero-emblem-bg"></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ─── Supported Platforms ─── -->
+  <section class="platforms">
+    <div class="platforms-label">Works with your favorite AI platforms</div>
+    <div class="platforms-grid">
+      <div class="platform-card">ChatGPT</div>
+      <div class="platform-card">Claude</div>
+      <div class="platform-card">Gemini</div>
+      <div class="platform-card">Perplexity</div>
+      <div class="platform-card">Grok</div>
+      <div class="platform-card">Copilot</div>
+      <div class="platform-card">DeepSeek</div>
+      <div class="platform-card">Poe</div>
+      <div class="platform-card">Le Chat</div>
+      <div class="platform-card">Luma</div>
+      <div class="platform-card">Runway</div>
+      <div class="platform-card muted">+ more</div>
+    </div>
+  </section>
+
+  <!-- ─── Features ─── -->
+  <section class="features" id="features">
+    <div class="section-label">Features</div>
+    <div class="section-title">Everything you need to work faster</div>
+    <p class="section-sub">
+      Built for AI power users who want their prompts organized, accessible, and ready to use across platforms.
+    </p>
+
+    <!-- Feature 1 -->
+    <div class="feature-block">
+      <div class="feature-content">
+        <div class="feature-number">01</div>
+        <div class="feature-title">Insert prompts right where you type</div>
+        <div class="feature-desc">
+          A small button appears next to the AI input box. Click it, pick your prompt,
+          and it inserts right where your cursor is. No tab-switching, no clipboard juggling.
+        </div>
+        <span class="feature-tag">⚡ Under 0.5 seconds</span>
+      </div>
+      <div class="feature-visual">
+        <div class="mock-inject">
+          <div class="mock-chatbar">
+            <span class="mock-chatbar-text">How can I help you today?</span>
+            <div class="mock-arixify-btn">
+              <svg width="12" height="12" viewBox="0 0 32 32" fill="none"><path d="M11 6L7 14H14L10 22" stroke="white" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 6L17 14H24L20 22" stroke="white" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/></svg>
+              <span class="mock-arixify-btn-label">Arixify</span>
+            </div>
+          </div>
+          <div class="mock-picker">
+            <div class="mock-picker-header">
+              <div class="mock-picker-brand">
+                <svg width="12" height="12" viewBox="0 0 32 32" fill="none"><path d="M11 6L7 14H14L10 22" stroke="#9D8DFF" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 6L17 14H24L20 22" stroke="#9D8DFF" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/></svg>
+                Arixify
+              </div>
+              <span class="mock-picker-hint">Click to insert</span>
+            </div>
+            <div class="mock-picker-search">Search…</div>
+            <div class="mock-picker-item">
+              <div class="mock-picker-text">
+                <span class="mock-picker-title">Write unit tests</span>
+                <span class="mock-picker-preview">Write comprehensive unit tests for the following f…</span>
+              </div>
+              <span class="mock-picker-count">43x</span>
+            </div>
+            <div class="mock-picker-item">
+              <div class="mock-picker-text">
+                <span class="mock-picker-title">Explain like I'm 5</span>
+                <span class="mock-picker-preview">Explain the following concept as if you're talking…</span>
+              </div>
+              <span class="mock-picker-count">67x</span>
+            </div>
+            <div class="mock-picker-item">
+              <div class="mock-picker-text">
+                <span class="mock-picker-title">Code review checklist</span>
+                <span class="mock-picker-preview">Review the following code for bugs, security issu…</span>
+              </div>
+              <span class="mock-picker-count">31x</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature 2 -->
+    <div class="feature-block">
+      <div class="feature-content">
+        <div class="feature-number">02</div>
+        <div class="feature-title">Know which prompts actually work</div>
+        <div class="feature-desc">
+          Every prompt tracks how many times you've used it. Sort by Top Used to surface what works.
+          Pro users can also rate prompts with stars and sort by Top Rated.
+        </div>
+        <span class="feature-tag">📊 Usage tracking + sorting</span>
+      </div>
+      <div class="feature-visual">
+        <div style="width:80%; max-width:100%; display:flex; flex-direction:column; gap:8px;">
+          <div class="mock-track-row">
+            <div style="display:flex; flex-direction:column; gap:2px;">
+              <span style="font-size:12px; font-weight:600; color:var(--text-primary);">Code review checklist</span>
+              <span style="font-size:10px; color:var(--amber);">★★★★★</span>
+            </div>
+            <span style="font-family:var(--font-mono); font-size:12px; color:var(--accent-soft);">47x</span>
+          </div>
+          <div class="mock-track-row">
+            <div style="display:flex; flex-direction:column; gap:2px;">
+              <span style="font-size:12px; font-weight:600; color:var(--text-primary);">Translate to formal English</span>
+              <span style="font-size:10px; color:var(--amber);">★★★★☆</span>
+            </div>
+            <span style="font-family:var(--font-mono); font-size:12px; color:var(--accent-soft);">31x</span>
+          </div>
+          <div class="mock-track-row">
+            <div style="display:flex; flex-direction:column; gap:2px;">
+              <span style="font-size:12px; font-weight:600; color:var(--text-primary);">Summarize this article</span>
+              <span style="font-size:10px; color:var(--amber);">★★★★☆</span>
+            </div>
+            <span style="font-family:var(--font-mono); font-size:12px; color:var(--accent-soft);">28x</span>
+          </div>
+          <div class="mock-track-row">
+            <div style="display:flex; flex-direction:column; gap:2px;">
+              <span style="font-size:12px; font-weight:600; color:var(--text-secondary);">Debug this error</span>
+              <span style="font-size:10px; color:var(--amber);">★★★☆☆</span>
+            </div>
+            <span style="font-family:var(--font-mono); font-size:12px; color:var(--text-tertiary);">15x</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature 3 -->
+    <div class="feature-block">
+      <div class="feature-content">
+        <div class="feature-number">03</div>
+        <div class="feature-title">Save prompts from any webpage</div>
+        <div class="feature-desc">
+          Highlight any text on the web, right-click, and select "Add to Arixify."
+          Your best ideas are saved in seconds, right from the page you're reading.
+        </div>
+        <span class="feature-tag">🖱️ Works on any webpage</span>
+      </div>
+      <div class="feature-visual">
+        <div class="mock-inject" style="width:80%; max-width:100%">
+          <div style="padding:14px 18px; background:var(--bg-elevated); border:1px solid var(--border-default); border-radius:10px;">
+            <div style="font-size:12px; color:var(--text-secondary); line-height:1.7; margin-bottom:10px;">
+              <span style="background:rgba(124,110,250,0.2); padding:2px 0; border-radius:2px;">You are an expert code reviewer. Review the following code for bugs, security issues, and performance…</span>
+            </div>
+            <div style="background:var(--bg-card); border:1px solid var(--border-default); border-radius:8px; overflow:hidden; box-shadow:0 4px 16px rgba(0,0,0,0.3);">
+              <div style="display:flex; align-items:center; justify-content:space-between; padding:8px 12px; font-size:11px; color:var(--text-tertiary); border-bottom:1px solid var(--border-subtle);">
+                <span style="display:flex; align-items:center; gap:6px;">Copy</span>
+                <span style="font-size:10px; color:var(--text-tertiary); opacity:0.5;">Ctrl+C</span>
+              </div>
+              <div style="display:flex; align-items:center; padding:8px 12px; font-size:11px; color:var(--text-tertiary); border-bottom:1px solid var(--border-subtle);">Print…</div>
+              <div style="display:flex; align-items:center; gap:7px; padding:8px 12px; font-size:11px; color:var(--text-primary); background:rgba(124,110,250,0.06); cursor:pointer;">
+                <svg width="14" height="14" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="5" fill="#7C6EFA"/><path d="M11 8L7 16H14L10 24" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 8L15 16H22L18 24" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/></svg>
+                Add to Arixify
+              </div>
+              <div style="display:flex; align-items:center; padding:8px 12px; font-size:11px; color:var(--text-tertiary);">Inspect</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature 4 -->
+    <div class="feature-block">
+      <div class="feature-content">
+        <div class="feature-number">04</div>
+        <div class="feature-title">Full management dashboard with Markdown editor</div>
+        <div class="feature-desc">
+          A three-column management page for power users.
+          Folders, drag-and-drop organization, resizable panels, and a split-view
+          Markdown editor with keyboard shortcuts and rich text paste support.
+          Pro users get live preview alongside the editor.
+        </div>
+        <span class="feature-tag">🗂️ Organize · Edit · Sync</span>
+      </div>
+      <div class="feature-visual">
+        <div class="mock-manage-dashboard" style="width:90%; max-width:100%; display:flex; gap:6px; min-height:180px;">
+          <div style="width:22%; background:var(--bg-elevated); border:1px solid var(--border-default); border-radius:8px; padding:10px;">
+            <div style="font-size:9px; color:var(--text-tertiary); margin-bottom:8px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em;">Folders</div>
+            <div style="font-size:10px; color:var(--accent-soft); padding:4px 6px; background:rgba(124,110,250,0.08); border-radius:4px; margin-bottom:4px;">All Prompts</div>
+            <div style="font-size:10px; color:var(--text-secondary); padding:4px 6px; margin-bottom:4px;">Marketing</div>
+            <div style="font-size:10px; color:var(--text-secondary); padding:4px 6px; margin-bottom:4px;">Dev</div>
+            <div style="font-size:10px; color:var(--text-secondary); padding:4px 6px;">Writing</div>
+          </div>
+          <div style="width:30%; background:var(--bg-elevated); border:1px solid var(--border-default); border-radius:8px; padding:10px; display:flex; flex-direction:column; gap:5px;">
+            <div style="padding:6px 8px; background:rgba(124,110,250,0.06); border:1px solid var(--accent); border-radius:5px;">
+              <div style="font-size:10px; color:var(--text-primary); font-weight:600;">Code review</div>
+              <div style="font-size:8px; color:var(--text-tertiary); margin-top:2px;">×47 · ★★★★★</div>
+            </div>
+            <div style="padding:6px 8px; border:1px solid var(--border-default); border-radius:5px;">
+              <div style="font-size:10px; color:var(--text-secondary);">Translate formal</div>
+              <div style="font-size:8px; color:var(--text-tertiary); margin-top:2px;">×31 · ★★★★</div>
+            </div>
+            <div style="padding:6px 8px; border:1px solid var(--border-default); border-radius:5px;">
+              <div style="font-size:10px; color:var(--text-secondary);">Summarize</div>
+              <div style="font-size:8px; color:var(--text-tertiary); margin-top:2px;">×28 · ★★★★</div>
+            </div>
+          </div>
+          <div style="flex:1; background:var(--bg-elevated); border:1px solid var(--border-default); border-radius:8px; padding:10px; display:flex; flex-direction:column;">
+            <div style="display:flex; gap:4px; margin-bottom:6px;">
+              <span style="font-size:9px; padding:2px 6px; background:var(--bg-card); border:1px solid var(--border-default); border-radius:3px; color:var(--text-tertiary); font-weight:600;">B</span>
+              <span style="font-size:9px; padding:2px 6px; background:var(--bg-card); border:1px solid var(--border-default); border-radius:3px; color:var(--text-tertiary); font-style:italic;">I</span>
+              <span style="font-size:9px; padding:2px 6px; background:var(--bg-card); border:1px solid var(--border-default); border-radius:3px; color:var(--text-tertiary);">H1</span>
+            </div>
+            <div style="flex:1; display:flex; gap:4px;">
+              <div style="flex:1; background:var(--bg-card); border-radius:4px; padding:6px; font-size:8px; color:var(--text-tertiary); font-family:var(--font-mono); line-height:1.6;">
+                # Code Review<br>
+                **Check for:**<br>
+                - Security issues<br>
+                - Performance…
+              </div>
+              <div style="flex:1; background:var(--bg-card); border-radius:4px; padding:6px; font-size:8px; color:var(--text-secondary); line-height:1.6;">
+                <span style="font-size:12px; font-weight:700;">Code Review</span><br>
+                <strong>Check for:</strong><br>
+                • Security issues<br>
+                • Performance…
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature 5 -->
+    <div class="feature-block">
+      <div class="feature-content">
+        <div class="feature-number">05</div>
+        <div class="feature-title">20+ platforms. One extension.</div>
+        <div class="feature-desc">
+          AI chat tools like ChatGPT, Claude, Gemini, Perplexity, Grok, DeepSeek, and Copilot — plus
+          AI image and video generators like Runway, Kling AI, and Luma.
+          On supported platforms, prompts insert directly into the input field — no paste needed.
+        </div>
+        <span class="feature-tag">🌐 AI Chat + Image + Video</span>
+      </div>
+      <div class="feature-visual">
+        <div style="width:80%; max-width:100%; display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <div style="font-size:9px; font-weight:600; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-tertiary); margin-bottom:8px;">AI Chat</div>
+            <div style="display:flex; flex-wrap:wrap; gap:6px;">
+              <span class="mock-platform-tag">ChatGPT</span>
+              <span class="mock-platform-tag">Claude</span>
+              <span class="mock-platform-tag">Gemini</span>
+              <span class="mock-platform-tag">Perplexity</span>
+              <span class="mock-platform-tag">Grok</span>
+              <span class="mock-platform-tag">DeepSeek</span>
+              <span class="mock-platform-tag">Copilot</span>
+              <span class="mock-platform-tag">Le Chat</span>
+              <span class="mock-platform-tag">Poe</span>
+              <span class="mock-platform-tag muted">+ more</span>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:9px; font-weight:600; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-tertiary); margin-bottom:8px;">AI Image & Video</div>
+            <div style="display:flex; flex-wrap:wrap; gap:6px;">
+              <span class="mock-platform-tag">Runway</span>
+              <span class="mock-platform-tag">Kling AI</span>
+              <span class="mock-platform-tag">Luma</span>
+              <span class="mock-platform-tag">Dreamina</span>
+              <span class="mock-platform-tag">Hailuo</span>
+              <span class="mock-platform-tag muted">+ more</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature 6 -->
+    <div class="feature-block">
+      <div class="feature-content">
+        <div class="feature-number">06</div>
+        <div class="feature-title">Your data stays on your device</div>
+        <div class="feature-desc">
+          Free plan stores everything locally in your browser. No account needed, no data uploaded.
+          Arixify never reads your AI conversations, doesn't track your browsing,
+          and doesn't collect analytics. Cloud sync is opt-in for Pro users only.
+        </div>
+        <span class="feature-tag">🔒 No tracking · No analytics · No data collection</span>
+      </div>
+      <div class="feature-visual">
+        <div class="mock-local">
+          <div class="mock-shield">🛡️</div>
+          <div class="mock-local-lines">
+            <div class="mock-local-line"><span class="check">✓</span> Doesn't read your AI conversations</div>
+            <div class="mock-local-line"><span class="check">✓</span> No analytics, trackers, or ads</div>
+            <div class="mock-local-line"><span class="check">✓</span> Local storage by default (Free plan)</div>
+            <div class="mock-local-line"><span class="check">✓</span> Opt-in cloud sync (Pro plan)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── How it works ─── -->
+  <section class="how-it-works" id="how">
+    <div class="section-label">How it works</div>
+    <div class="section-title">Three steps. Zero friction.</div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">01</div>
+        <div class="step-title">Save your prompt</div>
+        <div class="step-desc">Type it in the popup, or highlight text on any page and right-click → Add to Arixify.</div>
+      </div>
+      <div class="step">
+        <div class="step-number">02</div>
+        <div class="step-title">Open any AI</div>
+        <div class="step-desc">Go to ChatGPT, Claude, Gemini, or any of the 20+ supported platforms.</div>
+      </div>
+      <div class="step">
+        <div class="step-number">03</div>
+        <div class="step-title">Click and insert</div>
+        <div class="step-desc">Tap the Arixify button next to the input box. Pick a prompt. Done.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Pricing ─── -->
+  <section class="pricing" id="pricing">
+    <div class="pricing-inner">
+      <div class="section-label">Pricing</div>
+      <div class="section-title">Start free. Upgrade when you're ready.</div>
+      <p class="section-sub" style="margin: 0 auto;">No trial limits. No credit card required. Free plan is free forever — unlimited prompts included.</p>
+
+      <div class="pricing-cards">
+        <div class="pricing-card">
+          <div class="pricing-plan">Free</div>
+          <div class="pricing-price"><span class="currency">$</span>0 <span>/ forever</span></div>
+          <div class="pricing-period">No account needed</div>
+          <div class="pricing-divider"></div>
+          <ul class="pricing-features">
+            <li><span class="check">✓</span> Unlimited prompts</li>
+            <li><span class="check">✓</span> One-click insert on 20+ AI platforms</li>
+            <li><span class="check">✓</span> Instant search (title + content)</li>
+            <li><span class="check">✓</span> Usage count tracking</li>
+            <li><span class="check">✓</span> Right-click save from any webpage</li>
+            <li><span class="check">✓</span> Management page with Markdown editor</li>
+            <li><span class="check">✓</span> 100% local storage — no account needed</li>
+          </ul>
+          <a class="pricing-btn free" href="https://chromewebstore.google.com" target="_blank">Install Free</a>
+        </div>
+
+        <div class="pricing-card pro">
+          <div class="pricing-badge">Most popular</div>
+          <div class="pricing-plan">Pro</div>
+          <div class="pricing-price"><span class="currency">$</span>8 <span>/ month</span></div>
+          <div class="pricing-annual-note">or <span class="currency" style="font-size: 11px; vertical-align: baseline;">$</span>79/year — save 18%</div>
+          <div class="pricing-divider"></div>
+          <ul class="pricing-features">
+            <li><span class="check-green">✓</span> Everything in Free</li>
+            <li><span class="check-green">✓</span> Cloud sync across devices</li>
+            <li><span class="check-green">✓</span> Folders to organize your library</li>
+            <li><span class="check-green">✓</span> Star ratings for your prompts</li>
+            <li><span class="check-green">✓</span> Advanced sorting</li>
+            <li><span class="check-green">✓</span> Full Manage dashboard</li>
+            <li><span class="check-green">✓</span> Drag & drop organization</li>
+            <li><span class="check-green">✓</span> Markdown editor with live preview</li>
+          </ul>
+          <a class="pricing-btn pro" href="/checkout.html">Upgrade to Pro</a>
+        </div>
+      </div>
+
+      <p class="pricing-note">14-day money-back guarantee · Cancel anytime · Payments secured by Paddle</p>
+    </div>
+  </section>
+
+  <!-- ─── CTA ─── -->
+  <section class="cta">
+    <div class="cta-title">Stop retyping your best prompts.</div>
+    <p class="cta-sub">Install for free and start inserting prompts with one click.</p>
+    <a class="btn-primary" href="https://chromewebstore.google.com" target="_blank">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <path d="M9 3L4 13H12L8 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M16 3L11 13H19L15 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+      </svg>
+      Add to Browser — Free
+    </a>
+  </section>
+
+  <!-- ─── Footer ─── -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <a class="footer-logo" href="/">
+          <svg width="18" height="18" viewBox="0 0 32 32" fill="none">
+            <rect width="32" height="32" rx="7" fill="#7C6EFA"/>
+            <path d="M11 8L7 16H14L10 24" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M19 8L15 16H22L18 24" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+          </svg>
+          Arixify<span class="nav-logo-dot"></span>
+        </a>
+        <span class="footer-copy">© <span id="current-year"></span> Arixify. All rights reserved.</span>
+      </div>
+      <div class="footer-links">
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/billing.html">Billing</a>
+        <a href="mailto:support@arixify.com">Contact</a>
+      </div>
+    </div>
+  </footer>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+  </script>
+
+  <!-- ─── Hero Emblem Typing Animation ─── -->
+  <script>
+  (function() {
+    var wrap = document.getElementById('hero-emblem');
+    var textEl = document.getElementById('hero-emblem-text');
+    if (!wrap || !textEl) return;
+
+    var emblemTriggered = false;
+    var word = 'Arixify';
+
+    function startTyping(extraDelay) {
+      setTimeout(function() {
+        wrap.classList.add('is-typing');
+        var i = 0;
+        var interval = setInterval(function() {
+          i++;
+          textEl.textContent = word.slice(0, i);
+          if (i >= word.length) {
+            clearInterval(interval);
+            setTimeout(function() {
+              wrap.classList.remove('is-typing');
+              wrap.classList.add('is-button');
+            }, 200);
+          }
+        }, 60);
+      }, extraDelay);
+    }
+
+    var emblemObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting && !emblemTriggered) {
+          emblemTriggered = true;
+          emblemObs.unobserve(wrap);
+          startTyping(80);
+        }
+      });
+    }, { threshold: 0 });
+    emblemObs.observe(wrap);
+  })();
+  </script>
+
+  <!-- ─── Hero Demo: Animated Cursor Interaction Loop ─── -->
+  <script>
+  (function() {
+    var demo = document.getElementById('hero-demo');
+    if (!demo) return;
+
+    var content = document.getElementById('hero-demo-content');
+    var handCursor = document.getElementById('hero-demo-cursor');
+    var ibeamCursor = document.getElementById('hero-demo-cursor-ibeam');
+    var caretEl = document.getElementById('hero-demo-caret');
+    var btn = document.getElementById('hero-demo-btn');
+    var chatbar = document.getElementById('hero-demo-chatbar');
+    var picker = document.getElementById('hero-demo-picker');
+    var textEl = document.getElementById('hero-demo-text');
+    var items = picker.querySelectorAll('.hero-demo-picker-item');
+    var targetItem = items[1]; // "Explain like I'm 5"
+
+    // Currently active cursor element (hand or ibeam)
+    var activeCursor = handCursor;
+
+    var PLACEHOLDER = 'How can I help you today?';
+    var INSERT_TEXT = 'Explain the following concept as if you\u2019re talking to a 5-year-old. Use simple words and a fun analogy.\n\n';
+
+    var animTimer = null;
+    var demoStarted = false;
+
+    // Switch between hand and ibeam cursor
+    function switchToHand() {
+      if (activeCursor === handCursor) return;
+      var wasVisible = ibeamCursor.classList.contains('is-visible');
+      ibeamCursor.classList.remove('is-visible', 'is-clicking');
+      handCursor.style.left = ibeamCursor.style.left;
+      handCursor.style.top = ibeamCursor.style.top;
+      if (wasVisible) handCursor.classList.add('is-visible');
+      activeCursor = handCursor;
+    }
+
+    function switchToIbeam() {
+      if (activeCursor === ibeamCursor) return;
+      var wasVisible = handCursor.classList.contains('is-visible');
+      handCursor.classList.remove('is-visible', 'is-clicking');
+      ibeamCursor.style.left = handCursor.style.left;
+      ibeamCursor.style.top = handCursor.style.top;
+      if (wasVisible) ibeamCursor.classList.add('is-visible');
+      activeCursor = ibeamCursor;
+    }
+
+    // Smooth cursor movement with cubic ease-in-out
+    function moveCursor(toX, toY, duration, cb) {
+      var startX = parseFloat(activeCursor.style.left) || 0;
+      var startY = parseFloat(activeCursor.style.top) || 0;
+      var startTime = performance.now();
+
+      function frame(now) {
+        var elapsed = now - startTime;
+        var t = Math.min(elapsed / duration, 1);
+        t = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        var cx = startX + (toX - startX) * t;
+        var cy = startY + (toY - startY) * t;
+        activeCursor.style.left = cx + 'px';
+        activeCursor.style.top = cy + 'px';
+        if (elapsed < duration) {
+          requestAnimationFrame(frame);
+        } else {
+          if (cb) cb();
+        }
+      }
+      requestAnimationFrame(frame);
+    }
+
+    // Get element center relative to content container
+    function getRelPos(el) {
+      var cRect = content.getBoundingClientRect();
+      var eRect = el.getBoundingClientRect();
+      return {
+        x: eRect.left - cRect.left + eRect.width / 2,
+        y: eRect.top - cRect.top + eRect.height / 2
+      };
+    }
+
+    // Position caret on the empty line below inserted text (after the \n)
+    function positionCaret() {
+      var cRect = content.getBoundingClientRect();
+      var tRect = textEl.getBoundingClientRect();
+      // The text ends with \n so the last "line" is empty.
+      // We get the line height from font-size * line-height (13px * 1.55 ≈ 20px)
+      var lineH = 20;
+      // Place caret left-aligned, on the last (empty) line
+      caretEl.style.left = (tRect.left - cRect.left) + 'px';
+      caretEl.style.top = (tRect.top - cRect.top + tRect.height) + 'px';
+    }
+
+    function resetDemo() {
+      handCursor.classList.remove('is-visible', 'is-clicking');
+      ibeamCursor.classList.remove('is-visible', 'is-clicking');
+      caretEl.classList.remove('is-visible');
+      btn.classList.remove('is-pressed');
+      picker.classList.remove('shown');
+      items.forEach(function(item) {
+        item.classList.remove('shown', 'is-hovered', 'is-clicked');
+      });
+      textEl.textContent = PLACEHOLDER;
+      textEl.classList.remove('has-text');
+      // Animate chatbar back to initial height
+      chatbar.style.height = initialChatbarH + 'px';
+      chatbar.classList.remove('is-expanded');
+      btn.style.marginTop = '0';
+      activeCursor = handCursor;
+    }
+
+    // Measure and lock chatbar's natural (compact) height once before first run
+    var initialChatbarH = 0;
+    function lockInitialChatbarHeight() {
+      chatbar.style.height = '';
+      initialChatbarH = chatbar.scrollHeight;
+      chatbar.style.height = initialChatbarH + 'px';
+    }
+
+    // Pre-calculate the final chatbar height after full text is inserted.
+    function calcFinalChatbarHeight(fullText) {
+      var clone = chatbar.cloneNode(true);
+      clone.style.cssText = [
+        'position:absolute', 'visibility:hidden', 'pointer-events:none',
+        'width:' + chatbar.offsetWidth + 'px',
+        'height:auto', 'overflow:visible', 'max-height:none'
+      ].join(';');
+      var cloneText = clone.querySelector('#hero-demo-text') || clone.querySelector('.hero-demo-placeholder');
+      if (cloneText) cloneText.textContent = fullText;
+      document.body.appendChild(clone);
+      var h = clone.scrollHeight;
+      document.body.removeChild(clone);
+      return Math.max(h, initialChatbarH);
+    }
+
+    function runAnimation() {
+      resetDemo();
+
+      var contentW = content.offsetWidth;
+      var contentH = content.offsetHeight;
+      handCursor.style.left = (contentW - 50) + 'px';
+      handCursor.style.top = (contentH + 10) + 'px';
+
+      // 0.2s — Show hand cursor
+      setTimeout(function() {
+        handCursor.classList.add('is-visible');
+      }, 200);
+
+      // 0.5s — Move to Arixify button
+      setTimeout(function() {
+        var btnPos = getRelPos(btn);
+        moveCursor(btnPos.x - 5, btnPos.y + 4, 550, function() {
+
+          // Click button
+          activeCursor.classList.add('is-clicking');
+          btn.classList.add('is-pressed');
+
+          setTimeout(function() {
+            activeCursor.classList.remove('is-clicking');
+            btn.classList.remove('is-pressed');
+
+            // Show picker
+            setTimeout(function() {
+              picker.classList.add('shown');
+
+              items.forEach(function(item, i) {
+                setTimeout(function() {
+                  item.classList.add('shown');
+                }, i * 100);
+              });
+
+              // Move to target item
+              setTimeout(function() {
+                var itemPos = getRelPos(targetItem);
+                moveCursor(itemPos.x - 30, itemPos.y + 4, 450, function() {
+
+                  targetItem.classList.add('is-hovered');
+
+                  // Click item
+                  setTimeout(function() {
+                    activeCursor.classList.add('is-clicking');
+                    targetItem.classList.remove('is-hovered');
+                    targetItem.classList.add('is-clicked');
+
+                    setTimeout(function() {
+                      activeCursor.classList.remove('is-clicking');
+
+                      // Hide picker, then after fade completes clean up item states
+                      setTimeout(function() {
+                        picker.classList.remove('shown');
+
+                        // Wait for picker fade-out (250ms) before clearing item highlights
+                        setTimeout(function() {
+                          items.forEach(function(item) {
+                            item.classList.remove('shown', 'is-hovered', 'is-clicked');
+                          });
+                        }, 260);
+
+                        setTimeout(function() {
+                          var typeText = 'How Arixify saves me hours every week';
+                          var fullText = INSERT_TEXT + typeText;
+
+                          // Pre-calculate final height and animate chatbar to it
+                          var finalH = calcFinalChatbarHeight(fullText);
+                          chatbar.style.height = finalH + 'px';
+                          chatbar.classList.add('is-expanded');
+                          // Push button to bottom: margin-top = expanded height - initial height - btn height
+                          var btnH = btn.offsetHeight;
+                          var pushDown = finalH - initialChatbarH;
+                          btn.style.marginTop = pushDown + 'px';
+
+                          textEl.textContent = INSERT_TEXT;
+                          textEl.classList.add('has-text');
+
+                          // Switch to ibeam and move to the empty line
+                          setTimeout(function() {
+                            switchToIbeam();
+                            positionCaret();
+                            // Move ibeam cursor to exactly where the caret will blink
+                            var caretX = parseFloat(caretEl.style.left);
+                            var caretY = parseFloat(caretEl.style.top);
+                            moveCursor(caretX, caretY, 400, function() {
+
+                              // Click at caret position
+                              activeCursor.classList.add('is-clicking');
+                              setTimeout(function() {
+                                activeCursor.classList.remove('is-clicking');
+
+                                // Stay as ibeam, just move away and fade out
+                                setTimeout(function() {
+                                  moveCursor(contentW - 20, caretY + 40, 350, function() {
+                                    ibeamCursor.classList.remove('is-visible');
+                                    // Show blinking caret
+                                    caretEl.classList.add('is-visible');
+                                                  
+                                    // Type the question
+                                    var typeIndex = 0;
+
+                                    function updateCaretByRange() {
+                                      try {
+                                        var range = document.createRange();
+                                        var textNode = textEl.firstChild;
+                                        if (!textNode) return;
+                                        var offset = Math.min(textEl.textContent.length, textEl.textContent.length);
+                                        range.setStart(textNode, textEl.textContent.length);
+                                        range.setEnd(textNode, textEl.textContent.length);
+                                        var rRect = range.getBoundingClientRect();
+                                        var cRect2 = content.getBoundingClientRect();
+                                        caretEl.style.left = (rRect.left - cRect2.left) + 'px';
+                                        caretEl.style.top = (rRect.top - cRect2.top) + 'px';
+                                      } catch(e) {}
+                                    }
+
+                                    var typeInterval = setInterval(function() {
+                                      typeIndex++;
+                                      textEl.textContent = INSERT_TEXT + typeText.slice(0, typeIndex);
+                                      updateCaretByRange();
+                                      if (typeIndex >= typeText.length) {
+                                        clearInterval(typeInterval);
+                                        animTimer = setTimeout(runAnimation, 2000);
+                                      }
+                                    }, 60);
+                                  });
+                                }, 120);
+                              }, 100);
+                            });
+                          }, 150);
+                        }, 200);
+                      }, 120);
+                    }, 80);
+                  }, 250);
+                });
+              }, 500);
+            }, 150);
+          }, 100);
+        });
+      }, 500);
+    }
+
+    // Lock the demo window to its natural rendered height before the first run,
+    // so the chatbar expanding its height never pushes the window taller.
+    var demoWindow = demo.querySelector('.hero-demo-window');
+    function lockWindowHeight() {
+      if (!demoWindow) return;
+      var h = demoWindow.getBoundingClientRect().height;
+      if (h > 0) {
+        demoWindow.style.minHeight = h + 'px';
+        demoWindow.style.maxHeight = h + 'px';
+        demoWindow.style.overflow = 'hidden';
+      }
+    }
+
+    // Start when scrolled into view
+    var demoObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting && !demoStarted) {
+          demoStarted = true;
+          demoObs.unobserve(demo);
+          lockWindowHeight();
+          lockInitialChatbarHeight();
+          setTimeout(runAnimation, 500);
+        }
+      });
+    }, { threshold: 0.3 });
+    demoObs.observe(demo);
+  })();
+  </script>
+
+  <!-- ─── Scroll Reveal for All Sections ─── -->
+  <script>
+  (function() {
+    document.querySelectorAll('.feature-block').forEach(function(el, i) {
+      if (i >= 4) {
+        el.classList.add('scroll-reveal', 'from-right');
+      } else {
+        el.classList.add('scroll-reveal', 'from-left');
+      }
+    });
+
+    document.querySelectorAll('.step').forEach(function(el, i) {
+      el.classList.add('scroll-reveal', 'from-bottom');
+      if (i > 0 && i <= 3) el.classList.add('scroll-reveal-delay-' + i);
+    });
+
+    document.querySelectorAll('.pricing-card').forEach(function(el, i) {
+      if (el.classList.contains('pro')) {
+        el.classList.add('scroll-reveal', 'from-right', 'scroll-reveal-delay-1');
+      } else {
+        el.classList.add('scroll-reveal', 'from-left');
+      }
+    });
+
+    document.querySelectorAll('.platform-card').forEach(function(el, i) {
+      el.classList.add('scroll-reveal', 'from-left');
+      var d = i % 6;
+      if (d > 0 && d <= 5) el.classList.add('scroll-reveal-delay-' + d);
+    });
+
+    var revealObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+          entry.target.addEventListener('transitionend', function handler(e) {
+            if (e.propertyName !== 'transform' && e.propertyName !== 'opacity') return;
+            var el = entry.target;
+            el.classList.remove('scroll-reveal', 'from-left', 'from-right', 'from-bottom', 'is-revealed',
+              'scroll-reveal-delay-1', 'scroll-reveal-delay-2', 'scroll-reveal-delay-3',
+              'scroll-reveal-delay-4', 'scroll-reveal-delay-5');
+            el.removeEventListener('transitionend', handler);
+          });
+          revealObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.scroll-reveal').forEach(function(el) {
+      revealObs.observe(el);
+    });
+  })();
+  </script>
+
+  <!-- ─── Touch-hover Script ─── -->
+  <script>
+  (function() {
+    if (!('ontouchstart' in window) && !navigator.maxTouchPoints) return;
+
+    const TOUCH_HOVER_SELECTORS = [
+      '.nav-logo',
+      '.nav-cta',
+      '.btn-primary',
+      '.btn-secondary',
+      '.platform-card',
+      '.feature-block',
+      '.mock-arixify-btn',
+      '.mock-picker-search',
+      '.mock-picker-item',
+      '.mock-platform-tag',
+      '.mock-shield',
+      '.mock-local-line',
+      '.mock-track-row',
+      '.step',
+      '.pricing-card',
+      '.pricing-btn',
+      '.footer-links a'
+    ];
+
+    const allSelector = TOUCH_HOVER_SELECTORS.join(', ');
+
+    let currentHovered = null;
+
+    function clearHover() {
+      if (currentHovered) {
+        currentHovered.classList.remove('touch-hover');
+        currentHovered = null;
+      }
+    }
+
+    document.addEventListener('touchstart', function(e) {
+      const target = e.target.closest(allSelector);
+      clearHover();
+      if (target) {
+        target.classList.add('touch-hover');
+        currentHovered = target;
+      }
+    }, { passive: true });
+
+    document.addEventListener('touchend', function() {
+      setTimeout(clearHover, 300);
+    }, { passive: true });
+
+    document.addEventListener('touchcancel', function() {
+      clearHover();
+    }, { passive: true });
+
+    let scrolling = false;
+    document.addEventListener('scroll', function() {
+      if (!scrolling) {
+        scrolling = true;
+        clearHover();
+        setTimeout(function() { scrolling = false; }, 100);
+      }
+    }, { passive: true });
+  })();
+  </script>
+
+</body>
+</html>
