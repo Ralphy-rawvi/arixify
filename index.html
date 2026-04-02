@@ -63,6 +63,141 @@
     a:hover { color: var(--accent); }
 
 
+    /* ─── Giant Background Lightning ─── */
+    .bg-lightning-wrap {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-38%);
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0;
+      animation: lightning-reveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+    }
+
+    @keyframes lightning-reveal {
+      0% { opacity: 0; filter: blur(30px) brightness(3); }
+      30% { opacity: 1; filter: blur(0px) brightness(2); }
+      60% { opacity: 0.85; filter: blur(0px) brightness(1.2); }
+      100% { opacity: 1; filter: blur(0px) brightness(1); }
+    }
+
+    /* ── Main bolt layer ── */
+    .bg-lightning {
+      position: absolute;
+      inset: 0;
+    }
+
+    .bg-lightning svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ── RGB Split: Red channel (shifted left) ── */
+    .bg-lightning-r {
+      position: absolute;
+      inset: 0;
+      mix-blend-mode: screen;
+      opacity: 0;
+    }
+    .bg-lightning-r svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ── RGB Split: Cyan channel (shifted right) ── */
+    .bg-lightning-b {
+      position: absolute;
+      inset: 0;
+      mix-blend-mode: screen;
+      opacity: 0;
+    }
+    .bg-lightning-b svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ── Scanline overlay ── */
+    .bg-lightning-scanlines {
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 3px,
+        rgba(0, 0, 0, 0.08) 3px,
+        rgba(0, 0, 0, 0.08) 4px
+      );
+      pointer-events: none;
+      animation: scanline-scroll 0.4s linear infinite;
+    }
+
+    @keyframes scanline-scroll {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(4px); }
+    }
+
+    /* ── Glitch slice overlay (horizontal tear) ── */
+    .bg-lightning-slice {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+    }
+    .bg-lightning-slice svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Subtle breathing glow on the lightning */
+    .bg-lightning-glow {
+      animation: lightning-breathe 5s ease-in-out infinite;
+    }
+
+    @keyframes lightning-breathe {
+      0%, 100% { opacity: 0.35; }
+      50% { opacity: 0.55; }
+    }
+
+    .bg-lightning-core {
+      animation: lightning-core-breathe 5s ease-in-out infinite;
+    }
+
+    @keyframes lightning-core-breathe {
+      0%, 100% { opacity: 0.07; }
+      50% { opacity: 0.12; }
+    }
+
+    /* Occasional flash effect */
+    .bg-lightning-flash {
+      animation: lightning-flash 8s ease-in-out infinite 2s;
+    }
+
+    @keyframes lightning-flash {
+      0%, 100% { opacity: 0; }
+      45% { opacity: 0; }
+      48% { opacity: 0.15; }
+      52% { opacity: 0.25; }
+      56% { opacity: 0.15; }
+      60% { opacity: 0; }
+    }
+
+    @media (max-width: 768px) {
+      .bg-lightning-wrap {
+        display: none !important;
+      }
+    }
+
+    /* ── Reduce motion preference ── */
+    @media (prefers-reduced-motion: reduce) {
+      .bg-lightning-r, .bg-lightning-b, .bg-lightning-slice,
+      .bg-lightning-scanlines { display: none; }
+      .bg-lightning-glow,
+      .bg-lightning-core,
+      .bg-lightning-flash { animation: none !important; }
+    }
+
     /* ─── Animated Light Particles ─── */
     .light-particle {
       position: fixed;
@@ -2395,6 +2530,123 @@
 
 <body>
 
+  <!-- ─── Giant Background Lightning (Glitch) ─── -->
+  <div class="bg-lightning-wrap" aria-hidden="true">
+
+    <!-- Red channel offset -->
+    <div class="bg-lightning-r">
+      <svg viewBox="0 0 1200 1200" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMin slice">
+        <defs>
+          <filter id="bolt-r-glow" x="-40%" y="-15%" width="180%" height="130%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="28"/>
+          </filter>
+        </defs>
+        <path d="M 608 -40 L 575 180 L 640 195 L 565 520 L 645 540 L 540 860 L 620 880 L 510 1260 L 560 860 L 480 840 L 590 520 L 510 500 L 615 195 L 548 180 Z" fill="#ff3344" filter="url(#bolt-r-glow)" opacity="0.3"/>
+        <path d="M 596 20 L 583 178 L 604 184 L 578 515 L 600 522 L 562 855 L 582 862 L 538 1200" stroke="#ff3344" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.4"/>
+      </svg>
+    </div>
+
+    <!-- Cyan channel offset -->
+    <div class="bg-lightning-b">
+      <svg viewBox="0 0 1200 1200" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMin slice">
+        <defs>
+          <filter id="bolt-b-glow" x="-40%" y="-15%" width="180%" height="130%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="28"/>
+          </filter>
+        </defs>
+        <path d="M 608 -40 L 575 180 L 640 195 L 565 520 L 645 540 L 540 860 L 620 880 L 510 1260 L 560 860 L 480 840 L 590 520 L 510 500 L 615 195 L 548 180 Z" fill="#00D9FF" filter="url(#bolt-b-glow)" opacity="0.25"/>
+        <path d="M 596 20 L 583 178 L 604 184 L 578 515 L 600 522 L 562 855 L 582 862 L 538 1200" stroke="#00D9FF" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.35"/>
+      </svg>
+    </div>
+
+    <!-- Main bolt (original layers) -->
+    <div class="bg-lightning">
+      <svg viewBox="0 0 1200 1200" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMin slice">
+        <defs>
+          <!-- Wide glow filter -->
+          <filter id="bolt-glow" x="-50%" y="-20%" width="200%" height="140%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="38" result="blur1"/>
+            <feColorMatrix in="blur1" type="matrix" values="1 0 0 0 0.1  0 0.6 0 0 0.1  0 0 1 0 0.4  0 0 0 1 0" result="colored"/>
+            <feMerge>
+              <feMergeNode in="colored"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+          <!-- Tight inner glow -->
+          <filter id="bolt-core-glow" x="-30%" y="-10%" width="160%" height="120%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="8"/>
+          </filter>
+          <!-- Ultra-wide ambient glow for flash -->
+          <filter id="bolt-flash" x="-80%" y="-30%" width="260%" height="160%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="80"/>
+          </filter>
+          <!-- Gradient for the bolt body -->
+          <linearGradient id="bolt-gradient" x1="580" y1="-60" x2="620" y2="1300" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#A78BFA" stop-opacity="0.0"/>
+            <stop offset="8%" stop-color="#9D8DFF" stop-opacity="0.7"/>
+            <stop offset="35%" stop-color="#7C6EFA" stop-opacity="1"/>
+            <stop offset="65%" stop-color="#6B5EE8" stop-opacity="0.9"/>
+            <stop offset="85%" stop-color="#00D9FF" stop-opacity="0.6"/>
+            <stop offset="100%" stop-color="#00D9FF" stop-opacity="0.0"/>
+          </linearGradient>
+          <linearGradient id="bolt-glow-grad" x1="580" y1="-60" x2="620" y2="1300" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#7C6EFA" stop-opacity="0"/>
+            <stop offset="20%" stop-color="#7C6EFA" stop-opacity="0.6"/>
+            <stop offset="50%" stop-color="#9D8DFF" stop-opacity="0.8"/>
+            <stop offset="80%" stop-color="#00D9FF" stop-opacity="0.5"/>
+            <stop offset="100%" stop-color="#00D9FF" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+
+        <!-- Layer 1: Ultra-wide ambient flash (intermittent) -->
+        <path class="bg-lightning-flash" d="
+          M 608 -40 L 575 180 L 640 195 L 565 520 L 645 540 L 540 860 L 620 880 L 510 1260 L 560 860 L 480 840 L 590 520 L 510 500 L 615 195 L 548 180 Z
+        " fill="url(#bolt-glow-grad)" filter="url(#bolt-flash)" opacity="0"/>
+
+        <!-- Layer 2: Wide outer glow (breathing) -->
+        <path class="bg-lightning-glow" d="
+          M 608 -40 L 575 180 L 640 195 L 565 520 L 645 540 L 540 860 L 620 880 L 510 1260 L 560 860 L 480 840 L 590 520 L 510 500 L 615 195 L 548 180 Z
+        " fill="url(#bolt-glow-grad)" filter="url(#bolt-glow)" opacity="0.4"/>
+
+        <!-- Layer 3: Core bolt shape -->
+        <path class="bg-lightning-core" d="
+          M 604 -20 L 580 175 L 632 188 L 572 510 L 636 528 L 548 850 L 614 868 L 520 1240 L 556 856 L 490 838 L 594 520 L 518 504 L 610 188 L 555 178 Z
+        " fill="url(#bolt-gradient)" filter="url(#bolt-core-glow)" opacity="0.09"/>
+
+        <!-- Layer 4: Thin bright center line -->
+        <path d="
+          M 596 20 L 583 178 L 604 184 L 578 515 L 600 522 L 562 855 L 582 862 L 538 1200
+        " stroke="url(#bolt-gradient)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.15" fill="none"/>
+
+        <!-- Small branch 1 (upper right) -->
+        <path class="bg-lightning-glow" d="M 615 190 L 695 260 L 670 265 L 730 340" stroke="#7C6EFA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.15" fill="none" filter="url(#bolt-core-glow)"/>
+
+        <!-- Small branch 2 (mid left) -->
+        <path class="bg-lightning-glow" d="M 570 525 L 480 580 L 505 585 L 440 650" stroke="#9D8DFF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.12" fill="none" filter="url(#bolt-core-glow)"/>
+
+        <!-- Small branch 3 (lower right) -->
+        <path class="bg-lightning-glow" d="M 610 870 L 690 920 L 665 928 L 720 990" stroke="#00D9FF" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" opacity="0.1" fill="none" filter="url(#bolt-core-glow)"/>
+      </svg>
+    </div>
+
+    <!-- Glitch horizontal slice layer -->
+    <div class="bg-lightning-slice">
+      <svg viewBox="0 0 1200 1200" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMin slice">
+        <defs>
+          <filter id="bolt-slice-glow" x="-30%" y="-10%" width="160%" height="120%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="12"/>
+          </filter>
+        </defs>
+        <path d="M 608 -40 L 575 180 L 640 195 L 565 520 L 645 540 L 540 860 L 620 880 L 510 1260 L 560 860 L 480 840 L 590 520 L 510 500 L 615 195 L 548 180 Z" fill="#9D8DFF" filter="url(#bolt-slice-glow)" opacity="0.5"/>
+        <path d="M 596 20 L 583 178 L 604 184 L 578 515 L 600 522 L 562 855 L 582 862 L 538 1200" stroke="#EEEDF5" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.6"/>
+      </svg>
+    </div>
+
+    <!-- Scanlines -->
+    <div class="bg-lightning-scanlines"></div>
+
+  </div>
+
   <!-- Animated Light Particles -->
   <div class="light-particle p1"></div>
   <div class="light-particle p2"></div>
@@ -2921,7 +3173,7 @@
       </div>
     </div>
   </footer>
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     document.getElementById('current-year').textContent = new Date().getFullYear();
   </script>
 
@@ -3326,6 +3578,89 @@
   })();
   </script>
 
+  <!-- ─── Lightning Glitch Controller (irregular timing) ─── -->
+  <script>
+  (function() {
+    var main  = document.querySelector('.bg-lightning');
+    var rCh   = document.querySelector('.bg-lightning-r');
+    var bCh   = document.querySelector('.bg-lightning-b');
+    var slice = document.querySelector('.bg-lightning-slice');
+    if (!main || !rCh || !bCh || !slice) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (window.matchMedia('(max-width: 768px)').matches) return;
+
+    function rand(a, b) { return a + Math.random() * (b - a); }
+    function randInt(a, b) { return Math.floor(rand(a, b + 1)); }
+    function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+    // Generate a random clip-path band
+    function randClip() {
+      var top = randInt(5, 75);
+      var h = randInt(10, 30);
+      return 'inset(' + top + '% 0 ' + (100 - top - h) + '% 0)';
+    }
+
+    // Single glitch "tick" — one rapid displacement frame
+    function glitchTick(done) {
+      var dx  = pick([-1,1]) * rand(3, 8);
+      var dy  = pick([-1,0,1]) * rand(0, 2);
+      var rdx = pick([-1,1]) * rand(6, 14);
+      var bdx = -rdx + pick([-1,1]) * rand(0, 4);
+      var sdx = pick([-1,1]) * rand(12, 24);
+
+      main.style.transform  = 'translate(' + dx + 'px,' + dy + 'px)';
+      rCh.style.transform   = 'translateX(' + rdx + 'px)';
+      rCh.style.clipPath    = randClip();
+      rCh.style.opacity     = rand(0.25, 0.45);
+      bCh.style.transform   = 'translateX(' + bdx + 'px)';
+      bCh.style.clipPath    = randClip();
+      bCh.style.opacity     = rand(0.2, 0.4);
+      slice.style.transform = 'translateX(' + sdx + 'px)';
+      slice.style.clipPath  = randClip();
+      slice.style.opacity   = rand(0.4, 0.65);
+
+      setTimeout(function() {
+        main.style.transform  = '';
+        rCh.style.transform   = '';
+        rCh.style.clipPath    = '';
+        rCh.style.opacity     = '0';
+        bCh.style.transform   = '';
+        bCh.style.clipPath    = '';
+        bCh.style.opacity     = '0';
+        slice.style.transform = '';
+        slice.style.clipPath  = '';
+        slice.style.opacity   = '0';
+        if (done) done();
+      }, randInt(50, 120));
+    }
+
+    // A "burst" = 2–3 rapid glitch ticks in quick succession
+    function glitchBurst(done) {
+      var count = randInt(2, 3);
+      var i = 0;
+      function next() {
+        if (i >= count) { if (done) done(); return; }
+        i++;
+        setTimeout(function() {
+          glitchTick(next);
+        }, randInt(30, 80));
+      }
+      next();
+    }
+
+    // Schedule: burst → long pause → burst → long pause ...
+    function scheduleNext() {
+      var pause = rand(5, 10) * 1000;  // 5–10 seconds between bursts
+      setTimeout(function() {
+        glitchBurst(scheduleNext);
+      }, pause);
+    }
+
+    // Initial delay before first glitch
+    setTimeout(scheduleNext, rand(2, 4) * 1000);
+  })();
+  </script>
+
   <!-- ─── Touch-hover Script ─── -->
   <script>
   (function() {
@@ -3392,3 +3727,4 @@
 
 </body>
 </html>
+   
