@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#7C6EFA" />
+  <meta name="robots" content="noindex, nofollow">
+  <title>Upgrade to Pro — Arixify</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+  <link rel="icon" type="image/png" sizes="144x144" href="/favicon-144x144.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-primary: #0A0A0F;
+      --bg-card: #16151F;
+      --bg-elevated: #1C1B28;
+      --border-subtle: #1F1E2E;
+      --border-default: #2A293D;
+      --accent: #7C6EFA;
+      --accent-hover: #6B5EE8;
+      --accent-glow: rgba(124, 110, 250, 0.15);
+      --accent-soft: #9D8DFF;
+      --text-primary: #EEEDF5;
+      --text-secondary: #A09CB5;
+      --text-tertiary: #6B6880;
+      --green: #34D399;
+      --red: #EF4444;
+      --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* Glow behind card */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Brand signature line */
+    .brand-line {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent 0%, var(--accent) 30%, #00D9FF 70%, transparent 100%);
+      z-index: 100;
+    }
+
+    a { color: var(--accent-soft); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 48px;
+      text-decoration: none;
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo-dot { color: var(--accent); }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-default);
+      border-radius: 20px;
+      padding: 44px 40px;
+      width: 100%;
+      max-width: 480px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 15%;
+      right: 15%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    }
+
+    .card-title {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .card-sub {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 36px;
+      line-height: 1.7;
+    }
+
+    .plans {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .plan-btn {
+      position: relative;
+      padding: 18px 22px;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-default);
+      border-radius: 14px;
+      cursor: pointer;
+      text-align: left;
+      transition: border-color 0.2s, background 0.2s, transform 0.15s;
+      width: 100%;
+      font-family: inherit;
+      color: inherit;
+    }
+
+    .plan-btn:hover { border-color: var(--accent); background: rgba(124,110,250,0.04); }
+    .plan-btn.selected { border-color: var(--accent); background: rgba(124,110,250,0.06); }
+
+    .plan-badge {
+      position: absolute;
+      top: -10px;
+      right: 18px;
+      background: var(--accent);
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 12px;
+      border-radius: 999px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .plan-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .plan-price {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.03em;
+    }
+
+    .plan-price span {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-tertiary);
+    }
+
+    .plan-saving {
+      display: inline-block;
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--green);
+      font-weight: 600;
+    }
+
+    .btn-checkout {
+      width: 100%;
+      padding: 15px;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      margin-bottom: 20px;
+    }
+
+    .btn-checkout:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 24px var(--accent-glow);
+    }
+
+    .btn-checkout:disabled {
+      background: rgba(124,110,250,0.3);
+      cursor: not-allowed;
+      opacity: 0.6;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .features-mini {
+      text-align: left;
+      margin-bottom: 28px;
+      padding: 16px 20px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+    }
+
+    .features-mini-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+    }
+
+    .features-mini-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 16px;
+    }
+
+    .features-mini-item {
+      font-size: 12px;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .features-mini-item .check {
+      color: var(--green);
+      font-weight: 700;
+      font-size: 11px;
+    }
+
+    .guarantee {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      line-height: 1.7;
+    }
+
+    .guarantee a { color: var(--text-secondary); }
+
+    .error-msg {
+      margin-top: 16px;
+      padding: 12px 16px;
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: 10px;
+      font-size: 13px;
+      color: var(--red);
+      display: none;
+    }
+
+    .signin-notice {
+      padding: 16px 20px;
+      background: linear-gradient(135deg, rgba(124,110,250,0.08), rgba(124,110,250,0.03));
+      border: 1px solid rgba(124,110,250,0.25);
+      border-radius: 12px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .signin-notice p {
+      font-size: 13px;
+      color: var(--accent-soft);
+      line-height: 1.7;
+      margin: 0 0 12px;
+    }
+
+    .signin-notice a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      background: var(--accent);
+      color: white;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .signin-notice a:hover {
+      background: var(--accent-hover);
+      text-decoration: none;
+    }
+
+    @media (max-width: 480px) {
+      .card { padding: 32px 24px; }
+      .features-mini-list { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="brand-line"></div>
+
+  <a class="logo" href="https://arixify.com">
+    <svg width="24" height="24" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="7" fill="#7C6EFA"/><path d="M11 8L7 16H14L10 24" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 8L15 16H22L18 24" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/></svg>
+    Arixify<span class="logo-dot"></span>
+  </a>
+
+  <div class="card" id="main-card">
+    <div class="card-title">Upgrade to Pro</div>
+    <div class="card-sub">Sync your prompts across devices, organize with folders, and rate your best work.</div>
+
+    <div class="signin-notice" id="signin-notice" style="display:none">
+      <p>To upgrade, install Arixify and sign in first.</p>
+      <a href="https://chromewebstore.google.com/detail/ealpfbnghiinadhalaldigbonggcnocf" target="_blank">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 3L4 13H12L8 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 3L11 13H19L15 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/></svg>
+        Install Arixify — Free
+      </a>
+    </div>
+
+    <div class="plans">
+      <button class="plan-btn" id="plan-annual" onclick="selectPlan('annual')">
+        <div class="plan-badge">BEST VALUE</div>
+        <div class="plan-name">Annual</div>
+        <div class="plan-price">$79 <span>/ year</span></div>
+        <div class="plan-saving">Save 18% — only $6.58/mo</div>
+      </button>
+
+      <button class="plan-btn selected" id="plan-monthly" onclick="selectPlan('monthly')">
+        <div class="plan-name">Monthly</div>
+        <div class="plan-price">$8 <span>/ month</span></div>
+      </button>
+    </div>
+
+    <div class="features-mini">
+      <div class="features-mini-title">Included in Pro</div>
+      <div class="features-mini-list">
+        <div class="features-mini-item"><span class="check">✓</span> Cloud sync</div>
+        <div class="features-mini-item"><span class="check">✓</span> Folders</div>
+        <div class="features-mini-item"><span class="check">✓</span> Star ratings</div>
+        <div class="features-mini-item"><span class="check">✓</span> Advanced sorting</div>
+        <div class="features-mini-item"><span class="check">✓</span> Manage dashboard</div>
+        <div class="features-mini-item"><span class="check">✓</span> Markdown live preview</div>
+      </div>
+    </div>
+
+    <button class="btn-checkout" id="checkout-btn" onclick="startCheckout()">
+      Continue to Payment
+    </button>
+
+    <div class="guarantee">
+      14-day money-back guarantee · Cancel anytime<br/>
+      Payments secured by <a href="https://paddle.com" target="_blank">Paddle</a> ·
+      <a href="https://arixify.com/terms.html" target="_blank">Terms</a> ·
+      <a href="https://arixify.com/privacy.html" target="_blank">Privacy</a>
+    </div>
+
+    <div class="error-msg" id="error-msg"></div>
+  </div>
+
+  <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+  <script>
+    // ── Replace these values ─────────────────────
+    var PADDLE_CLIENT_TOKEN = 'live_b84a4966c87086ec1d9ad9aa159';
+    var MONTHLY_PRICE_ID    = 'pri_01km7xqtcksgngq2mvgcp7w2nx';
+    var ANNUAL_PRICE_ID     = 'pri_01km7xsnt7beyfvwyxa7mfpams';
+    // ─────────────────────────────────────────────
+
+    var params = new URLSearchParams(window.location.search);
+    var uid = params.get('uid') || '';
+    var selectedPlan = 'monthly';
+    var paddleReady = false;
+
+    // If no uid, show install notice and disable checkout
+    if (!uid) {
+      document.getElementById('signin-notice').style.display = '';
+      document.getElementById('checkout-btn').disabled = true;
+      document.getElementById('checkout-btn').textContent = 'Sign in from Arixify to continue';
+    }
+
+    try {
+      Paddle.Initialize({
+        token: PADDLE_CLIENT_TOKEN,
+        eventCallback: function(event) {
+          if (event.name === 'checkout.completed') {
+            document.getElementById('main-card').innerHTML =
+              '<div style="text-align:center;padding:32px 0">' +
+              '<div style="font-size:48px;margin-bottom:20px">🎉</div>' +
+              '<div style="font-size:22px;font-weight:700;color:var(--text-primary);margin-bottom:12px;letter-spacing:-0.02em">Welcome to Pro!</div>' +
+              '<div style="font-size:14px;color:var(--text-secondary);line-height:1.8">Your account will be upgraded within a few seconds.<br/>Reopen the Arixify extension to enjoy your Pro features.</div>' +
+              '</div>';
+          }
+        }
+      });
+      paddleReady = true;
+    } catch(e) {
+      console.error('Paddle init error:', e);
+      showError('Payment system failed to load. Please refresh the page.');
+    }
+
+    function selectPlan(plan) {
+      selectedPlan = plan;
+      document.getElementById('plan-monthly').classList.toggle('selected', plan === 'monthly');
+      document.getElementById('plan-annual').classList.toggle('selected', plan === 'annual');
+    }
+
+    function startCheckout() {
+      if (!paddleReady) {
+        showError('Payment system is not ready. Please refresh the page.');
+        return;
+      }
+      if (!uid) {
+        showError('Please sign in to Arixify before upgrading.');
+        return;
+      }
+      var priceId = selectedPlan === 'annual' ? ANNUAL_PRICE_ID : MONTHLY_PRICE_ID;
+      Paddle.Checkout.open({
+        items: [{ priceId: priceId, quantity: 1 }],
+        customData: { uid: uid },
+        settings: {
+          theme: 'dark',
+          displayMode: 'overlay'
+        }
+      });
+    }
+
+    function showError(msg) {
+      var el = document.getElementById('error-msg');
+      el.textContent = msg;
+      el.style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>
