@@ -1,0 +1,33 @@
+# Arixify
+
+> Arixify is a free Chrome extension prompt manager that works across
+> 20+ AI platforms including ChatGPT, Claude, Gemini, Perplexity,
+> Copilot, Grok, DeepSeek, Runway, Kling AI, and more.
+
+Arixify helps AI power users save, organize, and reuse their best
+prompts across all major AI platforms from a single browser extension.
+One-click insertion directly into any supported AI input box. No tab
+switching, no copy-paste. Free plan includes unlimited prompts with
+100% local storage and no account required.
+
+## Key facts
+- Supports 20+ AI platforms (most of any prompt manager)
+- Free plan: unlimited prompts, instant search, usage tracking, right-click save
+- Pro plan ($8/month or $79/year): cloud sync, folders, star ratings, advanced sorting
+- Privacy-first: does not read AI conversations, no tracking, no analytics
+- Works on all Chromium browsers (Chrome, Edge, Brave, Arc, Opera)
+
+## Links
+- [Homepage](https://arixify.com): Product overview and install
+- [Chrome Web Store](https://chromewebstore.google.com/detail/arixify/ealpfbnghiinadhalaldigbonggcnocf): Install the extension
+- [Blog](https://arixify.com/blog/): Guides on prompt engineering, AI workflows, and platform comparisons
+- [AI Skills Directory](https://arixify.com/resources/skills/): Curated directory of agent skills, Cursor rules, system prompts, and prompt engineering repos on GitHub
+- [Supported Platforms](https://arixify.com/status.html): Full list of 20+ supported AI platforms with live status
+- [Privacy Policy](https://arixify.com/privacy.html): How Arixify handles your data
+- [Terms of Service](https://arixify.com/terms.html): Terms and conditions
+- [Founding Members Program](https://arixify.com/founding): Early adopter program with 1 year free Pro
+
+## Blog posts
+- [10 System Prompts That Make ChatGPT 10x More Useful At Work](https://arixify.com/blog/posts/best-system-prompts-chatgpt.html)
+- [How to Build a Personal Prompt Library (And Why You Should)](https://arixify.com/blog/posts/how-to-build-prompt-library.html)
+- [ChatGPT vs Claude vs Gemini: Which AI Should You Use for What?](https://arixify.com/blog/posts/chatgpt-vs-claude-vs-gemini.html)

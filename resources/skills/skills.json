@@ -1,0 +1,154 @@
+{
+  "lastUpdated": "2026-04-28",
+  "categories": [
+    {
+      "id": "agent-skills",
+      "name": "Agent Skills",
+      "description": "Reusable SKILL.md collections for Claude Code, Codex, Cursor, Gemini CLI, and other AI coding agents.",
+      "repos": [
+        {
+          "name": "VoltAgent/awesome-agent-skills",
+          "description": "1000+ agent skills from official dev teams and the community. The most comprehensive collection.",
+          "stars": 19200,
+          "url": "https://github.com/VoltAgent/awesome-agent-skills"
+        },
+        {
+          "name": "anthropics/skills",
+          "description": "Official Anthropic skills for document manipulation, brand guidelines, and internal communications.",
+          "stars": 125000,
+          "url": "https://github.com/anthropics/skills"
+        },
+        {
+          "name": "openai/codex",
+          "description": "OpenAI Codex skills catalog including agent skills, skill creator, and concise planning.",
+          "stars": 78400,
+          "url": "https://github.com/openai/codex"
+        },
+        {
+          "name": "alirezarezvani/claude-skills",
+          "description": "232+ skills and agent plugins for Claude Code, Codex, Gemini CLI, Cursor, and 8 more coding agents.",
+          "stars": 13000,
+          "url": "https://github.com/alirezarezvani/claude-skills"
+        },
+        {
+          "name": "aj-geddes/useful-ai-prompts",
+          "description": "259 specialized skills with progressive disclosure architecture. Each skill is a self-contained expert domain.",
+          "stars": 185,
+          "url": "https://github.com/aj-geddes/useful-ai-prompts"
+        }
+      ]
+    },
+    {
+      "id": "cursor-rules",
+      "name": "Cursor Rules & Skills",
+      "description": "Configuration files and skills for Cursor AI editor. Rules define coding conventions, skills define on-demand workflows.",
+      "repos": [
+        {
+          "name": "PatrickJS/awesome-cursorrules",
+          "description": "The most comprehensive collection of .cursorrules files, categorized by framework and language.",
+          "stars": 39300,
+          "url": "https://github.com/PatrickJS/awesome-cursorrules"
+        },
+        {
+          "name": "spencerpauly/awesome-cursor-skills",
+          "description": "Curated list of reusable SKILL.md files for Cursor including parallel CI triage, visual QA, and browser testing.",
+          "stars": 196,
+          "url": "https://github.com/spencerpauly/awesome-cursor-skills"
+        },
+        {
+          "name": "sanjeed5/awesome-cursor-rules-mdc",
+          "description": "Curated .mdc format rules with a generator tool using Exa search and LLM content generation.",
+          "stars": 3500,
+          "url": "https://github.com/sanjeed5/awesome-cursor-rules-mdc"
+        }
+      ]
+    },
+    {
+      "id": "system-prompts",
+      "name": "System Prompts",
+      "description": "Extracted and documented system prompts from production AI tools. Learn how real products instruct their models.",
+      "repos": [
+        {
+          "name": "x1xhlol/system-prompts-and-models-of-ai-tools",
+          "description": "Full system prompts from 25+ tools: Cursor, Devin, Windsurf, Claude Code, v0, Lovable, Replit, Warp, and more.",
+          "stars": 136000,
+          "url": "https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools"
+        },
+        {
+          "name": "EliFuzz/awesome-system-prompts",
+          "description": "System prompts and tool definitions from AI coding agents with analysis of design patterns.",
+          "stars": 178,
+          "url": "https://github.com/EliFuzz/awesome-system-prompts"
+        },
+        {
+          "name": "dontriskit/awesome-ai-system-prompts",
+          "description": "Curated system prompts from ChatGPT, Claude, Perplexity, Manus, Grok, Notion, and MetaAI with deep analysis.",
+          "stars": 5800,
+          "url": "https://github.com/dontriskit/awesome-ai-system-prompts"
+        }
+      ]
+    },
+    {
+      "id": "prompt-engineering",
+      "name": "Prompt Engineering",
+      "description": "Research papers, frameworks, techniques, and resources for writing better prompts across all AI platforms.",
+      "repos": [
+        {
+          "name": "promptslab/Awesome-Prompt-Engineering",
+          "description": "Hand-curated resources covering papers, tools, models, APIs, benchmarks, courses, and communities for prompt engineering.",
+          "stars": 4500,
+          "url": "https://github.com/promptslab/Awesome-Prompt-Engineering"
+        },
+        {
+          "name": "ai-boost/awesome-prompts",
+          "description": "Curated prompts from top-rated GPTs in the GPT Store plus advanced prompt engineering papers and agent patterns.",
+          "stars": 16000,
+          "url": "https://github.com/ai-boost/awesome-prompts"
+        },
+        {
+          "name": "f/awesome-chatgpt-prompts",
+          "description": "The original awesome prompts list for ChatGPT. Act-as prompts for various personas and use cases.",
+          "stars": 120000,
+          "url": "https://github.com/f/awesome-chatgpt-prompts"
+        },
+        {
+          "name": "nidhinjs/prompt-master",
+          "description": "Claude skill that writes accurate prompts for 20+ AI tools. Routes to the right framework automatically.",
+          "stars": 6300,
+          "url": "https://github.com/nidhinjs/prompt-master"
+        }
+      ]
+    },
+    {
+      "id": "skill-tools",
+      "name": "Skill Tools & Directories",
+      "description": "CLIs, marketplaces, and installers for discovering, installing, and managing AI agent skills across platforms.",
+      "repos": [
+        {
+          "name": "agentskill-sh/ags",
+          "description": "CLI to search, install, and manage 100K+ skills. The /learn command for Claude Code, Codex, Cursor, and more.",
+          "stars": 16,
+          "url": "https://github.com/agentskill-sh/ags"
+        },
+        {
+          "name": "sickn33/antigravity-awesome-skills",
+          "description": "1,400+ installable skills with npm installer, bundles, and workflows. Trusted by 35K+ GitHub stargazers.",
+          "stars": 35400,
+          "url": "https://github.com/sickn33/antigravity-awesome-skills"
+        },
+        {
+          "name": "skillsdirectory/awesome-ai-skills",
+          "description": "10 high-quality skills following the Agent Skills Standard (SKILL.md) format. Clean reference implementations.",
+          "stars": 1,
+          "url": "https://github.com/skillsdirectory/awesome-ai-skills"
+        },
+        {
+          "name": "heilcheng/awesome-agent-skills",
+          "description": "Tutorials, guides, and skill directories with clear explanations for non-technical users getting started.",
+          "stars": 4400,
+          "url": "https://github.com/heilcheng/awesome-agent-skills"
+        }
+      ]
+    }
+  ]
+}

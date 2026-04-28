@@ -1,0 +1,93 @@
+# ========================================
+# ROBOTS.TXT — ARIXIFY GEO-OPTIMIZED
+# Updated: 2026-04-19
+# ========================================
+
+# --- Traditional search engines — ALLOW ---
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# --- AI TRAINING CRAWLERS — BLOCK ---
+# These crawlers collect content for model training.
+# Blocking them protects content from being used as
+# training data while keeping AI search visibility.
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Meta-ExternalAgent
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
+
+User-agent: cohere-ai
+Disallow: /
+
+User-agent: xAI-Bot
+Disallow: /
+
+# --- AI SEARCH CRAWLERS — ALLOW ---
+# These crawlers retrieve content for real-time AI search
+# answers (ChatGPT search, Perplexity, Claude search, etc).
+# Allowing them = appearing in AI-generated answers.
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /checkout.html
+Disallow: /billing.html
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /checkout.html
+Disallow: /billing.html
+
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /checkout.html
+Disallow: /billing.html
+
+User-agent: Claude-User
+Allow: /
+Disallow: /checkout.html
+Disallow: /billing.html
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /checkout.html
+Disallow: /billing.html
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: DuckAssistBot
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+# --- Default ---
+User-agent: *
+Allow: /
+Disallow: /checkout.html
+Disallow: /billing.html
+
+Sitemap: https://arixify.com/sitemap.xml

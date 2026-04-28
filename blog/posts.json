@@ -1,0 +1,26 @@
+[
+  {
+    "slug": "best-system-prompts-chatgpt",
+    "title": "10 System Prompts That Make ChatGPT 10x More Useful At Work",
+    "description": "Stop getting generic answers. These battle-tested system prompts turn ChatGPT into a focused expert for coding, writing, analysis, and more.",
+    "tag": "Prompt Engineering",
+    "tagSlug": "prompt-engineering",
+    "readTime": "10 min read"
+  },
+  {
+    "slug": "how-to-build-prompt-library",
+    "title": "How to Build a Personal Prompt Library (And Why You Should)",
+    "description": "If you use AI daily, you're probably rewriting the same prompts over and over. Here's how to build a reusable prompt library that actually saves time.",
+    "tag": "Workflow",
+    "tagSlug": "workflow",
+    "readTime": "8 min read"
+  },
+  {
+    "slug": "chatgpt-vs-claude-vs-gemini",
+    "title": "ChatGPT vs Claude vs Gemini: Which AI Should You Use for What?",
+    "description": "Each AI platform has strengths. Here's a practical breakdown of when to use ChatGPT, Claude, or Gemini based on real daily usage.",
+    "tag": "Comparison",
+    "tagSlug": "comparison",
+    "readTime": "9 min read"
+  }
+]

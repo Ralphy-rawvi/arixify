@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — Arixify</title>
+  <script src="/head-common.js"></script>
+  <meta name="description" content="Arixify Privacy Policy. We don't sell your data, track your browsing, or share anything with third parties." />
+  <link rel="canonical" href="https://arixify.com/privacy.html" />
+  <meta property="og:url" content="https://arixify.com/privacy.html" />
+  <meta property="og:title" content="Privacy Policy — Arixify" />
+  <meta property="og:description" content="Arixify Privacy Policy. We don't sell your data, track your browsing, or share anything with third parties." />
+  <meta name="twitter:title" content="Privacy Policy — Arixify" />
+  <meta name="twitter:description" content="Arixify Privacy Policy. We don't sell your data, track your browsing, or share anything with third parties." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-primary: #0A0A0F;
+      --bg-secondary: #111118;
+      --bg-card: #16151F;
+      --bg-elevated: #1C1B28;
+      --border-subtle: #1F1E2E;
+      --border-default: #2A293D;
+      --accent: #7C6EFA;
+      --accent-soft: #9D8DFF;
+      --text-primary: #EEEDF5;
+      --text-secondary: #A09CB5;
+      --text-tertiary: #6B6880;
+      --green: #34D399;
+      --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--accent-soft); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--accent); text-decoration: underline; }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* Nav */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 64px;
+      border-bottom: 1.1px solid var(--border-subtle);
+      border-top: 2px solid;
+      border-image: linear-gradient(90deg, transparent 0%, var(--accent) 30%, #00D9FF 70%, transparent 100%) 1;
+      background: rgba(10, 10, 15, 0.85);
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .nav-logo-dot { color: var(--accent); }
+
+    .nav-back {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-tertiary);
+      text-decoration: none;
+    }
+
+    .nav-back:hover { color: var(--accent-soft); text-decoration: none; }
+
+    /* Container */
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 136px 24px 120px;
+    }
+
+    /* Header */
+    .page-header {
+      margin-bottom: 48px;
+      padding-bottom: 36px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .page-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .page-title {
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.025em;
+      margin-bottom: 12px;
+    }
+
+    .page-meta {
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+
+    /* Highlight box */
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(124,110,250,0.06), rgba(124,110,250,0.02));
+      border: 1px solid rgba(124,110,250,0.2);
+      border-radius: 14px;
+      padding: 24px 28px;
+      margin-bottom: 48px;
+    }
+
+    .highlight-box p {
+      margin: 0;
+      font-size: 14px;
+      color: var(--accent-soft);
+      line-height: 1.75;
+    }
+
+    /* Sections */
+    .section {
+      margin-bottom: 44px;
+    }
+
+    h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 14px;
+      padding-left: 16px;
+      border-left: 3px solid var(--accent);
+      letter-spacing: -0.01em;
+    }
+
+    p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+      line-height: 1.75;
+    }
+
+    ul {
+      list-style: none;
+      margin-bottom: 14px;
+    }
+
+    ul li {
+      font-size: 15px;
+      color: var(--text-secondary);
+      padding: 7px 0 7px 22px;
+      position: relative;
+      line-height: 1.6;
+    }
+
+    ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 16px;
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      opacity: 0.6;
+    }
+
+    ul li strong { color: var(--text-primary); }
+
+    /* Contact box */
+    .contact-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-default);
+      border-radius: 14px;
+      padding: 28px;
+      margin-top: 56px;
+    }
+
+    .contact-box h2 { border-left-color: var(--accent-soft); margin-bottom: 10px; }
+    .contact-box p { margin-bottom: 10px; }
+
+    .contact-email {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+      padding: 10px 18px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-default);
+      border-radius: 8px;
+      font-size: 14px;
+      color: var(--accent-soft);
+      font-family: var(--font-mono);
+    }
+
+    .contact-email a { text-decoration: none; }
+    .contact-email a:hover { text-decoration: underline; }
+
+    /* Footer */
+    .footer {
+      margin-top: 80px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border-subtle);
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      margin-bottom: 14px;
+    }
+
+    .footer-links a {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover { color: var(--accent-soft); }
+
+    .footer-copy {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      opacity: 0.6;
+    }
+
+    @media (max-width: 768px) {
+      .nav { padding: 0 16px; }
+      .container { padding: 48px 20px 80px; }
+      .page-title { font-size: 28px; }
+    }
+
+    @media (max-width: 480px) {
+      .nav { padding: 0 14px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a class="nav-logo" href="https://arixify.com">
+      <svg width="22" height="22" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="7" fill="#7C6EFA"/><path d="M11 8L7 16H14L10 24" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 8L15 16H22L18 24" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/></svg>
+      Arixify<span class="nav-logo-dot"></span>
+    </a>
+    <a class="nav-back" href="https://arixify.com">← Back to home</a>
+  </nav>
+
+  <div class="container">
+
+    <div class="page-header">
+      <div class="page-label">Legal</div>
+      <h1 class="page-title">Privacy Policy</h1>
+      <p class="page-meta" data-nosnippet>Last updated: March 2026</p>
+    </div>
+
+    <div class="highlight-box">
+      <p>
+        <strong>Short version:</strong> Arixify stores your prompts and account info to provide its service.
+        We do not sell your data, track your browsing, or share anything with third parties for advertising.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>What Arixify stores</h2>
+      <p><strong>Free plan users:</strong> all data is stored locally in your browser using Chrome's built-in storage API. Nothing is sent to any server. We have zero access to your data.</p>
+      <p><strong>Pro plan users:</strong> when you sign in with Google and enable cloud sync, the following data is stored in Google's cloud services to provide the sync feature:</p>
+      <ul>
+        <li><strong>Google account information</strong> — your name, email address, and profile photo, used solely for authentication via Google Sign-In.</li>
+        <li><strong>Prompt content</strong> — the titles and text of prompts you save. This data is stored under your account and protected by security rules — only your account can read or write it.</li>
+        <li><strong>Usage metadata</strong> — how many times each prompt has been used and when it was last used, to power sorting and ranking features.</li>
+        <li><strong>Folder structure</strong> — folder names and ordering you create to organize your prompts.</li>
+      </ul>
+      <p>We do not access, review, or analyze the content of your prompts. Security rules ensure that each user's data is isolated and accessible only to their own account.</p>
+    </div>
+
+    <div class="section">
+      <h2>What we do NOT collect</h2>
+      <ul>
+        <li>Your browsing history or the pages you visit</li>
+        <li>The content you type into ChatGPT, Claude, Gemini, or Perplexity</li>
+        <li>Any data from AI platforms beyond what you explicitly save as a prompt</li>
+        <li>Payment information (handled entirely by Paddle, our payment processor)</li>
+        <li>Device identifiers or any analytics tracking</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>How we use your data</h2>
+      <p>Your data is used exclusively to provide Arixify's features:</p>
+      <ul>
+        <li>Storing and syncing your prompts across devices (Pro plan)</li>
+        <li>Authenticating your account and identifying your subscription status</li>
+        <li>Displaying usage counts and ratings within the extension</li>
+      </ul>
+      <p>We do not use your data for advertising, analytics, or any purpose beyond operating the service.</p>
+      <p>We do not independently collect or store IP addresses. Third-party services we rely on (such as Google Cloud Services and Paddle) may process technical information including IP addresses as part of their standard operations, subject to their respective privacy policies linked below.</p>
+    </div>
+
+    <div class="section">
+      <h2>Browser permissions</h2>
+      <p>Arixify requests the following browser permissions to function:</p>
+      <ul>
+        <li><strong>storage</strong> — to save your prompts, settings, and usage data locally in your browser.</li>
+        <li><strong>activeTab</strong> — to insert prompts into the currently active AI platform tab when you click the Arixify button.</li>
+        <li><strong>contextMenus</strong> — to provide the right-click "Add to Arixify" option for saving text from any webpage.</li>
+        <li><strong>identity</strong> — to authenticate your Google account for Pro plan cloud sync via Google Sign-In.</li>
+      </ul>
+      <p>Arixify also requests access to specific AI platform websites (such as ChatGPT, Claude, Gemini, and others) solely to display the prompt insertion button on those pages. Arixify does not read, collect, or transmit any content from these websites.</p>
+    </div>
+
+    <div class="section">
+      <h2>Data storage</h2>
+      <p>
+        Pro plan data is stored in Google's cloud services, located in the
+        <strong>us-central1</strong> region. Data is protected by security rules that ensure
+        only you can read or write your own data. We do not have a process to access or view
+        individual user data.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>Third-party services</h2>
+      <p>Arixify uses the following third-party services:</p>
+      <ul>
+        <li><strong>Google Cloud Services</strong> — authentication and cloud data storage. Subject to <a href="https://cloud.google.com/terms/cloud-privacy-notice" target="_blank">Google's Privacy Policy</a>.</li>
+        <li><strong>Paddle</strong> — payment processing for Pro subscriptions. Paddle acts as the merchant of record. We do not receive or store your payment details. Subject to <a href="https://www.paddle.com/legal/privacy" target="_blank">Paddle's Privacy Policy</a>.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Data deletion</h2>
+      <p>You can delete your data at any time:</p>
+      <ul>
+        <li>Sign out of Arixify to stop cloud sync immediately</li>
+        <li>Uninstall the Arixify extension to clear all local data from your browser</li>
+        <li>Email us to request complete deletion of your account and all associated cloud data</li>
+      </ul>
+      <p>We will process deletion requests within 30 days.</p>
+    </div>
+
+    <div class="section">
+      <h2>Children's privacy</h2>
+      <p>
+        Arixify is not directed at children under 13. We do not knowingly collect personal
+        information from children under 13. If you believe we have inadvertently collected
+        such information, please contact us immediately.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>Changes to this policy</h2>
+      <p>
+        We may update this Privacy Policy as the service evolves. When we do, we will update
+        the "Last updated" date at the top of this page. Continued use of Arixify after changes
+        constitutes acceptance of the updated policy.
+      </p>
+    </div>
+
+    <div class="contact-box">
+      <h2>Contact</h2>
+      <p>If you have any questions about this Privacy Policy or your data, please reach out:</p>
+      <div class="contact-email">✉ <a href="mailto:support@arixify.com">support@arixify.com</a></div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-links">
+        <a href="/terms.html">Terms of Service</a>
+        <a href="/billing.html">Billing</a>
+        <a href="https://arixify.com">Home</a>
+      </div>
+      <p class="footer-copy">© <span id="current-year"></span> Arixify. All rights reserved.</p>
+    </div>
+  </div>
+  
+  <script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>

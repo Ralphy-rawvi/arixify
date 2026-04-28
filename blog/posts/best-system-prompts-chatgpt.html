@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "10 System Prompts That Make ChatGPT 10x More Useful At Work",
+  "description": "Stop getting generic answers. These battle-tested system prompts turn ChatGPT into a focused expert for coding, writing, analysis, and more.",
+  "datePublished": "2026-04-12T10:00:00+08:00",
+  "dateModified": "2026-04-12T10:00:00+08:00",
+  "author": {
+    "@type": "Organization",
+    "name": "Arixify",
+    "url": "https://arixify.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Arixify",
+    "url": "https://arixify.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://arixify.com/favicon-192x192.png",
+      "width": 192,
+      "height": 192
+    }
+  },
+  "mainEntityOfPage": "https://arixify.com/blog/posts/best-system-prompts-chatgpt.html",
+  "image": "https://arixify.com/og-image.png",
+  "wordCount": 2500,
+  "keywords": "system prompts, ChatGPT, prompt engineering, AI prompts, ChatGPT custom instructions",
+  "articleSection": "Prompt Engineering",
+  "inLanguage": "en"
+}
+</script>
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="../../icon.svg">
+  <link rel="icon" type="image/png" sizes="192x192" href="../../icon-192.png">
+  <link rel="icon" type="image/png" sizes="144x144" href="../../favicon-144x144.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="../../favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="../../favicon-48x48.png">
+  <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ═══ SEO ═══ -->
+  <title>10 System Prompts That Make ChatGPT 10x More Useful — Arixify Blog</title>
+  <meta name="description" content="Stop getting generic answers. These 10 battle-tested system prompts turn ChatGPT into a focused expert for coding, writing, analysis, and more." />
+  <link rel="canonical" href="https://arixify.com/blog/best-system-prompts-chatgpt.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="10 System Prompts That Make ChatGPT 10x More Useful" />
+  <meta property="og:description" content="Stop getting generic answers. These 10 battle-tested system prompts turn ChatGPT into a focused expert for coding, writing, analysis, and more." />
+  <meta property="og:url" content="https://arixify.com/blog/best-system-prompts-chatgpt.html" />
+  <meta property="og:site_name" content="Arixify" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="10 System Prompts That Make ChatGPT 10x More Useful" />
+  <meta name="twitter:description" content="Stop getting generic answers. These 10 battle-tested system prompts turn ChatGPT into a focused expert for coding, writing, analysis, and more." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-primary: #0A0A0F;
+      --bg-secondary: #111118;
+      --bg-card: #16151F;
+      --bg-elevated: #1C1B28;
+      --border-subtle: #1F1E2E;
+      --border-default: #2A293D;
+      --accent: #7C6EFA;
+      --accent-soft: #9D8DFF;
+      --accent-glow: rgba(124, 110, 250, 0.15);
+      --text-primary: #EEEDF5;
+      --text-secondary: #A09CB5;
+      --text-tertiary: #6B6880;
+      --cyan: #00D9FF;
+      --green: #34D399;
+      --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--accent-soft); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--accent); text-decoration: underline; }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ── Nav ── */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 64px;
+      border-bottom: 1.1px solid var(--border-subtle);
+      border-top: 2px solid;
+      border-image: linear-gradient(90deg, transparent 0%, var(--accent) 30%, var(--cyan) 70%, transparent 100%) 1;
+      background: rgba(10, 10, 15, 0.85);
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-tertiary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent-soft); }
+    .nav-links a.active { color: var(--accent-soft); }
+
+    /* ── Article container ── */
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 120px 24px 100px;
+    }
+
+    /* ── Article header ── */
+    .article-header {
+      margin-bottom: 48px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border-subtle);
+      animation: fadeUp 0.5s ease both;
+    }
+
+    .article-breadcrumb {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      margin-bottom: 20px;
+    }
+
+    .article-breadcrumb a { color: var(--text-tertiary); }
+    .article-breadcrumb a:hover { color: var(--accent-soft); text-decoration: none; }
+    .article-breadcrumb span { margin: 0 6px; opacity: 0.4; }
+
+    .article-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-glow);
+      padding: 4px 12px;
+      border-radius: 100px;
+      margin-bottom: 16px;
+    }
+
+    .article-title {
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+
+    .article-meta-sep {
+      width: 3px;
+      height: 3px;
+      background: var(--text-tertiary);
+      border-radius: 50%;
+      opacity: 0.5;
+    }
+
+    /* ── Article content ── */
+    .article-content {
+      animation: fadeUp 0.5s ease 0.1s both;
+    }
+
+    .article-content h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-top: 48px;
+      margin-bottom: 16px;
+      padding-left: 16px;
+      border-left: 3px solid var(--accent);
+      letter-spacing: -0.01em;
+    }
+
+    .article-content h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-top: 32px;
+      margin-bottom: 12px;
+    }
+
+    .article-content p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      line-height: 1.8;
+    }
+
+    .article-content strong { color: var(--text-primary); }
+
+    .article-content ul,
+    .article-content ol {
+      margin-bottom: 16px;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .article-content ul li,
+    .article-content ol li {
+      font-size: 15px;
+      color: var(--text-secondary);
+      padding: 5px 0 5px 22px;
+      position: relative;
+      line-height: 1.7;
+    }
+
+    .article-content ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 14px;
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      opacity: 0.6;
+    }
+
+    .article-content ol { counter-reset: ol-counter; }
+
+    .article-content ol li::before {
+      counter-increment: ol-counter;
+      content: counter(ol-counter) '.';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 13px;
+      font-family: var(--font-mono);
+    }
+
+    /* ── Code blocks ── */
+    .article-content code {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      background: var(--bg-elevated);
+      color: var(--accent-soft);
+      padding: 2px 7px;
+      border-radius: 5px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .article-content pre {
+      background: var(--bg-card);
+      border: 1px solid var(--border-default);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 20px;
+      overflow-x: auto;
+      position: relative;
+    }
+
+    .article-content pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+
+    .code-label {
+      position: absolute;
+      top: 10px;
+      right: 14px;
+      font-size: 10px;
+      font-family: var(--font-mono);
+      font-weight: 500;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      opacity: 0.6;
+    }
+
+    /* ── Prompt showcase block ── */
+    .prompt-block {
+      background: linear-gradient(135deg, rgba(124,110,250,0.05), rgba(0,217,255,0.03));
+      border: 1px solid rgba(124,110,250,0.2);
+      border-radius: 14px;
+      padding: 24px 28px;
+      margin: 20px 0 24px;
+    }
+
+    .prompt-block-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .prompt-block-label::before {
+      content: '⚡';
+      font-size: 13px;
+    }
+
+    .prompt-block pre {
+      background: rgba(10, 10, 15, 0.5);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin: 0;
+    }
+
+    .prompt-block pre code {
+      color: var(--text-primary);
+      font-size: 13px;
+      line-height: 1.65;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .prompt-context {
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--text-tertiary);
+      line-height: 1.6;
+    }
+
+    .prompt-context strong { color: var(--text-secondary); }
+
+    /* ── Tip / Note box ── */
+    .tip-box {
+      background: rgba(52, 211, 153, 0.04);
+      border: 1px solid rgba(52, 211, 153, 0.2);
+      border-radius: 12px;
+      padding: 18px 22px;
+      margin: 16px 0 24px;
+    }
+
+    .tip-box p {
+      margin: 0;
+      font-size: 14px;
+      color: var(--green);
+      line-height: 1.7;
+    }
+
+    /* ── Image placeholder ── */
+    .image-placeholder {
+      background: var(--bg-card);
+      border: 2px dashed var(--border-default);
+      border-radius: 12px;
+      padding: 32px 24px;
+      margin: 24px 0;
+      text-align: center;
+      color: var(--text-tertiary);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .image-placeholder strong {
+      display: block;
+      color: var(--accent);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+
+    /* ── CTA section ── */
+    .article-cta {
+      margin-top: 56px;
+      padding: 36px 32px;
+      background: linear-gradient(135deg, rgba(124,110,250,0.08), rgba(0,217,255,0.04));
+      border: 1px solid rgba(124,110,250,0.25);
+      border-radius: 18px;
+      text-align: center;
+    }
+
+    .article-cta h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+    }
+
+    .article-cta p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      background: var(--accent);
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .cta-button:hover {
+      background: var(--accent-soft);
+      transform: translateY(-1px);
+      text-decoration: none;
+      color: white;
+    }
+
+    /* ── Article footer ── */
+    .article-footer {
+      margin-top: 56px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .article-footer-back {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-tertiary);
+    }
+
+    .article-footer-back:hover { color: var(--accent-soft); text-decoration: none; }
+
+    .article-footer-share {
+      font-size: 12px;
+      color: var(--text-tertiary);
+    }
+
+    /* ── Site footer ── */
+    .footer {
+      margin-top: 64px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border-subtle);
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      margin-bottom: 14px;
+    }
+
+    .footer-links a {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover { color: var(--accent-soft); }
+
+    .footer-copy {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      opacity: 0.6;
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .nav { padding: 0 16px; }
+      .nav-links { gap: 16px; }
+      .container { padding: 100px 20px 80px; }
+      .article-title { font-size: 28px; }
+      .article-content h2 { font-size: 19px; }
+      .prompt-block { padding: 20px; }
+      .article-cta { padding: 28px 24px; }
+      .image-placeholder { padding: 24px 16px; }
+    }
+
+    @media (max-width: 480px) {
+      .nav { padding: 0 14px; }
+      .nav-links a.hide-mobile { display: none; }
+      .article-title { font-size: 24px; }
+      .article-meta { flex-wrap: wrap; gap: 8px; }
+      .article-meta-sep { display: none; }
+    }
+
+    /* ── Lightbox ── */
+    .lightbox-overlay { display:none; position:fixed; inset:0; z-index:9998; background:rgba(0,0,0,0.85); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); cursor:zoom-out; justify-content:center; align-items:center; }
+    .lightbox-overlay.active { display:flex; }
+    .lightbox-overlay img { max-width:92vw; max-height:90vh; border-radius:8px; cursor:default; animation:lbIn 0.2s ease; }
+    .article-content img:not(.no-lightbox) { cursor:zoom-in; transition:opacity 0.15s; }
+    .article-content img:not(.no-lightbox):hover { opacity:0.9; }
+    @keyframes lbIn { from { opacity:0; transform:scale(0.95); } to { opacity:1; transform:scale(1); } }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a class="nav-logo" href="https://arixify.com">
+      <svg width="22" height="22" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="7" fill="#7C6EFA"/><path d="M11 8L7 16H14L10 24" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 8L15 16H22L18 24" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/></svg>
+      Arixify
+    </a>
+    <div class="nav-links">
+      <a href="https://arixify.com" class="hide-mobile">Home</a>
+      <a href="/blog/" class="active">Blog</a>
+      <a href="/privacy.html" class="hide-mobile">Privacy</a>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <article>
+      <header class="article-header">
+        <div class="article-breadcrumb">
+          <a href="/blog/">Blog</a>
+          <span>›</span>
+          Prompt Engineering
+        </div>
+        <span class="article-tag">Prompt Engineering</span>
+        <h1 class="article-title">10 System Prompts That Make ChatGPT 10x More Useful At Work</h1>
+        <div class="article-meta">
+          <span>10 min read</span>
+        </div>
+      </header>
+
+      <div class="article-content">
+
+        <p>
+          Most people type a question into ChatGPT, get a generic answer, and move on. That works for simple lookups. But if you rely on AI for real work, there is a better approach: <strong>system prompts</strong>.
+        </p>
+        <p>
+          A system prompt is the instruction you set before the conversation begins. It tells the model what role to play, what to focus on, and what to skip. Think of it as briefing a consultant before they start working on your problem. The same model that gives you a mediocre answer with no context can give you a genuinely useful one when properly briefed.
+        </p>
+        <p>
+          Here are 10 system prompts I use daily across coding, writing, and analysis. Each one has been tested over hundreds of conversations. Every prompt works on ChatGPT, but most also work well on Claude, Gemini, and other platforms.
+        </p>
+
+        <div style="margin: 24px 0;">
+          <img src="images/system-prompt-before-after.png" alt="Side-by-side comparison: with a system prompt, ChatGPT lists specific code issues without rewriting; without one, it rewrites the entire function" style="width:100%; border-radius:12px; border:1px solid var(--border-default);" loading="lazy" />
+        </div>
+
+
+        <!-- ═══ PROMPT 1 ═══ -->
+        <h2>1. 🔍 The Senior Code Reviewer</h2>
+
+        <p>When you paste code into ChatGPT without direction, it defaults to rewriting your entire function. That is rarely what you need during code review. This prompt forces it to <strong>find issues without rewriting</strong>, which is what a real senior engineer would do in a pull request review.</p>
+
+        <div class="prompt-block">
+          <div class="prompt-block-label">System Prompt</div>
+          <pre><code>You are a senior software engineer conducting a code review.
+Focus on: bugs, edge cases, security vulnerabilities, and performance bottlenecks.
+Do NOT rewrite the code unless I explicitly ask. Instead, point out specific issues with line references and explain WHY each issue matters. Prioritize critical issues over style preferences. If the code looks solid, say so — don't invent problems.</code></pre>
+          <p class="prompt-context">
+            <strong>Best for:</strong> ChatGPT, Claude &nbsp;·&nbsp;
+            <strong>When to use:</strong> Before pushing code to production, reviewing pull requests
+          </p>
+        </div>
+
+        <p><strong>Why it works:</strong> The instruction "do NOT rewrite" is the critical line. Without it, ChatGPT will reflexively generate a "better version" of your code even when the original is fine. The last sentence also prevents a common failure mode where the model invents non-issues to seem thorough.</p>
+
+
+        <!-- ═══ PROMPT 2 ═══ -->
+        <h2>2. ✍️ The Writing Editor (Not Rewriter)</h2>
+
+        <p>Asking ChatGPT to "improve my writing" usually produces something that sounds like ChatGPT wrote it. Your voice disappears. This prompt separates <strong>editing from rewriting</strong> by forcing the model to point out problems without touching your text.</p>
+
+        <div class="prompt-block">
+          <div class="prompt-block-label">System Prompt</div>
+          <pre><code>You are a professional editor. When I share text, provide
+feedback in three categories:
+
+1. CLARITY — sentences that are confusing or could be simpler
+2. FLOW — transitions that feel abrupt or sections that drag
+3. IMPACT — places where stronger word choices would help
+
+Keep my voice. Do not rewrite unless I ask. Just tell me what
+to fix and suggest alternatives inline. If the writing is
+already strong, say so briefly.</code></pre>
+          <p class="prompt-context">
+            <strong>Best for:</strong> ChatGPT, Claude &nbsp;·&nbsp;
+            <strong>When to use:</strong> Blog posts, emails, documentation, client-facing copy
+          </p>
+        </div>
+
+        <p><strong>Why it works:</strong> The three-category structure (Clarity, Flow, Impact) gives the model a specific framework instead of vague "improvement." It also prevents the model from turning your casual blog post into a corporate white paper.</p>
+
+        <div style="margin: 24px 0;">
+          <img src="images/writing-coach-demo.png" alt="ChatGPT as writing coach: system prompt defines CLARITY, FLOW, IMPACT structure, and the output follows that exact format with specific inline suggestions" style="width:100%; border-radius:12px; border:1px solid var(--border-default);" loading="lazy" />
+        </div>
+
+
+        <!-- ═══ PROMPT 3 ═══ -->
+        <h2>3. 🐛 The Rubber Duck Debugger</h2>
+
+        <p>When you are stuck on a bug, the last thing you need is ChatGPT dumping a wall of code at you. This prompt turns it into a <strong>questioning partner</strong> that helps you find the bug yourself by asking the right questions.</p>
+
+        <div class="prompt-block">
+          <div class="prompt-block-label">System Prompt</div>
+          <pre><code>You are a debugging partner. When I describe a bug, do NOT
+immediately suggest a fix. Instead:
+
+1. Ask me 2-3 clarifying questions about the behavior I'm
+   seeing vs. what I expected.
+2. Help me narrow down where the issue likely lives.
+3. Only suggest specific fixes after we've identified the
+   root cause together.
+
+If I give you code, read it carefully before responding.
+Point out assumptions I might be making.</code></pre>
+          <p class="prompt-context">
+            <strong>Best for:</strong> ChatGPT, Claude &nbsp;·&nbsp;
+            <strong>When to use:</strong> Debugging sessions, especially when the bug is in your logic rather than syntax
+          </p>
+        </div>
+
+        <p><strong>Why it works:</strong> This mirrors how experienced developers actually debug. Instead of jumping to solutions, they ask questions first. The prompt prevents the common pattern where ChatGPT suggests five different fixes and none of them address the real problem because the model never understood what was actually broken.</p>
+
+
+        <!-- ═══ PROMPT 4 ═══ -->
+        <h2>4. 📖 The API Documentation Reader</h2>
+
+        <p>ChatGPT is trained on documentation that may be months or years out of date. This prompt forces it to be <strong>explicit about what it knows and what it might be wrong about</strong>, which is critical when working with APIs that update frequently.</p>
+
+        <div class="prompt-block">
+          <div class="prompt-block-label">System Prompt</div>
+          <pre><code>You are a technical reference assistant. When I ask about an
+API, library, or framework:
+
+1. State which version your answer is based on.
+2. Flag anything that might have changed since your training
+   data. Say "this may be outdated" explicitly.
+3. Provide code examples that are copy-paste ready with
+   correct imports and error handling.
+4. If you're unsure about a specific parameter or behavior,
+   say so instead of guessing.
+
+Accuracy matters more than speed. It's okay to say "I don't
+know" or "check the latest docs for this."</code></pre>
+          <p class="prompt-context">
+            <strong>Best for:</strong> ChatGPT, Gemini &nbsp;·&nbsp;
+            <strong>When to use:</strong> Looking up API methods, checking library behavior, writing integration code
+          </p>
+        </div>
+
+        <p><strong>Why it works:</strong> The biggest risk with AI-generated code is silent incorrectness. The model writes confident-looking code that uses a deprecated method or a wrong parameter name. This prompt turns that confidence into explicit uncertainty, which saves you from debugging phantom issues caused by outdated training data.</p>
+
+
+        <!-- ═══ PROMPT 5 ═══ -->
+        <h2>5. 📊 The Data Analyst</h2>
+
+        <p>When you paste a CSV or dataset into ChatGPT, it tends to summarize everything superficially. This prompt pushes it to focus on <strong>what the data actually says versus what you might assume</strong>.</p>
+
+        <div class="prompt-block">
+          <div class="prompt-block-label">System Prompt</div>
+          <pre><code>You are a data analyst. When I share data:
+
+1. Start with a quick sanity check — are there obvious data
+   quality issues, missing values, or outliers?
+2. Describe what the data shows in plain language before any
+   statistical analysis.
+3. If I ask for trends or conclusions, always state the
+   sample size and confidence level. Flag when the sample is
+   too small to draw meaningful conclusions.
+4. Suggest what additional data would strengthen the analysis.
+
+Never say "the data clearly shows" unless it actually does.
+Uncertainty is okay.</code></pre>
+          <p class="prompt-context">
+            <strong>Best for:</strong> ChatGPT (with data analysis), Claude &nbsp;·&nbsp;
+            <strong>When to use:</strong> Analyzing spreadsheets, interpreting dashboards, making data-driven decisions
+          </p>
+        </div>
+
+        <p><strong>Why it works:</strong> The instruction to always state sample size prevents a common failure: ChatGPT announcing dramatic trends based on five data points. The "uncertainty is okay" line prevents the model from forcing conclusions when the data is genuinely ambiguous.</p>
+
+        <div class="tip-box">
+          <p><strong>Tip:</strong> These system prompts become much more useful when you can access them in one click, right inside the AI chat. Tools like <a href="https://arixify.com">Arixify</a> let you save system prompts and inject them into ChatGPT, Claude, or Gemini without copy-pasting from a notes app.</p>
+        </div>
+
+        <div style="margin: 24px 0;">
+          <img src="images/arixify-inject-demo.gif" alt="Arixify in action: clicking the button next to ChatGPT's input field, selecting a system prompt, and injecting it instantly" style="width:100%; border-radius:12px; border:1px solid var(--border-default);" loading="lazy" />
+        </div>
+
+
+        <!-- ═══ PROMPT 6 ═══ -->
+        <h2>6. 📄 The Technical Writer</h2>
+
+        <p>AI-generated documentation tends to be either too verbose or too shallow. This prompt produces documentation that is <strong>structured for scanning</strong>, which is how developers actually read docs.</p>
+
+        <div class="prompt-block">
+          <div class="prompt-block-label">System Prompt</div>
+          <pre><code>You are a technical writer creating developer documentation.
+Follow these rules:
+
+1. Lead with what it does, then how to use it, then edge
+   cases. Never bury the important part.
+2. Every explanation should include a minimal code example.
+3. Use consistent formatting: function names in backticks,
+   parameters in a table, return values clearly stated.
+4. Write for someone who has 5 minutes to understand this.
+   Remove anything that doesn't help them get there faster.
+5. If there are common mistakes, add a "Common pitfalls"
+   section at the end.</code></pre>
+          <p class="prompt-context">
+            <strong>Best for:</strong> ChatGPT, Claude &nbsp;·&nbsp;
+            <strong>When to use:</strong> Writing README files, API docs, internal wiki pages, onboarding guides
+          </p>
+        </div>
+
+        <p><strong>Why it works:</strong> The "5 minutes to understand" constraint forces the model to be concise. Without it, ChatGPT will write a 2,000-word explanation of a function that takes two parameters.</p>
+
+
+        <!-- ═══ PROMPT 7 ═══ -->
+        <h2>7. ⚖️ The Decision Framework Builder</h2>
+
+        <p>When you ask ChatGPT "should I use X or Y?", you usually get a generic pros-and-cons list. This prompt forces a <strong>structured decision process</strong> that surfaces the actual tradeoffs relevant to your situation.</p>
+
+        <div class="prompt-block">
+          <div class="prompt-block-label">System Prompt</div>
+          <pre><code>You are a decision-making advisor. When I present a decision
+or comparison:
+
+1. Ask me about my specific constraints before analyzing
+   (timeline, budget, team size, experience level).
+2. Identify the 2-3 factors that actually matter most given
+   my constraints. Ignore factors that sound important but
+   don't apply to my situation.
+3. Give a clear recommendation with reasoning. Don't sit on
+   the fence unless the options are genuinely equivalent.
+4. State what would change your recommendation — what
+   conditions would make the other option better?</code></pre>
+          <p class="prompt-context">
+            <strong>Best for:</strong> ChatGPT, Claude &nbsp;·&nbsp;
+            <strong>When to use:</strong> Technology choices, architecture decisions, tool comparisons, vendor selection
+          </p>
+        </div>
+
+        <p><strong>Why it works:</strong> Step 1 (asking about constraints) prevents the model from giving advice that's technically correct but irrelevant to your situation. A solo developer choosing between AWS and Vercel has very different constraints than a 50-person engineering team.</p>
+
+
+        <!-- ═══ PROMPT 8 ═══ -->
+        <h2>8. ✉️ The Email Drafter</h2>
+
+        <p>ChatGPT-written emails are easy to spot: they are too long, too polite, and full of filler phrases. This prompt produces emails that <strong>sound like a real person wrote them</strong>.</p>
+
+        <div class="prompt-block">
+          <div class="prompt-block-label">System Prompt</div>
+          <pre><code>You are an email writing assistant. When I describe an email
+I need to send:
+
+1. Ask who the recipient is and what our relationship is
+   (colleague, client, cold outreach, etc.)
+2. Draft the email in 5 sentences or fewer unless the topic
+   genuinely requires more.
+3. Use a professional but natural tone. No "I hope this email
+   finds you well." No "Please don't hesitate to reach out."
+   No "I wanted to circle back." Write like a competent human.
+4. If there's a clear ask, put it in the first two sentences.
+   Don't bury it after three paragraphs of context.</code></pre>
+          <p class="prompt-context">
+            <strong>Best for:</strong> ChatGPT, Claude &nbsp;·&nbsp;
+            <strong>When to use:</strong> Client emails, follow-ups, cold outreach, internal updates
+          </p>
+        </div>
+
+        <p><strong>Why it works:</strong> The banned phrases ("I hope this email finds you well") force the model out of its default corporate template. The 5-sentence constraint prevents the common pattern where ChatGPT writes a 300-word email for a simple yes/no question.</p>
+
+
+
+
+
+        <!-- ═══ PROMPT 9 ═══ -->
+        <h2>9. 🎓 The Learning Accelerator</h2>
+
+        <p>When learning a new topic, the default ChatGPT response is either too basic ("here's what a variable is") or too advanced ("here's the formal definition with mathematical notation"). This prompt <strong>adapts to your actual level</strong>.</p>
+
+        <div class="prompt-block">
+          <div class="prompt-block-label">System Prompt</div>
+          <pre><code>You are a tutor. When I ask about a topic:
+
+1. Start by asking what I already know about it, or let me
+   tell you my background.
+2. Explain concepts using analogies from domains I'm already
+   familiar with.
+3. After each explanation, give me a small challenge or
+   question to test if I actually understood — not just
+   memorized the words.
+4. If I get something wrong, don't just give the answer.
+   Point me toward the gap in my reasoning.
+
+Adjust complexity based on my responses, not assumptions.</code></pre>
+          <p class="prompt-context">
+            <strong>Best for:</strong> ChatGPT, Claude, Gemini &nbsp;·&nbsp;
+            <strong>When to use:</strong> Learning new programming languages, understanding complex concepts, studying for interviews
+          </p>
+        </div>
+
+        <p><strong>Why it works:</strong> Step 3 (testing understanding) is what separates real learning from reading explanations and nodding along. Most people skip this step when self-studying. The prompt builds it into every interaction.</p>
+
+
+        <!-- ═══ PROMPT 10 ═══ -->
+        <h2>10. 📋 The Product Spec Writer</h2>
+
+        <p>Turning a vague idea into a clear product spec is one of the hardest parts of building software. This prompt forces ChatGPT to <strong>ask the questions a product manager would ask</strong> before writing anything down.</p>
+
+        <div class="prompt-block">
+          <div class="prompt-block-label">System Prompt</div>
+          <pre><code>You are a product manager helping me write a feature spec.
+Before writing anything:
+
+1. Ask me: Who is this for? What problem does it solve? How
+   do they solve it today?
+2. Help me define what "done" looks like — what's the minimum
+   version that delivers value?
+3. List assumptions we're making and flag the riskiest ones.
+4. Write the spec in this format:
+   - Problem statement (2-3 sentences)
+   - Proposed solution (what it does, not how to build it)
+   - Success criteria (measurable)
+   - Out of scope (what we're NOT building)
+   - Open questions
+
+Keep it to one page. If the spec needs to be longer, the
+feature is probably too big.</code></pre>
+          <p class="prompt-context">
+            <strong>Best for:</strong> ChatGPT, Claude &nbsp;·&nbsp;
+            <strong>When to use:</strong> Planning new features, writing PRDs, startup idea validation
+          </p>
+        </div>
+
+        <p><strong>Why it works:</strong> The "Out of scope" and "Open questions" sections are where most specs fail. By making them explicit, this prompt prevents scope creep during the planning phase instead of during development. The one-page constraint also forces prioritization.</p>
+
+
+        <!-- ═══ CLOSING SECTION ═══ -->
+        <h2>🔄 How to actually use these every day</h2>
+
+        <p>The challenge with system prompts is not finding good ones. It is remembering to use them. You bookmark a prompt, use it once, and three days later you are back to typing raw questions into ChatGPT with no context.</p>
+
+        <p>There are a few approaches that work:</p>
+
+        <ul>
+          <li><strong>Keep a prompt library.</strong> Store your best system prompts somewhere you can search and access in seconds. A notes app works, but the friction of switching tabs means you will skip it when you are in a hurry.</li>
+          <li><strong>Match prompts to workflows.</strong> Instead of having one giant list, organize by use case: coding prompts, writing prompts, analysis prompts. You should be able to find the right prompt in under 5 seconds.</li>
+          <li><strong>Iterate on your prompts.</strong> The first version is never the best version. When a prompt gives you a bad response, tweak it and save the updated version. Over time, your library gets more precise.</li>
+        </ul>
+
+        <p>The prompts in this post are starting points. Customize them to your specific workflow, save the ones that work, and discard the ones that don't. The goal is not to have the most prompts. It is to have the right 10-15 that you reach for every day.</p>
+
+        <div style="margin: 24px 0;">
+          <img src="images/organized-prompt-library.png" alt="Arixify prompt library organized by workflow: Code Review, Writing, and Analysis folders with usage counts and star ratings visible" style="width:100%; border-radius:12px; border:1px solid var(--border-default);" loading="lazy" />
+          <p style="font-size:12px; color:var(--text-tertiary); margin-top:8px; text-align:center;">Folders keep prompts findable. Usage tracking shows what actually works.</p>
+        </div>
+
+      </div>
+
+      <!-- ── CTA ── -->
+      <div class="article-cta">
+        <h3>Stop retyping your best prompts</h3>
+        <p>Arixify saves your system prompts and inserts them into ChatGPT, Claude, Gemini, and 20+ AI platforms with one click. Free forever, no account required.</p>
+        <a class="cta-button" href="https://chromewebstore.google.com/detail/arixify/ealpfbnghiinadhalaldigbonggcnocf">
+          <svg width="16" height="16" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="7" fill="white" fill-opacity="0.2"/><path d="M11 8L7 16H14L10 24" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 8L15 16H22L18 24" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/></svg>
+          Add to Chrome — It's Free
+        </a>
+      </div>
+
+      <div class="article-footer">
+        <a class="article-footer-back" href="/blog/">← All posts</a>
+      </div>
+    </article>
+
+    <div class="footer">
+      <div class="footer-links">
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/billing.html">Billing</a>
+        <a href="https://arixify.com">Home</a>
+      </div>
+      <p class="footer-copy">© <span id="current-year"></span> Arixify. All rights reserved.</p>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+  </script>
+
+  <div class="lightbox-overlay" id="lb"><img src="" alt="" /></div>
+  <script>
+  (function(){
+    var lb=document.getElementById('lb'),lbImg=lb.querySelector('img');
+    document.querySelector('.article-content').addEventListener('click',function(e){
+      if(e.target.tagName==='IMG'&&!e.target.classList.contains('no-lightbox')){
+        lbImg.src=e.target.src;lbImg.alt=e.target.alt;lb.classList.add('active');
+      }
+    });
+    lb.addEventListener('click',function(e){if(e.target!==lbImg)lb.classList.remove('active');});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')lb.classList.remove('active');});
+  })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "How to Build a Personal Prompt Library (And Why You Should)",
+  "description": "If you use AI daily, you're probably rewriting the same prompts over and over. Here's how to build a reusable prompt library that actually saves time.",
+  "datePublished": "2026-04-12T10:00:00+08:00",
+  "dateModified": "2026-04-12T10:00:00+08:00",
+  "author": {
+    "@type": "Organization",
+    "name": "Arixify",
+    "url": "https://arixify.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Arixify",
+    "url": "https://arixify.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://arixify.com/favicon-192x192.png",
+      "width": 192,
+      "height": 192
+    }
+  },
+  "mainEntityOfPage": "https://arixify.com/blog/posts/how-to-build-prompt-library.html",
+  "image": "https://arixify.com/og-image.png",
+  "wordCount": 2000,
+  "keywords": "prompt library, AI prompts, prompt management, prompt organizer, reusable prompts",
+  "articleSection": "Workflow",
+  "inLanguage": "en"
+}
+</script>
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="../../icon.svg">
+  <link rel="icon" type="image/png" sizes="192x192" href="../../icon-192.png">
+  <link rel="icon" type="image/png" sizes="144x144" href="../../favicon-144x144.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="../../favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="../../favicon-48x48.png">
+  <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ═══ SEO ═══ -->
+  <title>ChatGPT vs Claude vs Gemini: Which AI Should You Use for What? — Arixify Blog</title>
+  <meta name="description" content="Each AI platform has different strengths. A practical breakdown of when to use ChatGPT, Claude, or Gemini based on real daily usage across coding, writing, and research." />
+  <link rel="canonical" href="https://arixify.com/blog/chatgpt-vs-claude-vs-gemini.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="ChatGPT vs Claude vs Gemini: Which AI Should You Use for What?" />
+  <meta property="og:description" content="Each AI platform has different strengths. A practical breakdown of when to use ChatGPT, Claude, or Gemini based on real daily usage across coding, writing, and research." />
+  <meta property="og:url" content="https://arixify.com/blog/chatgpt-vs-claude-vs-gemini.html" />
+  <meta property="og:site_name" content="Arixify" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ChatGPT vs Claude vs Gemini: Which AI Should You Use for What?" />
+  <meta name="twitter:description" content="Each AI platform has different strengths. A practical breakdown of when to use ChatGPT, Claude, or Gemini based on real daily usage across coding, writing, and research." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-primary: #0A0A0F;
+      --bg-secondary: #111118;
+      --bg-card: #16151F;
+      --bg-elevated: #1C1B28;
+      --border-subtle: #1F1E2E;
+      --border-default: #2A293D;
+      --accent: #7C6EFA;
+      --accent-soft: #9D8DFF;
+      --accent-glow: rgba(124, 110, 250, 0.15);
+      --text-primary: #EEEDF5;
+      --text-secondary: #A09CB5;
+      --text-tertiary: #6B6880;
+      --cyan: #00D9FF;
+      --green: #34D399;
+      --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--accent-soft); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--accent); text-decoration: underline; }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 64px; border-bottom: 1.1px solid var(--border-subtle); border-top: 2px solid; border-image: linear-gradient(90deg, transparent 0%, var(--accent) 30%, var(--cyan) 70%, transparent 100%) 1; background: rgba(10, 10, 15, 0.85); backdrop-filter: blur(20px) saturate(1.4); -webkit-backdrop-filter: blur(20px) saturate(1.4); }
+    .nav-logo { display: flex; align-items: center; gap: 10px; font-size: 17px; font-weight: 700; color: var(--text-primary); text-decoration: none; }
+    .nav-links { display: flex; align-items: center; gap: 24px; }
+    .nav-links a { font-size: 13px; font-weight: 500; color: var(--text-tertiary); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent-soft); }
+    .nav-links a.active { color: var(--accent-soft); }
+
+    .container { max-width: 720px; margin: 0 auto; padding: 120px 24px 100px; }
+
+    .article-header { margin-bottom: 48px; padding-bottom: 32px; border-bottom: 1px solid var(--border-subtle); animation: fadeUp 0.5s ease both; }
+    .article-breadcrumb { font-size: 12px; color: var(--text-tertiary); margin-bottom: 20px; }
+    .article-breadcrumb a { color: var(--text-tertiary); }
+    .article-breadcrumb a:hover { color: var(--accent-soft); text-decoration: none; }
+    .article-breadcrumb span { margin: 0 6px; opacity: 0.4; }
+    .article-tag { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); background: var(--accent-glow); padding: 4px 12px; border-radius: 100px; margin-bottom: 16px; }
+    .article-title { font-size: 36px; font-weight: 700; color: var(--text-primary); letter-spacing: -0.03em; line-height: 1.2; margin-bottom: 16px; }
+    .article-meta { display: flex; align-items: center; gap: 16px; font-size: 13px; color: var(--text-tertiary); }
+
+    .article-content { animation: fadeUp 0.5s ease 0.1s both; }
+    .article-content h2 { font-size: 22px; font-weight: 700; color: var(--text-primary); margin-top: 48px; margin-bottom: 16px; padding-left: 16px; border-left: 3px solid var(--accent); letter-spacing: -0.01em; }
+    .article-content h3 { font-size: 17px; font-weight: 700; color: var(--text-primary); margin-top: 32px; margin-bottom: 12px; }
+    .article-content p { font-size: 15px; color: var(--text-secondary); margin-bottom: 16px; line-height: 1.8; }
+    .article-content strong { color: var(--text-primary); }
+    .article-content ul, .article-content ol { margin-bottom: 16px; padding-left: 0; list-style: none; }
+    .article-content ul li, .article-content ol li { font-size: 15px; color: var(--text-secondary); padding: 5px 0 5px 22px; position: relative; line-height: 1.7; }
+    .article-content ul li::before { content: ''; position: absolute; left: 0; top: 14px; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; opacity: 0.6; }
+    .article-content ol { counter-reset: ol-counter; }
+    .article-content ol li::before { counter-increment: ol-counter; content: counter(ol-counter) '.'; position: absolute; left: 0; color: var(--accent); font-weight: 700; font-size: 13px; font-family: var(--font-mono); }
+
+    .article-content code { font-family: var(--font-mono); font-size: 13px; background: var(--bg-elevated); color: var(--accent-soft); padding: 2px 7px; border-radius: 5px; border: 1px solid var(--border-subtle); }
+
+    /* ── Comparison table ── */
+    .comparison-table { width: 100%; border-collapse: collapse; margin: 24px 0; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-default); }
+    .comparison-table th { background: var(--bg-elevated); color: var(--text-primary); font-size: 13px; font-weight: 700; text-align: left; padding: 14px 16px; border-bottom: 1px solid var(--border-default); }
+    .comparison-table td { background: var(--bg-card); color: var(--text-secondary); font-size: 14px; padding: 12px 16px; border-bottom: 1px solid var(--border-subtle); line-height: 1.6; }
+    .comparison-table tr:last-child td { border-bottom: none; }
+    .comparison-table td:first-child { color: var(--text-primary); font-weight: 600; white-space: nowrap; }
+
+    .verdict-box { background: linear-gradient(135deg, rgba(124,110,250,0.06), rgba(0,217,255,0.03)); border: 1px solid rgba(124,110,250,0.2); border-radius: 12px; padding: 20px 24px; margin: 20px 0 24px; }
+    .verdict-box p { margin: 0; font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
+    .verdict-box strong { color: var(--accent-soft); }
+
+    .tip-box { background: rgba(52, 211, 153, 0.04); border: 1px solid rgba(52, 211, 153, 0.2); border-radius: 12px; padding: 18px 22px; margin: 16px 0 24px; }
+    .tip-box p { margin: 0; font-size: 14px; color: var(--green); line-height: 1.7; }
+
+    .image-placeholder { background: var(--bg-card); border: 2px dashed var(--border-default); border-radius: 12px; padding: 32px 24px; margin: 24px 0; text-align: center; color: var(--text-tertiary); font-size: 13px; line-height: 1.6; }
+    .image-placeholder strong { display: block; color: var(--accent); font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+
+    .article-cta { margin-top: 56px; padding: 36px 32px; background: linear-gradient(135deg, rgba(124,110,250,0.08), rgba(0,217,255,0.04)); border: 1px solid rgba(124,110,250,0.25); border-radius: 18px; text-align: center; }
+    .article-cta h3 { font-size: 20px; font-weight: 700; color: var(--text-primary); margin-bottom: 10px; letter-spacing: -0.02em; }
+    .article-cta p { font-size: 14px; color: var(--text-secondary); margin-bottom: 20px; line-height: 1.6; }
+    .cta-button { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; background: var(--accent); color: white; font-size: 14px; font-weight: 600; border-radius: 10px; text-decoration: none; transition: all 0.2s; }
+    .cta-button:hover { background: var(--accent-soft); transform: translateY(-1px); text-decoration: none; color: white; }
+
+    .article-footer { margin-top: 56px; padding-top: 28px; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; }
+    .article-footer-back { font-size: 14px; font-weight: 500; color: var(--text-tertiary); }
+    .article-footer-back:hover { color: var(--accent-soft); text-decoration: none; }
+
+    .footer { margin-top: 64px; padding-top: 28px; border-top: 1px solid var(--border-subtle); text-align: center; }
+    .footer-links { display: flex; justify-content: center; gap: 28px; margin-bottom: 14px; }
+    .footer-links a { font-size: 12px; color: var(--text-tertiary); text-decoration: none; }
+    .footer-links a:hover { color: var(--accent-soft); }
+    .footer-copy { font-size: 12px; color: var(--text-tertiary); opacity: 0.6; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 768px) {
+      .nav { padding: 0 16px; } .nav-links { gap: 16px; } .container { padding: 100px 20px 80px; }
+      .article-title { font-size: 28px; } .article-content h2 { font-size: 19px; }
+      .article-cta { padding: 28px 24px; } .image-placeholder { padding: 24px 16px; }
+      .comparison-table { font-size: 13px; }
+      .comparison-table th, .comparison-table td { padding: 10px 12px; }
+    }
+    @media (max-width: 480px) {
+      .nav { padding: 0 14px; } .nav-links a.hide-mobile { display: none; }
+      .article-title { font-size: 24px; } .article-meta { flex-wrap: wrap; gap: 8px; }
+      .comparison-table { display: block; overflow-x: auto; }
+    }
+
+    /* ── Lightbox ── */
+    .lightbox-overlay { display:none; position:fixed; inset:0; z-index:9998; background:rgba(0,0,0,0.85); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); cursor:zoom-out; justify-content:center; align-items:center; }
+    .lightbox-overlay.active { display:flex; }
+    .lightbox-overlay img { max-width:92vw; max-height:90vh; border-radius:8px; cursor:default; animation:lbIn 0.2s ease; }
+    .article-content img:not(.no-lightbox) { cursor:zoom-in; transition:opacity 0.15s; }
+    .article-content img:not(.no-lightbox):hover { opacity:0.9; }
+    @keyframes lbIn { from { opacity:0; transform:scale(0.95); } to { opacity:1; transform:scale(1); } }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a class="nav-logo" href="https://arixify.com">
+      <svg width="22" height="22" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="7" fill="#7C6EFA"/><path d="M11 8L7 16H14L10 24" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 8L15 16H22L18 24" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/></svg>
+      Arixify
+    </a>
+    <div class="nav-links">
+      <a href="https://arixify.com" class="hide-mobile">Home</a>
+      <a href="/blog/" class="active">Blog</a>
+      <a href="/privacy.html" class="hide-mobile">Privacy</a>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <article>
+      <header class="article-header">
+        <div class="article-breadcrumb">
+          <a href="/blog/">Blog</a>
+          <span>›</span>
+          Comparison
+        </div>
+        <span class="article-tag">Comparison</span>
+        <h1 class="article-title">ChatGPT vs Claude vs Gemini: Which AI Should You Use for What?</h1>
+        <div class="article-meta">
+          <span>9 min read</span>
+        </div>
+      </header>
+
+      <div class="article-content">
+
+        <p>
+          The honest answer to "which AI is best?" is: it depends on what you are doing. ChatGPT, Claude, and Gemini are all capable models, but they have meaningfully different strengths. If you use AI for real work, knowing which tool to reach for in which situation saves you time and produces better results.
+        </p>
+        <p>
+          This is not a benchmark comparison or a spec sheet. It is a practical guide based on daily usage across coding, writing, research, and analysis. The goal is to help you pick the right tool for each task, not to declare an overall winner.
+        </p>
+
+        <p>
+          <strong>A note on timing:</strong> AI models update frequently. The observations here are based on the current generation of models (GPT-5/5.3, Claude Sonnet/Opus 4.6, Gemini 2.5/3.1 Pro) as of April 2026. If you are reading this months later, some specifics may have shifted, but the general patterns tend to hold across updates.
+        </p>
+
+        <!-- ════════════════════════════════════════════
+             📸 IMAGE PLACEHOLDER #1
+             ════════════════════════════════════════════ -->
+        <div style="margin: 24px 0;">
+          <svg viewBox="0 0 720 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;border-radius:12px;">
+            <defs>
+              <linearGradient id="bgG" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#0e0e14"/>
+                <stop offset="100%" stop-color="#141420"/>
+              </linearGradient>
+              <radialGradient id="glowGreen" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#10a37f" stop-opacity="0.12"/>
+                <stop offset="100%" stop-color="#10a37f" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="glowAmber" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#d4a27f" stop-opacity="0.12"/>
+                <stop offset="100%" stop-color="#d4a27f" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="glowBlue" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#4285f4" stop-opacity="0.12"/>
+                <stop offset="100%" stop-color="#4285f4" stop-opacity="0"/>
+              </radialGradient>
+              <linearGradient id="gemStar" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#4285f4"/>
+                <stop offset="50%" stop-color="#a259ff"/>
+                <stop offset="100%" stop-color="#ea4335"/>
+              </linearGradient>
+            </defs>
+
+            <!-- Background -->
+            <rect width="720" height="280" rx="12" fill="url(#bgG)"/>
+            <rect width="720" height="280" rx="12" fill="none" stroke="#2A293D" stroke-width="1"/>
+
+            <!-- Subtle grid dots -->
+            <pattern id="dots" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+              <circle cx="12" cy="12" r="0.5" fill="#2A293D" opacity="0.5"/>
+            </pattern>
+            <rect width="720" height="280" rx="12" fill="url(#dots)"/>
+
+            <!-- ── ChatGPT ── -->
+            <g transform="translate(120, 90)">
+              <!-- Glow -->
+              <circle cx="0" cy="0" r="60" fill="url(#glowGreen)"/>
+              <!-- Hexagonal ring (abstract nod to the OpenAI shape) -->
+              <polygon points="0,-30 26,-15 26,15 0,30 -26,15 -26,-15" fill="none" stroke="#10a37f" stroke-width="1.5" opacity="0.35"/>
+              <polygon points="0,-22 19,-11 19,11 0,22 -19,11 -19,-11" fill="#10a37f" opacity="0.08"/>
+              <!-- Stylized node pattern inside -->
+              <circle cx="0" cy="-12" r="3" fill="#10a37f" opacity="0.7"/>
+              <circle cx="10" cy="6" r="3" fill="#10a37f" opacity="0.7"/>
+              <circle cx="-10" cy="6" r="3" fill="#10a37f" opacity="0.7"/>
+              <line x1="0" y1="-12" x2="10" y2="6" stroke="#10a37f" stroke-width="1" opacity="0.4"/>
+              <line x1="10" y1="6" x2="-10" y2="6" stroke="#10a37f" stroke-width="1" opacity="0.4"/>
+              <line x1="-10" y1="6" x2="0" y2="-12" stroke="#10a37f" stroke-width="1" opacity="0.4"/>
+              <!-- Label -->
+              <text x="0" y="52" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="15" font-weight="700" fill="#EEEDF5">ChatGPT</text>
+              <text x="0" y="72" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="11.5" fill="#A09CB5">Versatile generalist</text>
+              <!-- Model pill -->
+              <rect x="-32" y="84" width="64" height="22" rx="11" fill="#10a37f" opacity="0.1" stroke="#10a37f" stroke-width="0.5" stroke-opacity="0.3"/>
+              <text x="0" y="99" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="500" fill="#10a37f">GPT-5</text>
+            </g>
+
+            <!-- ── Claude ── -->
+            <g transform="translate(360, 90)">
+              <!-- Glow -->
+              <circle cx="0" cy="0" r="60" fill="url(#glowAmber)"/>
+              <!-- Sunburst / spark pattern (nod to Claude's warmth) -->
+              <g opacity="0.6">
+                <line x1="0" y1="-24" x2="0" y2="-14" stroke="#d4a27f" stroke-width="2" stroke-linecap="round"/>
+                <line x1="0" y1="14" x2="0" y2="24" stroke="#d4a27f" stroke-width="2" stroke-linecap="round"/>
+                <line x1="-24" y1="0" x2="-14" y2="0" stroke="#d4a27f" stroke-width="2" stroke-linecap="round"/>
+                <line x1="14" y1="0" x2="24" y2="0" stroke="#d4a27f" stroke-width="2" stroke-linecap="round"/>
+                <line x1="-17" y1="-17" x2="-10" y2="-10" stroke="#d4a27f" stroke-width="2" stroke-linecap="round"/>
+                <line x1="10" y1="10" x2="17" y2="17" stroke="#d4a27f" stroke-width="2" stroke-linecap="round"/>
+                <line x1="17" y1="-17" x2="10" y2="-10" stroke="#d4a27f" stroke-width="2" stroke-linecap="round"/>
+                <line x1="-10" y1="10" x2="-17" y2="17" stroke="#d4a27f" stroke-width="2" stroke-linecap="round"/>
+              </g>
+              <circle cx="0" cy="0" r="8" fill="#d4a27f" opacity="0.15" stroke="#d4a27f" stroke-width="1.5" stroke-opacity="0.4"/>
+              <circle cx="0" cy="0" r="3" fill="#d4a27f" opacity="0.5"/>
+              <!-- Outer ring -->
+              <circle cx="0" cy="0" r="30" fill="none" stroke="#d4a27f" stroke-width="1" opacity="0.2" stroke-dasharray="3 5"/>
+              <!-- Label -->
+              <text x="0" y="52" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="15" font-weight="700" fill="#EEEDF5">Claude</text>
+              <text x="0" y="72" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="11.5" fill="#A09CB5">Careful thinker</text>
+              <!-- Model pill -->
+              <rect x="-38" y="84" width="76" height="22" rx="11" fill="#d4a27f" opacity="0.1" stroke="#d4a27f" stroke-width="0.5" stroke-opacity="0.3"/>
+              <text x="0" y="99" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="500" fill="#d4a27f">Opus 4.6</text>
+            </g>
+
+            <!-- ── Gemini ── -->
+            <g transform="translate(600, 90)">
+              <!-- Glow -->
+              <circle cx="0" cy="0" r="60" fill="url(#glowBlue)"/>
+              <!-- Concentric orbit rings (research/search concept) -->
+              <circle cx="0" cy="0" r="26" fill="none" stroke="#4285f4" stroke-width="1.2" opacity="0.3"/>
+              <circle cx="0" cy="0" r="18" fill="none" stroke="#a259ff" stroke-width="1" opacity="0.25"/>
+              <circle cx="0" cy="0" r="10" fill="#4285f4" opacity="0.08" stroke="#4285f4" stroke-width="1" stroke-opacity="0.35"/>
+              <!-- Tilted ellipse orbits -->
+              <ellipse cx="0" cy="0" rx="28" ry="12" fill="none" stroke="#4285f4" stroke-width="0.8" opacity="0.2" transform="rotate(-30)"/>
+              <ellipse cx="0" cy="0" rx="28" ry="12" fill="none" stroke="#a259ff" stroke-width="0.8" opacity="0.15" transform="rotate(30)"/>
+              <!-- Orbital dots -->
+              <circle cx="0" cy="0" r="3.5" fill="#4285f4" opacity="0.5"/>
+              <circle cx="22" cy="-14" r="2" fill="#4285f4" opacity="0.6"/>
+              <circle cx="-20" cy="16" r="1.5" fill="#a259ff" opacity="0.5"/>
+              <circle cx="12" cy="24" r="1.5" fill="#ea4335" opacity="0.4"/>
+              <!-- Label -->
+              <text x="0" y="52" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="15" font-weight="700" fill="#EEEDF5">Gemini</text>
+              <text x="0" y="72" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="11.5" fill="#A09CB5">Research powerhouse</text>
+              <!-- Model pill -->
+              <rect x="-36" y="84" width="72" height="22" rx="11" fill="#4285f4" opacity="0.1" stroke="#4285f4" stroke-width="0.5" stroke-opacity="0.3"/>
+              <text x="0" y="99" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="500" fill="#4285f4">3.1 Pro</text>
+            </g>
+
+            <!-- Connecting flow lines -->
+            <path d="M168,90 C210,90 210,90 310,90" fill="none" stroke="#2A293D" stroke-width="1" stroke-dasharray="2 4"/>
+            <path d="M410,90 C450,90 510,90 552,90" fill="none" stroke="#2A293D" stroke-width="1" stroke-dasharray="2 4"/>
+            <!-- Small diamond connectors -->
+            <polygon points="240,90 244,86 248,90 244,94" fill="#2A293D" opacity="0.6"/>
+            <polygon points="476,90 480,86 484,90 480,94" fill="#2A293D" opacity="0.6"/>
+
+            <!-- Bottom caption -->
+            <text x="360" y="262" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="11" fill="#6B6880">Each platform excels at different tasks. The best approach: use the right one for the job.</text>
+          </svg>
+        </div>
+
+
+        <h2>💻 Coding</h2>
+
+        <p>
+          This is probably the category with the clearest differences between the three platforms.
+        </p>
+
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Task</th>
+              <th>Best pick</th>
+              <th>Why</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>⚡ Code generation</td>
+              <td>Claude</td>
+              <td>Produces cleaner, more complete code out of the box. Better at following structural constraints in system prompts.</td>
+            </tr>
+            <tr>
+              <td>🐛 Debugging</td>
+              <td>ChatGPT</td>
+              <td>Better at working through multi-step debugging sessions. More willing to ask clarifying questions when the bug description is vague.</td>
+            </tr>
+            <tr>
+              <td>🔎 Code review</td>
+              <td>Claude</td>
+              <td>More thorough at catching edge cases and security issues. Less likely to rewrite your code when you asked for review only.</td>
+            </tr>
+            <tr>
+              <td>🔗 API integration</td>
+              <td>Gemini</td>
+              <td>Strongest for Google ecosystem (Firebase, GCP, Android). For other APIs, ChatGPT and Claude are comparable.</td>
+            </tr>
+            <tr>
+              <td>📖 Explaining code</td>
+              <td>Claude</td>
+              <td>Better at structured explanations. Tends to explain the "why" behind code decisions, not just the "what."</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="verdict-box">
+          <p><strong>Bottom line:</strong> If you write code daily, Claude is the strongest default for generation and review. ChatGPT is better for interactive debugging sessions where you go back and forth. Gemini is worth using for anything in the Google ecosystem.</p>
+        </div>
+
+
+        <h2>✍️ Writing</h2>
+
+        <p>
+          Writing quality is where personal preference matters most. All three models can produce competent text, but they have different defaults that affect the output in noticeable ways.
+        </p>
+
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Task</th>
+              <th>Best pick</th>
+              <th>Why</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>📝 Long-form content</td>
+              <td>Claude</td>
+              <td>Handles longer context windows well. Better at maintaining tone and structure across 2,000+ word pieces.</td>
+            </tr>
+            <tr>
+              <td>✉️ Email drafting</td>
+              <td>ChatGPT</td>
+              <td>Faster for short, formulaic text. Better at matching casual vs. formal tone when instructed.</td>
+            </tr>
+            <tr>
+              <td>🖊️ Editing feedback</td>
+              <td>Claude</td>
+              <td>Better at pointing out issues without rewriting your text. Respects "keep my voice" instructions more consistently.</td>
+            </tr>
+            <tr>
+              <td>📢 Marketing copy</td>
+              <td>ChatGPT</td>
+              <td>More willing to be punchy and persuasive. Claude tends to be cautious with strong claims, which is sometimes good but sometimes too conservative.</td>
+            </tr>
+            <tr>
+              <td>📄 Technical docs</td>
+              <td>Claude</td>
+              <td>More structured output. Better at consistent formatting across sections (parameter tables, code examples, etc.).</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="verdict-box">
+          <p><strong>Bottom line:</strong> Claude produces text that needs less editing. ChatGPT is faster for short, disposable writing (emails, Slack messages, quick drafts). Gemini is usable for writing but rarely the best choice unless you need integration with Google Docs.</p>
+        </div>
+
+        <!-- ════════════════════════════════════════════
+             📸 IMAGE PLACEHOLDER #2
+             ════════════════════════════════════════════ -->
+        <div style="margin: 24px 0;">
+          <img src="images/writing-comparison.png" alt="Same prompt sent to ChatGPT, Claude, and Gemini — ChatGPT gives a fast, concise rewrite; Claude offers multiple tone alternatives; Gemini provides a full style breakdown with reasoning" style="width:100%; border-radius:12px; border:1px solid var(--border-default);" loading="lazy" />
+          <p style="font-size:12px; color:var(--text-tertiary); margin-top:8px; text-align:center;">Same prompt, three different approaches. Tested in incognito mode with fresh accounts.</p>
+        </div>
+
+
+        <h2>🔍 Research and analysis</h2>
+
+        <p>
+          This is where Gemini's integration with Google Search becomes a genuine advantage, and where the differences between the platforms are most task-dependent.
+        </p>
+
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Task</th>
+              <th>Best pick</th>
+              <th>Why</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>🌐 Web research</td>
+              <td>Gemini</td>
+              <td>Native Google Search integration produces more current results. Perplexity is also strong here, but among the big three, Gemini leads.</td>
+            </tr>
+            <tr>
+              <td>📊 Data analysis</td>
+              <td>ChatGPT</td>
+              <td>Advanced Data Analysis handles CSV uploads, chart generation, and statistical analysis. Claude and Gemini can analyze data but lack the built-in execution environment.</td>
+            </tr>
+            <tr>
+              <td>📑 Document summarization</td>
+              <td>Claude</td>
+              <td>Larger effective context window. Better at summarizing long documents without losing key details in the middle.</td>
+            </tr>
+            <tr>
+              <td>✅ Fact-checking</td>
+              <td>Gemini</td>
+              <td>Real-time search access makes it stronger for verifying current information. For historical facts, all three are comparable.</td>
+            </tr>
+            <tr>
+              <td>⚔️ Competitive analysis</td>
+              <td>Gemini + Claude</td>
+              <td>Use Gemini to gather current data, then Claude to structure and analyze it. This two-step approach consistently outperforms using either one alone.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="verdict-box">
+          <p><strong>Bottom line:</strong> Gemini is the go-to for anything that needs current web information. ChatGPT is best when you need to process data files. Claude is strongest when you need to work through long documents carefully.</p>
+        </div>
+
+
+        <h2>🧠 Conversation and reasoning</h2>
+
+        <p>
+          Beyond specific tasks, the three platforms have different conversational styles that affect how useful they feel during extended sessions.
+        </p>
+
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Aspect</th>
+              <th>ChatGPT</th>
+              <th>Claude</th>
+              <th>Gemini</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>🎯 Instruction following</td>
+              <td>Good</td>
+              <td>Excellent</td>
+              <td>Good</td>
+            </tr>
+            <tr>
+              <td>🤔 Admitting uncertainty</td>
+              <td>Sometimes hedges too much</td>
+              <td>Clear about what it knows vs. doesn't</td>
+              <td>Can be overconfident</td>
+            </tr>
+            <tr>
+              <td>🔄 Multi-turn coherence</td>
+              <td>Strong</td>
+              <td>Strong</td>
+              <td>Moderate (can lose context)</td>
+            </tr>
+            <tr>
+              <td>🚧 Following constraints</td>
+              <td>Moderate (sometimes ignores "don't")</td>
+              <td>Strong (respects negative instructions)</td>
+              <td>Moderate</td>
+            </tr>
+            <tr>
+              <td>⚡ Speed</td>
+              <td>Fast</td>
+              <td>Moderate</td>
+              <td>Fast</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>
+          The "following constraints" row is particularly important for anyone who uses system prompts. If your prompt says "do NOT rewrite the code," Claude is the most reliable at following that instruction. ChatGPT and Gemini will sometimes ignore negative constraints, especially in longer conversations.
+        </p>
+
+        <div class="tip-box">
+          <p><strong>Tip:</strong> If you use multiple AI platforms, a prompt manager that works across all of them saves you from maintaining separate prompt libraries. <a href="https://arixify.com">Arixify</a> injects saved prompts into ChatGPT, Claude, Gemini, and 20+ other AI platforms with the same one-click workflow.</p>
+        </div>
+
+
+        <h2>💰 Pricing</h2>
+
+        <p>All three platforms offer free tiers and paid plans. Here is how they compare for individual users:</p>
+
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Plan</th>
+              <th>ChatGPT</th>
+              <th>Claude</th>
+              <th>Gemini</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>🆓 Free tier</td>
+              <td>GPT-5.3 with usage limits (ad-supported)</td>
+              <td>Sonnet 4.6 with usage limits</td>
+              <td>Gemini 2.5 Flash with limited 2.5 Pro access</td>
+            </tr>
+            <tr>
+              <td>💳 Paid plan</td>
+              <td>$20/mo (Plus)</td>
+              <td>$20/mo (Pro)</td>
+              <td>$19.99/mo (Google AI Pro)</td>
+            </tr>
+            <tr>
+              <td>⭐ Best paid feature</td>
+              <td>GPT-5 Thinking, Deep Research, Codex agent</td>
+              <td>Opus 4.6, Projects, Claude Code</td>
+              <td>Gemini 3.1 Pro, Deep Research, Google ecosystem integration</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>
+          At the same ~$20/month price point, the decision comes down to which model's strengths match your daily usage. If you primarily code and write, Claude Pro gives you the most value. If you do a lot of data analysis, ChatGPT Plus with Advanced Data Analysis is hard to beat. If you live in the Google ecosystem, Google AI Pro is the natural choice.
+        </p>
+
+        <p>
+          <strong>The free tiers are good enough for most people.</strong> Unless you hit usage limits daily or need access to the top-tier models for every conversation, the free plans cover the majority of use cases. Pay only when you consistently run into limits.
+        </p>
+
+        <!-- ════════════════════════════════════════════
+             📸 IMAGE PLACEHOLDER #3
+             ════════════════════════════════════════════ -->
+        <div style="margin: 24px 0;">
+          <svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;border-radius:12px;">
+            <defs>
+              <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#0e0e14"/>
+                <stop offset="100%" stop-color="#141420"/>
+              </linearGradient>
+            </defs>
+
+            <!-- Background -->
+            <rect width="720" height="300" rx="12" fill="url(#bg3)"/>
+            <rect width="720" height="300" rx="12" fill="none" stroke="#2A293D" stroke-width="1"/>
+
+            <!-- Title -->
+            <text x="360" y="36" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="13" font-weight="700" fill="#6B6880" letter-spacing="0.08em">BEST FOR AT A GLANCE</text>
+
+            <!-- ── ChatGPT column ── -->
+            <g transform="translate(8, 56)">
+              <!-- Card bg -->
+              <rect x="0" y="0" width="228" height="220" rx="10" fill="#16151F" stroke="#1F1E2E" stroke-width="1"/>
+              <!-- Header bar -->
+              <rect x="0" y="0" width="228" height="3" rx="1.5" fill="#10a37f" opacity="0.6"/>
+              <!-- Name -->
+              <text x="114" y="36" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="16" font-weight="700" fill="#EEEDF5">ChatGPT</text>
+              <!-- Divider -->
+              <line x1="24" y1="50" x2="204" y2="50" stroke="#2A293D" stroke-width="1"/>
+              <!-- Tags -->
+              <rect x="30" y="66" width="168" height="30" rx="8" fill="#10a37f" opacity="0.06" stroke="#10a37f" stroke-width="0.5" stroke-opacity="0.2"/>
+              <text x="114" y="85" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="12" font-weight="600" fill="#10a37f">🐛 Debugging</text>
+
+              <rect x="30" y="106" width="168" height="30" rx="8" fill="#10a37f" opacity="0.06" stroke="#10a37f" stroke-width="0.5" stroke-opacity="0.2"/>
+              <text x="114" y="125" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="12" font-weight="600" fill="#10a37f">📊 Data Analysis</text>
+
+              <rect x="30" y="146" width="168" height="30" rx="8" fill="#10a37f" opacity="0.06" stroke="#10a37f" stroke-width="0.5" stroke-opacity="0.2"/>
+              <text x="114" y="165" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="12" font-weight="600" fill="#10a37f">✉️ Quick Drafts</text>
+
+              <!-- Subtle model label -->
+              <text x="114" y="200" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#6B6880">GPT-5</text>
+            </g>
+
+            <!-- ── Claude column ── -->
+            <g transform="translate(246, 56)">
+              <rect x="0" y="0" width="228" height="220" rx="10" fill="#16151F" stroke="#1F1E2E" stroke-width="1"/>
+              <rect x="0" y="0" width="228" height="3" rx="1.5" fill="#d4a27f" opacity="0.6"/>
+              <text x="114" y="36" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="16" font-weight="700" fill="#EEEDF5">Claude</text>
+              <line x1="24" y1="50" x2="204" y2="50" stroke="#2A293D" stroke-width="1"/>
+
+              <rect x="30" y="66" width="168" height="30" rx="8" fill="#d4a27f" opacity="0.06" stroke="#d4a27f" stroke-width="0.5" stroke-opacity="0.2"/>
+              <text x="114" y="85" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="12" font-weight="600" fill="#d4a27f">⚡ Code Generation</text>
+
+              <rect x="30" y="106" width="168" height="30" rx="8" fill="#d4a27f" opacity="0.06" stroke="#d4a27f" stroke-width="0.5" stroke-opacity="0.2"/>
+              <text x="114" y="125" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="12" font-weight="600" fill="#d4a27f">📝 Long-form Writing</text>
+
+              <rect x="30" y="146" width="168" height="30" rx="8" fill="#d4a27f" opacity="0.06" stroke="#d4a27f" stroke-width="0.5" stroke-opacity="0.2"/>
+              <text x="114" y="165" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="12" font-weight="600" fill="#d4a27f">📑 Document Review</text>
+
+              <text x="114" y="200" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#6B6880">Opus 4.6</text>
+            </g>
+
+            <!-- ── Gemini column ── -->
+            <g transform="translate(484, 56)">
+              <rect x="0" y="0" width="228" height="220" rx="10" fill="#16151F" stroke="#1F1E2E" stroke-width="1"/>
+              <rect x="0" y="0" width="228" height="3" rx="1.5" fill="#4285f4" opacity="0.6"/>
+              <text x="114" y="36" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="16" font-weight="700" fill="#EEEDF5">Gemini</text>
+              <line x1="24" y1="50" x2="204" y2="50" stroke="#2A293D" stroke-width="1"/>
+
+              <rect x="30" y="66" width="168" height="30" rx="8" fill="#4285f4" opacity="0.06" stroke="#4285f4" stroke-width="0.5" stroke-opacity="0.2"/>
+              <text x="114" y="85" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="12" font-weight="600" fill="#4285f4">🌐 Web Research</text>
+
+              <rect x="30" y="106" width="168" height="30" rx="8" fill="#4285f4" opacity="0.06" stroke="#4285f4" stroke-width="0.5" stroke-opacity="0.2"/>
+              <text x="114" y="125" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="12" font-weight="600" fill="#4285f4">🔗 Google Integration</text>
+
+              <rect x="30" y="146" width="168" height="30" rx="8" fill="#4285f4" opacity="0.06" stroke="#4285f4" stroke-width="0.5" stroke-opacity="0.2"/>
+              <text x="114" y="165" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="12" font-weight="600" fill="#4285f4">✅ Fact-checking</text>
+
+              <text x="114" y="200" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#6B6880">3.1 Pro</text>
+            </g>
+          </svg>
+        </div>
+
+
+        <h2>🔄 The practical approach: use all three</h2>
+
+        <p>
+          The most productive AI users do not pick one platform and stick with it. They use different tools for different tasks, the same way a developer uses different editors or a designer uses different apps.
+        </p>
+        <p>
+          A practical daily setup might look like this:
+        </p>
+        <ul>
+          <li><strong>Default to Claude</strong> for code generation, writing, and document analysis. It produces the most consistent quality with the least post-editing.</li>
+          <li><strong>Switch to ChatGPT</strong> for interactive debugging, data analysis with file uploads, and quick disposable text (emails, messages, short summaries).</li>
+          <li><strong>Switch to Gemini</strong> when you need current web information, Google ecosystem integration, or fact-checking against live sources.</li>
+          <li><strong>Use Perplexity</strong> for pure research tasks where you want cited sources. It is not one of the "big three" but it fills a gap none of them cover as well.</li>
+        </ul>
+        <p>
+          The challenge with using multiple platforms is maintaining your workflow across all of them. Your best system prompts should be available on every platform, not locked into one. If you have a code review prompt that works perfectly, you want to use it whether you are in ChatGPT or Claude that day.
+        </p>
+
+        <h2>📋 Quick reference: which AI for which task</h2>
+
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Task</th>
+              <th>First choice</th>
+              <th>Runner-up</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>⚡ Generate code</td><td>Claude</td><td>ChatGPT</td></tr>
+            <tr><td>🐛 Debug code</td><td>ChatGPT</td><td>Claude</td></tr>
+            <tr><td>🔎 Review code</td><td>Claude</td><td>ChatGPT</td></tr>
+            <tr><td>📝 Write long-form</td><td>Claude</td><td>ChatGPT</td></tr>
+            <tr><td>✉️ Draft emails</td><td>ChatGPT</td><td>Claude</td></tr>
+            <tr><td>📊 Analyze data</td><td>ChatGPT</td><td>Gemini</td></tr>
+            <tr><td>🌐 Web research</td><td>Gemini</td><td>Perplexity</td></tr>
+            <tr><td>📑 Summarize docs</td><td>Claude</td><td>ChatGPT</td></tr>
+            <tr><td>✅ Fact-check</td><td>Gemini</td><td>Perplexity</td></tr>
+            <tr><td>🎓 Learn new topic</td><td>Claude</td><td>ChatGPT</td></tr>
+          </tbody>
+        </table>
+
+        <p>
+          Save this table somewhere accessible. Better yet, save the system prompts that make each platform perform best at its strongest tasks. A well-tuned prompt on the right platform is worth more than the best model with vague instructions.
+        </p>
+
+      </div>
+
+      <!-- ── CTA ── -->
+      <div class="article-cta">
+        <h3>One prompt library, every AI platform</h3>
+        <p>Arixify saves your prompts and injects them into ChatGPT, Claude, Gemini, and 20+ AI platforms with one click. Free, no account required.</p>
+        <a class="cta-button" href="https://chromewebstore.google.com/detail/arixify/ealpfbnghiinadhalaldigbonggcnocf">
+          <svg width="16" height="16" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="7" fill="white" fill-opacity="0.2"/><path d="M11 8L7 16H14L10 24" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 8L15 16H22L18 24" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/></svg>
+          Add to Chrome — It's Free
+        </a>
+      </div>
+
+      <div class="article-footer">
+        <a class="article-footer-back" href="/blog/">← All posts</a>
+      </div>
+    </article>
+
+    <div class="footer">
+      <div class="footer-links">
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/billing.html">Billing</a>
+        <a href="https://arixify.com">Home</a>
+      </div>
+      <p class="footer-copy">© <span id="current-year"></span> Arixify. All rights reserved.</p>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+  </script>
+
+  <div class="lightbox-overlay" id="lb"><img src="" alt="" /></div>
+  <script>
+  (function(){
+    var lb=document.getElementById('lb'),lbImg=lb.querySelector('img');
+    document.querySelector('.article-content').addEventListener('click',function(e){
+      if(e.target.tagName==='IMG'&&!e.target.classList.contains('no-lightbox')){
+        lbImg.src=e.target.src;lbImg.alt=e.target.alt;lb.classList.add('active');
+      }
+    });
+    lb.addEventListener('click',function(e){if(e.target!==lbImg)lb.classList.remove('active');});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')lb.classList.remove('active');});
+  })();
+  </script>
+
+</body>
+</html>

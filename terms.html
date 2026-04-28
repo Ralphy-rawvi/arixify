@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Service — Arixify</title>
+  <script src="/head-common.js"></script>
+  <meta name="description" content="Arixify Terms of Service. Use responsibly, you own your prompts, Pro subscriptions billed monthly or annually." />
+  <link rel="canonical" href="https://arixify.com/terms.html" />
+  <meta property="og:url" content="https://arixify.com/terms.html" />
+  <meta property="og:title" content="Terms of Service — Arixify" />
+  <meta property="og:description" content="Arixify Terms of Service. Use responsibly, you own your prompts, Pro subscriptions billed monthly or annually." />
+  <meta name="twitter:title" content="Terms of Service — Arixify" />
+  <meta name="twitter:description" content="Arixify Terms of Service. Use responsibly, you own your prompts, Pro subscriptions billed monthly or annually." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-primary: #0A0A0F;
+      --bg-secondary: #111118;
+      --bg-card: #16151F;
+      --bg-elevated: #1C1B28;
+      --border-subtle: #1F1E2E;
+      --border-default: #2A293D;
+      --accent: #7C6EFA;
+      --accent-soft: #9D8DFF;
+      --text-primary: #EEEDF5;
+      --text-secondary: #A09CB5;
+      --text-tertiary: #6B6880;
+      --amber: #FBBF24;
+      --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--accent-soft); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--accent); text-decoration: underline; }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 64px;
+      border-bottom: 1.1px solid var(--border-subtle);
+      border-top: 2px solid;
+      border-image: linear-gradient(90deg, transparent 0%, var(--accent) 30%, #00D9FF 70%, transparent 100%) 1;
+      background: rgba(10, 10, 15, 0.85);
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .nav-logo-dot { color: var(--accent); }
+
+    .nav-back {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-tertiary);
+      text-decoration: none;
+    }
+
+    .nav-back:hover { color: var(--accent-soft); text-decoration: none; }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 136px 24px 120px;
+    }
+
+    .page-header {
+      margin-bottom: 48px;
+      padding-bottom: 36px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .page-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .page-title {
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.025em;
+      margin-bottom: 12px;
+    }
+
+    .page-meta {
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(124,110,250,0.06), rgba(124,110,250,0.02));
+      border: 1px solid rgba(124,110,250,0.2);
+      border-radius: 14px;
+      padding: 24px 28px;
+      margin-bottom: 48px;
+    }
+
+    .highlight-box p {
+      margin: 0;
+      font-size: 14px;
+      color: var(--accent-soft);
+      line-height: 1.75;
+    }
+
+    .section { margin-bottom: 44px; }
+
+    h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 14px;
+      padding-left: 16px;
+      border-left: 3px solid var(--accent);
+      letter-spacing: -0.01em;
+    }
+
+    p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+      line-height: 1.75;
+    }
+
+    ul {
+      list-style: none;
+      margin-bottom: 14px;
+    }
+
+    ul li {
+      font-size: 15px;
+      color: var(--text-secondary);
+      padding: 7px 0 7px 22px;
+      position: relative;
+      line-height: 1.6;
+    }
+
+    ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 16px;
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      opacity: 0.6;
+    }
+
+    ul li strong { color: var(--text-primary); }
+
+    .warning-box {
+      background: rgba(251, 191, 36, 0.04);
+      border: 1px solid rgba(251, 191, 36, 0.2);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin: 16px 0 24px;
+    }
+
+    .warning-box p {
+      margin: 0;
+      font-size: 14px;
+      color: var(--amber);
+      line-height: 1.7;
+    }
+
+    .pricing-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 16px;
+      font-size: 14px;
+      border: 1px solid var(--border-default);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .pricing-table th {
+      text-align: left;
+      padding: 12px 16px;
+      background: var(--bg-elevated);
+      color: var(--text-tertiary);
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-bottom: 1px solid var(--border-default);
+    }
+
+    .pricing-table td {
+      padding: 12px 16px;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border-subtle);
+      vertical-align: top;
+      line-height: 1.6;
+    }
+
+    .pricing-table tr:last-child td { border-bottom: none; }
+
+    .pricing-table td:first-child {
+      font-weight: 600;
+      color: var(--text-primary);
+      white-space: nowrap;
+      width: 140px;
+    }
+
+    .contact-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-default);
+      border-radius: 14px;
+      padding: 28px;
+      margin-top: 56px;
+    }
+
+    .contact-box h2 { border-left-color: var(--accent-soft); margin-bottom: 10px; }
+    .contact-box p { margin-bottom: 10px; }
+
+    .contact-email {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+      padding: 10px 18px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-default);
+      border-radius: 8px;
+      font-size: 14px;
+      color: var(--accent-soft);
+      font-family: var(--font-mono);
+    }
+
+    .contact-email a { text-decoration: none; }
+    .contact-email a:hover { text-decoration: underline; }
+
+    .footer {
+      margin-top: 80px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border-subtle);
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      margin-bottom: 14px;
+    }
+
+    .footer-links a {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover { color: var(--accent-soft); }
+
+    .footer-copy {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      opacity: 0.6;
+    }
+
+    @media (max-width: 768px) {
+      .nav { padding: 0 16px; }
+      .container { padding: 48px 20px 80px; }
+      .page-title { font-size: 28px; }
+      .pricing-table td:first-child { white-space: normal; }
+    }
+
+    @media (max-width: 480px) {
+      .nav { padding: 0 14px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a class="nav-logo" href="https://arixify.com">
+      <svg width="22" height="22" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="7" fill="#7C6EFA"/><path d="M11 8L7 16H14L10 24" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 8L15 16H22L18 24" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/></svg>
+      Arixify<span class="nav-logo-dot"></span>
+    </a>
+    <a class="nav-back" href="https://arixify.com">← Back to home</a>
+  </nav>
+
+  <div class="container">
+
+    <div class="page-header">
+      <div class="page-label">Legal</div>
+      <h1 class="page-title">Terms of Service</h1>
+      <p class="page-meta" data-nosnippet>Last updated: March 2026</p>
+    </div>
+
+    <div class="highlight-box">
+      <p>
+        <strong>Short version:</strong> Use Arixify responsibly. You own your prompts.
+        Don't store illegal content. Pro subscriptions are billed monthly or annually and
+        can be cancelled at any time. We are not responsible for data loss — always keep
+        your own backups.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>Acceptance of terms</h2>
+      <p>
+        By installing or using the Arixify Chrome Extension ("the Service"), you agree to be
+        bound by these Terms of Service. If you do not agree, do not use the Service.
+      </p>
+      <p>
+        These terms apply to all users of Arixify, including free and paid (Pro) users.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>Description of service</h2>
+      <p>
+        Arixify is a Chrome Extension that allows users to save, organize, and insert text
+        prompts into AI platforms including ChatGPT, Claude, Gemini, Perplexity, and 20+ additional platforms.
+        The Service includes a free tier and a paid Pro tier with additional features.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>User content and responsibility</h2>
+      <p>
+        You retain full ownership of the prompts and content you store in Arixify. We do not
+        claim any rights over your content.
+      </p>
+      <p>
+        You are solely responsible for the content you store. You agree not to use Arixify
+        to store or distribute content that:
+      </p>
+      <ul>
+        <li>Violates any applicable law or regulation</li>
+        <li>Promotes violence, hatred, or discrimination against any person or group</li>
+        <li>Facilitates fraud, phishing, or other deceptive practices</li>
+        <li>Infringes the intellectual property rights of others</li>
+        <li>Contains malware, viruses, or malicious code</li>
+        <li>Harasses, threatens, or abuses any individual</li>
+      </ul>
+      <div class="warning-box">
+        <p>
+          <strong>Disclaimer:</strong> Arixify is a storage and insertion tool. We do not
+          review, moderate, or take responsibility for the content users store. Any misuse
+          of the Service is solely the user's responsibility.
+        </p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Data storage and backups</h2>
+      <p>
+        Arixify stores data using different methods depending on your plan:
+      </p>
+      <ul>
+        <li><strong>Free users:</strong> Data is stored locally on your device using Chrome's built-in storage (chrome.storage.local). This data exists only on your device and is not backed up to any server.</li>
+        <li><strong>Pro users:</strong> Data is synced to cloud storage powered by Google Firebase Firestore. While we take reasonable measures to ensure data integrity, cloud storage is provided on a best-effort basis.</li>
+      </ul>
+      <p>
+        <strong>You are solely responsible for maintaining backups of your content.</strong>
+        We strongly recommend exporting or copying any prompts that are important to you.
+        Arixify is not a backup service, and we do not guarantee the permanent availability
+        or integrity of stored data.
+      </p>
+      <div class="warning-box">
+        <p>
+          <strong>Important:</strong> Data loss can occur due to browser resets, device
+          changes, extension reinstallation, third-party service outages, or other
+          circumstances beyond our control. Arixify and its developer shall not be held
+          liable for any data loss, regardless of the cause.
+        </p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Third-party services</h2>
+      <p>
+        The Service relies on third-party platforms and infrastructure to function, including
+        but not limited to:
+      </p>
+      <ul>
+        <li><strong>Google Firebase:</strong> Cloud data storage and user authentication for Pro users</li>
+        <li><strong>Google Chrome APIs:</strong> Local storage, extension runtime, and identity services</li>
+        <li><strong>Paddle:</strong> Payment processing, subscription management, and billing</li>
+        <li><strong>AI platforms (ChatGPT, Claude, Gemini, Perplexity, etc.):</strong> Target platforms where prompts are inserted</li>
+      </ul>
+      <p>
+        These third-party services are operated independently and are subject to their own
+        terms of service, privacy policies, and availability. We do not control, and are not
+        responsible for, any outages, data loss, API changes, policy changes, or service
+        disruptions caused by these providers.
+      </p>
+      <p>
+        In particular, AI platforms may change their website structure (DOM) at any time
+        without notice, which may temporarily or permanently affect Arixify's prompt
+        insertion functionality on those platforms. Such changes are outside our control
+        and do not constitute a breach of these Terms.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>Pro subscription and billing</h2>
+      <p>Arixify offers a Pro plan with the following terms:</p>
+      <table class="pricing-table">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Monthly plan</td>
+            <td>$8/month. Billed every 30 days. Cancel anytime before the next billing date.</td>
+          </tr>
+          <tr>
+            <td>Annual plan</td>
+            <td>$79/year (equivalent to ~$6.58/month). Billed once per year. Cancel anytime; access continues until the period ends.</td>
+          </tr>
+          <tr>
+            <td>Payment processor</td>
+            <td>Payments are handled by Paddle, who acts as the merchant of record. All billing inquiries or payment questions can be directed to Paddle’s buyer support.</td>
+          </tr>
+          <tr>
+            <td>Refunds</td>
+            <td>We offer a 14-day refund policy. If you are not satisfied with your purchase, you may request a full refund within 14 days. Contact us at <a href="mailto:support@arixify.com">support@arixify.com</a> or through <a href="https://paddle.net" target="_blank" rel="noopener">Paddle's buyer support</a>.</td>
+          </tr>
+          <tr>
+            <td>Cancellation</td>
+            <td>You may cancel at any time. Pro features remain active until the end of the paid period. Note: cancellation and refund are different — cancellation lets you use Pro until the period ends, while a refund terminates access immediately.</td>
+          </tr>
+          <tr>
+            <td>Downgrades</td>
+            <td>On cancellation, your account reverts to the free tier. Your prompts are not deleted. Pro-only features (cloud sync, folders, star ratings, live preview) will no longer be available until you re-subscribe.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>Acceptable use</h2>
+      <p>You agree not to:</p>
+      <ul>
+        <li>Reverse engineer, decompile, or attempt to extract the source code of the Service</li>
+        <li>Use the Service to build a competing product without permission</li>
+        <li>Attempt to circumvent plan restrictions through account manipulation</li>
+        <li>Interfere with or disrupt the Service or its infrastructure</li>
+        <li>Share your account credentials with others</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Disclaimer of warranties</h2>
+      <p>
+        The Service is provided <strong>"as is"</strong> and <strong>"as available"</strong>
+        without warranties of any kind, either express or implied, including but not limited
+        to implied warranties of merchantability, fitness for a particular purpose, and
+        non-infringement. We do not warrant that:
+      </p>
+      <ul>
+        <li>The Service will be uninterrupted, error-free, or available at all times</li>
+        <li>Data stored in the Service will be preserved, accurate, or recoverable — whether stored locally or in the cloud</li>
+        <li>The Service will be compatible with all future versions of supported AI platforms or browsers</li>
+        <li>Third-party services (including Firebase, Chrome APIs, and Paddle) will remain available, unchanged, or free from errors</li>
+      </ul>
+      <p>
+        AI platform DOM structures change frequently and without notice. We cannot guarantee
+        that the prompt insertion feature will work indefinitely on all supported platforms.
+      </p>
+      <p>
+        You acknowledge that you use the Service at your own risk and that you are solely
+        responsible for any consequences arising from your reliance on the Service or its
+        data storage capabilities.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>Limitation of liability</h2>
+      <p>
+        To the maximum extent permitted by applicable law, Arixify and its developer shall
+        not be liable for any indirect, incidental, special, consequential, or punitive
+        damages, including but not limited to:
+      </p>
+      <ul>
+        <li>Loss of data, prompts, or user content — whether stored locally or in the cloud</li>
+        <li>Loss of profits, revenue, or business opportunities</li>
+        <li>Business interruption or inability to use the Service</li>
+        <li>Damages arising from third-party service outages, data breaches, API changes, or discontinuation</li>
+        <li>Damages arising from unauthorized access to your account or data</li>
+        <li>Damages caused by browser updates, extension conflicts, or device failures</li>
+      </ul>
+      <p>
+        This limitation applies regardless of the legal theory (contract, tort, negligence,
+        strict liability, or otherwise), even if we have been advised of the possibility of
+        such damages.
+      </p>
+      <p>
+        Our total liability to you for any claim arising from these Terms or your use of the
+        Service shall not exceed the amount you paid us in the 12 months preceding the claim.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>Account termination</h2>
+      <p>
+        We reserve the right to suspend or terminate accounts that violate these Terms,
+        particularly the user content restrictions above. In cases of termination due to
+        violations, no refund will be issued.
+      </p>
+      <p>
+        You may delete your account at any time by contacting us. Upon deletion, your cloud
+        data will be permanently removed within 30 days.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>Changes to these terms</h2>
+      <p>
+        We may update these Terms as the Service evolves. We will update the "Last updated"
+        date at the top of this page. Continued use of Arixify after changes constitutes
+        acceptance of the updated Terms. For material changes, we will make reasonable
+        efforts to notify users.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>Governing law and disputes</h2>
+      <p>
+        Any disputes arising from these Terms or your use of the Service will be resolved
+        through good-faith negotiation between you and Arixify. If a resolution cannot be
+        reached, disputes shall be submitted to binding arbitration under the rules of
+        a mutually agreed-upon arbitration body, with proceedings conducted in English.
+      </p>
+      <p>
+        To the extent that any court proceedings are necessary, the parties agree to submit
+        to the non-exclusive jurisdiction of courts with competent authority over the matter.
+      </p>
+    </div>
+
+    <div class="contact-box">
+      <h2>Contact</h2>
+      <p>Questions about these Terms? Reach out and we'll respond within a few business days.</p>
+      <div class="contact-email">✉ <a href="mailto:support@arixify.com">support@arixify.com</a></div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-links">
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/billing.html">Billing</a>
+        <a href="https://arixify.com">Home</a>
+      </div>
+      <p class="footer-copy">© <span id="current-year"></span> Arixify. All rights reserved.</p>
+    </div>
+  </div>
+  
+  <script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
