@@ -3539,7 +3539,7 @@
                         }, 260);
 
                         setTimeout(function() {
-                          var typeText = 'How Arixify saves me hours every week';
+                          var typeText = 'How Arixify saves me hours every week?';
                           var fullText = INSERT_TEXT + typeText;
 
                           // Pre-calculate final height and animate chatbar to it
@@ -3600,13 +3600,30 @@
                                       if (typeIndex >= typeText.length) {
                                         clearInterval(typeInterval);
                                         // Ending beat: pause, then SLIDE the cursor
-                                        // off-screen (bottom-right, beyond content)
-                                        // before restarting the loop.
+                                        // off-screen (bottom-right, beyond content).
                                         setTimeout(function() {
                                           moveCursor(contentW + 40, contentH + 40, 600, function() {
                                             ibeamCursor.classList.remove('is-visible');
                                             handCursor.classList.remove('is-visible');
-                                            animTimer = setTimeout(runAnimation, 700);
+
+                                            // Now SMOOTHLY collapse: clear the text and
+                                            // let the chatbar height + button margin-top
+                                            // animate back via their normal 0.4s CSS
+                                            // transitions (NOT suppressed), so the input
+                                            // box and button glide back instead of jumping.
+                                            caretEl.classList.remove('is-visible');
+                                            textEl.textContent = PLACEHOLDER;
+                                            textEl.classList.remove('has-text');
+                                            chatbar.classList.remove('is-expanded');
+                                            chatbar.style.height = initialChatbarH + 'px';
+                                            btn.style.marginTop = '0';
+
+                                            // Restart only after the collapse glide
+                                            // finishes (0.4s transition + small buffer).
+                                            // By then everything is already settled, so
+                                            // resetDemo()'s instant collapse is a no-op
+                                            // and produces no visible jump.
+                                            animTimer = setTimeout(runAnimation, 600);
                                           });
                                         }, 1400);
                                       }
