@@ -362,6 +362,112 @@
       transition: transform 0.08s ease-out;
     }
 
+    /* ─── Intro Splash (full-screen centered emblem) ─── */
+    .intro-splash {
+      position: relative;
+      z-index: 4;
+      min-height: 100vh;
+      min-height: 100svh; /* mobile dynamic viewport, falls back to vh above */
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    /* Reuse the hero glow + grid backdrop behind the splash */
+    .intro-splash::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 1400px;
+      height: 1400px;
+      max-width: 140vw;
+      max-height: 140vh;
+      background:
+        radial-gradient(ellipse 60% 45% at 50% 50%, rgba(124, 110, 250, 0.40) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 40% at 60% 55%, rgba(0, 217, 255, 0.18) 0%, transparent 50%),
+        radial-gradient(ellipse 40% 35% at 40% 45%, rgba(157, 141, 255, 0.14) 0%, transparent 55%);
+      pointer-events: none;
+      animation: hero-glow-breathe 6s ease-in-out infinite;
+    }
+
+    .intro-splash-inner {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+    }
+
+    /* Enlarge the animated emblem button 1.5x on the intro splash.
+       Scaling the wrap (not the inner button) avoids clashing with the
+       button's own float/hover/active transforms. */
+    .intro-splash .hero-emblem-wrap {
+      transform: scale(1.5);
+      transform-origin: center center;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    /* scale(1.5) doesn't grow the layout box, so add breathing room manually
+       to keep the scroll hint clear of the enlarged button. */
+    .intro-splash .intro-splash-inner {
+      gap: 64px;
+    }
+
+    @media (max-width: 768px) {
+      .intro-splash .hero-emblem-wrap { transform: scale(1.35); }
+      .intro-splash .intro-splash-inner { gap: 52px; }
+    }
+
+    @media (max-width: 480px) {
+      .intro-splash .hero-emblem-wrap { transform: scale(1.2); }
+      .intro-splash .intro-splash-inner { gap: 44px; }
+    }
+
+    /* Down-chevron hint that fades in after the emblem becomes a button */
+    .intro-scroll-hint {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      opacity: 0;
+      transition: opacity 0.6s ease;
+      animation: intro-hint-bob 2.4s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .intro-scroll-hint.is-shown { opacity: 0.55; }
+
+    @keyframes intro-hint-bob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(7px); }
+    }
+
+    /* Nav starts hidden so the splash is the clean first view; revealed on scroll */
+    .nav.is-hidden {
+      opacity: 0;
+      transform: translateY(-100%);
+      pointer-events: none;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .nav {
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .intro-splash::before { animation: none; }
+      .intro-scroll-hint { animation: none; }
+    }
+
     /* ─── Hero ─── */
     .hero {
       position: relative;
@@ -2549,7 +2655,7 @@
   <div class="light-particle p5"></div>
 
   <!-- ─── Navigation ─── -->
-  <nav class="nav">
+  <nav class="nav is-hidden" id="site-nav">
     <a class="nav-logo" href="/">
       <svg width="22" height="22" viewBox="0 0 32 32" fill="none">
         <rect width="32" height="32" rx="7" fill="#7C6EFA"/>
@@ -2566,8 +2672,32 @@
     </div>
   </nav>
 
+  <!-- ─── Intro Splash (first thing visible: centered emblem button) ─── -->
+  <section class="intro-splash" id="intro-splash">
+    <div class="intro-splash-inner">
+      <!-- Logo → Arixify Button (moved here from hero) -->
+      <div class="hero-emblem-wrap" id="hero-emblem">
+        <a href="#main-hero" class="hero-emblem-btn" id="hero-emblem-btn">
+          <div class="hero-emblem-inner">
+            <svg class="hero-emblem-svg" width="204" height="204" viewBox="0 0 32 32" fill="none">
+              <rect width="32" height="32" rx="7" fill="#7C6EFA"/>
+              <path d="M11 8L7 16H14L10 24" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M19 8L15 16H22L18 24" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+            </svg>
+            <span class="hero-emblem-text" id="hero-emblem-text"></span>
+          </div>
+          <div class="hero-emblem-bg" id="hero-emblem-bg"></div>
+        </a>
+      </div>
+      <span class="intro-scroll-hint" id="intro-scroll-hint" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </span>
+    </div>
+  </section>
+
   <!-- ─── Hero ─── -->
-  <section class="hero">
+  <section class="hero" id="main-hero">
+    <!-- <a class="founding-banner" href="/founding.html">First 50 users get Pro free for a year. Apply now.</a> -->
     <a class="hero-badge" href="/status.html">
       <span class="hero-badge-dot"></span>
       Now supporting 20+ AI platforms
@@ -2654,21 +2784,6 @@
     <p class="hero-sub" style="margin-top: 32px; font-size: clamp(14px, 1.6vw, 16px); max-width: 560px;">
       Just one click — your project context continues in a new AI chat, instantly. Found a good prompt? Save it, organize it, insert it with one click. Available on ChatGPT, Claude, Gemini, Runway, and 20+ platforms. Stop copy-pasting. Save hours every week with Arixify.
     </p>
-
-    <!-- Hero Logo → Arixify Button -->
-    <div class="hero-emblem-wrap" id="hero-emblem">
-      <a href="#features" class="hero-emblem-btn" id="hero-emblem-btn">
-        <div class="hero-emblem-inner">
-          <svg class="hero-emblem-svg" width="204" height="204" viewBox="0 0 32 32" fill="none">
-            <rect width="32" height="32" rx="7" fill="#7C6EFA"/>
-            <path d="M11 8L7 16H14L10 24" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M19 8L15 16H22L18 24" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
-          </svg>
-          <span class="hero-emblem-text" id="hero-emblem-text"></span>
-        </div>
-        <div class="hero-emblem-bg" id="hero-emblem-bg"></div>
-      </a>
-    </div>
   </section>
 
   <!-- ─── Supported Platforms ─── -->
@@ -3089,6 +3204,7 @@
 
     var emblemTriggered = false;
     var word = 'Arixify';
+    var hint = document.getElementById('intro-scroll-hint');
 
     function startTyping(extraDelay) {
       setTimeout(function() {
@@ -3102,6 +3218,7 @@
             setTimeout(function() {
               wrap.classList.remove('is-typing');
               wrap.classList.add('is-button');
+              if (hint) hint.classList.add('is-shown');
             }, 200);
           }
         }, 60);
@@ -3118,6 +3235,88 @@
       });
     }, { threshold: 0 });
     emblemObs.observe(wrap);
+  })();
+  </script>
+
+  <!-- ─── Intro Splash: 5s auto-scroll, click cancels, reveal nav ─── -->
+  <script>
+  (function() {
+    var splash = document.getElementById('intro-splash');
+    var heroTarget = document.getElementById('main-hero');
+    var emblemBtn = document.getElementById('hero-emblem-btn');
+    var nav = document.getElementById('site-nav');
+    if (!splash || !heroTarget) return;
+
+    var autoTimer = null;
+    var hasLeftSplash = false;
+
+    var prefersReduced = window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function scrollToHero() {
+      // Cancel pending auto-scroll so it can't fire twice
+      cancelAuto();
+      heroTarget.scrollIntoView({
+        behavior: prefersReduced ? 'auto' : 'smooth',
+        block: 'start'
+      });
+    }
+
+    function cancelAuto() {
+      if (autoTimer !== null) {
+        clearTimeout(autoTimer);
+        autoTimer = null;
+      }
+    }
+
+    // Auto-scroll after 5s of no interaction
+    autoTimer = setTimeout(function() {
+      autoTimer = null;
+      // Only auto-scroll if the user is still parked on the splash
+      if (!hasLeftSplash && window.scrollY < 10) {
+        scrollToHero();
+      }
+    }, 5000);
+
+    // Clicking the emblem scrolls down immediately and cancels the timer.
+    // The anchor href="#main-hero" would also jump; we preventDefault to keep
+    // a single smooth scroll and avoid a hard hash jump.
+    if (emblemBtn) {
+      emblemBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        scrollToHero();
+      });
+    }
+
+    // Any manual scroll intent also cancels the auto-timer (user took over).
+    function onUserScrollIntent() {
+      cancelAuto();
+    }
+    window.addEventListener('wheel', onUserScrollIntent, { passive: true });
+    window.addEventListener('touchmove', onUserScrollIntent, { passive: true });
+    window.addEventListener('keydown', function(e) {
+      // Space, PageDown, ArrowDown, End etc. count as scroll intent
+      var keys = [' ', 'Spacebar', 'PageDown', 'ArrowDown', 'End', 'PageUp', 'ArrowUp', 'Home'];
+      if (keys.indexOf(e.key) !== -1) cancelAuto();
+    });
+
+    // Reveal the nav once the splash is mostly scrolled away; hide again when
+    // the user scrolls back up to the splash (so the splash stays clean).
+    if (nav) {
+      var navObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            // Splash is in view → hide nav for a clean first screen
+            nav.classList.add('is-hidden');
+          } else {
+            // Splash scrolled out of view → show nav
+            nav.classList.remove('is-hidden');
+            hasLeftSplash = true;
+          }
+        });
+      }, { threshold: 0.4 });
+      navObs.observe(splash);
+    }
   })();
   </script>
 
@@ -3224,10 +3423,26 @@
       });
       textEl.textContent = PLACEHOLDER;
       textEl.classList.remove('has-text');
-      // Animate chatbar back to initial height
-      chatbar.style.height = initialChatbarH + 'px';
+      // Collapse chatbar back to its initial height INSTANTLY (no transition).
+      // CRITICAL: the button (#hero-demo-btn) has its OWN `margin-top 0.4s`
+      // transition. On a loop, the previous run left btn.marginTop pushed down
+      // and the chatbar expanded. If we only suppress the chatbar's transition,
+      // the button still ANIMATES its margin-top back to 0 over 0.4s, sliding
+      // upward while the picker (a sibling below) shifts with it — so the
+      // target item lands too low and the cursor misses. Suppress BOTH
+      // transitions, snap to the reset state, force reflow, then restore.
+      var prevChatbarTransition = chatbar.style.transition;
+      var prevBtnTransition = btn.style.transition;
+      chatbar.style.transition = 'none';
+      btn.style.transition = 'none';
       chatbar.classList.remove('is-expanded');
+      chatbar.style.height = initialChatbarH + 'px';
       btn.style.marginTop = '0';
+      // Force synchronous reflow so both no-transition resets apply now.
+      void chatbar.offsetHeight;
+      // Restore transitions for the later expand animation.
+      chatbar.style.transition = prevChatbarTransition;
+      btn.style.transition = prevBtnTransition;
       activeCursor = handCursor;
     }
 
@@ -3260,54 +3475,65 @@
 
       var contentW = content.offsetWidth;
       var contentH = content.offsetHeight;
+
+      // ── Cursor enters from off-screen (bottom-right), slides to the Arixify
+      //    button, clicks it (cursor + button scale down then back up), and the
+      //    release triggers the picker popping out. Matches the original entrance. ──
       handCursor.style.left = (contentW - 50) + 'px';
       handCursor.style.top = (contentH + 10) + 'px';
 
-      // 0.2s — Show hand cursor
+      // 0.2s — Show hand cursor (off-screen, about to slide in)
       setTimeout(function() {
         handCursor.classList.add('is-visible');
       }, 200);
 
-      // 0.5s — Move to Arixify button
+      // 0.5s — Slide cursor to the Arixify button, then click
       setTimeout(function() {
         var btnPos = getRelPos(btn);
         moveCursor(btnPos.x - 5, btnPos.y + 4, 550, function() {
 
-          // Click button
+          // Click button (cursor scales down 0.82, button presses 0.92)
           activeCursor.classList.add('is-clicking');
           btn.classList.add('is-pressed');
 
+          // Release after 100ms (both scale back up), then pop the picker
           setTimeout(function() {
             activeCursor.classList.remove('is-clicking');
             btn.classList.remove('is-pressed');
 
-            // Show picker
-            setTimeout(function() {
-              picker.classList.add('shown');
-
-              items.forEach(function(item, i) {
-                setTimeout(function() {
-                  item.classList.add('shown');
-                }, i * 100);
-              });
-
-              // Move to target item
+            // Show picker (pop-out) and stagger the items in
+            picker.classList.add('shown');
+            items.forEach(function(item, i) {
               setTimeout(function() {
-                var itemPos = getRelPos(targetItem);
-                moveCursor(itemPos.x - 30, itemPos.y + 4, 450, function() {
+                item.classList.add('shown');
+              }, i * 100);
+            });
 
-                  targetItem.classList.add('is-hovered');
+            // Move to target item, then continue the original flow
+            setTimeout(function() {
+              var itemPos = getRelPos(targetItem);
+              moveCursor(itemPos.x - 30, itemPos.y + 4, 450, function() {
 
-                  // Click item
-                  setTimeout(function() {
-                    activeCursor.classList.add('is-clicking');
-                    targetItem.classList.remove('is-hovered');
-                    targetItem.classList.add('is-clicked');
+                targetItem.classList.add('is-hovered');
 
-                    setTimeout(function() {
-                      activeCursor.classList.remove('is-clicking');
+                // Re-measure the item AFTER arrival + hover applied, and snap the
+                // cursor onto its settled center. On loop iterations the entrance
+                // transition timing can shift, so the first measurement may be
+                // slightly off; this guarantees the click lands on the item.
+                var settled = getRelPos(targetItem);
+                activeCursor.style.left = (settled.x - 30) + 'px';
+                activeCursor.style.top = (settled.y + 4) + 'px';
 
-                      // Hide picker, then after fade completes clean up item states
+                // Click item
+                setTimeout(function() {
+                activeCursor.classList.add('is-clicking');
+                targetItem.classList.remove('is-hovered');
+                targetItem.classList.add('is-clicked');
+
+                setTimeout(function() {
+                  activeCursor.classList.remove('is-clicking');
+
+                  // Hide picker, then after fade completes clean up item states
                       setTimeout(function() {
                         picker.classList.remove('shown');
 
@@ -3392,8 +3618,7 @@
                     }, 80);
                   }, 250);
                 });
-              }, 500);
-            }, 150);
+              }, 600);
           }, 100);
         });
       }, 500);
