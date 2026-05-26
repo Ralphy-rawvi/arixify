@@ -3345,6 +3345,7 @@
 
     var animTimer = null;
     var demoStarted = false;
+    var firstRun = true; // first load presses directly; loops slide the cursor in first
 
     // Switch between hand and ibeam cursor
     function switchToHand() {
@@ -3476,28 +3477,21 @@
       var contentW = content.offsetWidth;
       var contentH = content.offsetHeight;
 
-      // ── Cursor enters from off-screen (bottom-right), slides to the Arixify
-      //    button, clicks it (cursor + button scale down then back up), and the
-      //    release triggers the picker popping out. Matches the original entrance. ──
-      handCursor.style.left = (contentW - 50) + 'px';
-      handCursor.style.top = (contentH + 10) + 'px';
+      // ── Entrance: first load presses directly on the button; every loop
+      //    iteration first slides the cursor in from off-screen to the button,
+      //    THEN presses. Sequence per loop: (prev) slide-out -> slide-in ->
+      //    press -> pop-out -> ... ──
+      var btnPos = getRelPos(btn);
+      var btnTargetX = btnPos.x - 5;
+      var btnTargetY = btnPos.y + 4;
 
-      // 0.2s — Show hand cursor (off-screen, about to slide in)
-      setTimeout(function() {
-        handCursor.classList.add('is-visible');
-      }, 200);
+      // The press + release + picker pop-out, run once the cursor is on the button.
+      function doPress() {
+        activeCursor.classList.add('is-clicking'); // cursor scales down (0.82)
+        btn.classList.add('is-pressed');            // button scales down (0.92)
 
-      // 0.5s — Slide cursor to the Arixify button, then click
-      setTimeout(function() {
-        var btnPos = getRelPos(btn);
-        moveCursor(btnPos.x - 5, btnPos.y + 4, 550, function() {
-
-          // Click button (cursor scales down 0.82, button presses 0.92)
-          activeCursor.classList.add('is-clicking');
-          btn.classList.add('is-pressed');
-
-          // Release after 100ms (both scale back up), then pop the picker
-          setTimeout(function() {
+        // Release after 120ms (both scale back up), then pop the picker
+        setTimeout(function() {
             activeCursor.classList.remove('is-clicking');
             btn.classList.remove('is-pressed');
 
@@ -3574,13 +3568,13 @@
                               setTimeout(function() {
                                 activeCursor.classList.remove('is-clicking');
 
-                                // Stay as ibeam, just move away and fade out
+                                // Stay as ibeam, move slightly aside (still
+                                // visible) so it doesn't cover the typing.
                                 setTimeout(function() {
                                   moveCursor(contentW - 20, caretY + 40, 350, function() {
-                                    ibeamCursor.classList.remove('is-visible');
                                     // Show blinking caret
                                     caretEl.classList.add('is-visible');
-                                                  
+
                                     // Type the question
                                     var typeIndex = 0;
 
@@ -3605,7 +3599,16 @@
                                       updateCaretByRange();
                                       if (typeIndex >= typeText.length) {
                                         clearInterval(typeInterval);
-                                        animTimer = setTimeout(runAnimation, 2000);
+                                        // Ending beat: pause, then SLIDE the cursor
+                                        // off-screen (bottom-right, beyond content)
+                                        // before restarting the loop.
+                                        setTimeout(function() {
+                                          moveCursor(contentW + 40, contentH + 40, 600, function() {
+                                            ibeamCursor.classList.remove('is-visible');
+                                            handCursor.classList.remove('is-visible');
+                                            animTimer = setTimeout(runAnimation, 700);
+                                          });
+                                        }, 1400);
                                       }
                                     }, 60);
                                   });
@@ -3619,9 +3622,32 @@
                   }, 250);
                 });
               }, 600);
-          }, 100);
-        });
-      }, 500);
+        }, 120);
+      }
+
+      // Decide entrance:
+      if (firstRun) {
+        // First load: cursor appears on the button and presses directly.
+        firstRun = false;
+        handCursor.style.left = btnTargetX + 'px';
+        handCursor.style.top = btnTargetY + 'px';
+        setTimeout(function() {
+          handCursor.classList.add('is-visible');
+          doPress();
+        }, 200);
+      } else {
+        // Loop iteration: cursor slides in from off-screen (bottom-right) to the
+        // button, then presses. This is the "slide-in" that bridges the previous
+        // loop's slide-out and the new press.
+        handCursor.style.left = (contentW + 40) + 'px';
+        handCursor.style.top = (contentH + 40) + 'px';
+        setTimeout(function() {
+          handCursor.classList.add('is-visible');
+          moveCursor(btnTargetX, btnTargetY, 600, function() {
+            doPress();
+          });
+        }, 200);
+      }
     }
 
     // Lock the demo window to its natural rendered height before the first run,
